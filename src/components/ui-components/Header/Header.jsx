@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 import logo from './header_logo.png';
-import constants from '../../constants';
+import constants from '../../shared/constants';
 
 export default () => {
   const Nav = styled.nav`
@@ -18,6 +18,10 @@ export default () => {
     margin-left: 20px;
   `;
 
+  const Icon = styled.i`
+    color: ${constants.iconFontColor};
+  `;
+
   return (
     <header className="navbar-fixed">
       <Nav className="valign-wrapper">
@@ -26,7 +30,7 @@ export default () => {
         </Link>
 
         <a href="#" data-target="Sidenav" className="sidenav-trigger">
-          <i className="material-icons">menu</i>
+          <Icon className="material-icons">menu</Icon>
         </a>
       </Nav>
     </header>

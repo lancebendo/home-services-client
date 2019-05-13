@@ -7,10 +7,10 @@ $primary-color: #03a9f4; //theme-attached color
 $alternate-primary-color: #0277bd; //theme-attached color
 
 // font colors
-$default-font-color: #212121;
-$description-font-color: #616161;
-$navigation-font-color: #424242;
-$icon-font-color: #424242;
+$default-font-color: #999;
+$description-font-color: #999;
+$navigation-font-color: #222;
+$icon-font-color: #999;
 $proceed-font-color: #4d90fe; //theme-attached color
 
 $border-radius: 8px;
@@ -60,10 +60,10 @@ $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width 
   font-size: 1.04em;
 }
 
-img {
-  max-height: 200px !important;
-  max-width: 200px !important;
-}
+// img {
+//   max-height: 200px !important;
+//   max-width: 200px !important;
+// }
 
 h1 {
   font-size: 1.9rem;
@@ -92,9 +92,9 @@ table {
   }
 }
 
-.material-icons {
-  color: $icon-font-color;
-}
+// .material-icons {
+//   color: $icon-font-color;
+// }
 
 .card-action {
   padding: 10px !important;

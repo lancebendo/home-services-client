@@ -7,7 +7,6 @@ import constants from '../../shared/constants';
 
 const LinkButton = styled(Link)`
     border-radius: 270px;
-    padding: 2px 6px;
     
     &:hover {
         background-color: ${constants.hoverColor};

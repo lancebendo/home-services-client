@@ -4,7 +4,7 @@ export default {
   flatCardBorderColor: '#e0e0e0',
   hoverColor: '#b3e5fc',
   alternateHoverColor: '#f5f5f5',
-  mainColor: '#03a9f4',
+  primaryColor: '#03a9f4',
   alternateColor: '#0277bd',
 
   // font colors

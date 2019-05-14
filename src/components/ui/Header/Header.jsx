@@ -7,7 +7,7 @@ import constants from '../../shared/constants';
 
 const Nav = styled.nav`
 height: 80px;
-background-color: ${constants.mainColor};
+background-color: ${constants.primaryColor};
 `;
 
 const Img = styled.img`

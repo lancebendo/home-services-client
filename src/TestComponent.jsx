@@ -1,27 +1,28 @@
 import React from 'react';
 // import { connect } from 'react-redux';
-import { BrowserRouter /* Route, Switch, Link */ } from 'react-router-dom';
+import { BrowserRouter, Route/* , Switch, Link */ } from 'react-router-dom';
 
 // load components
 import Header from './components/ui/Header';
-import SideNav from './components/ui/SideNav';
-import NavLink from './components/ui/NavLink';
-import NavButton from './components/ui/NavButton';
+import Nav from './components/containers/Nav';
+
+const Dashboard = () => (<h1>Dashboard</h1>);
+const Profile = () => (<h1>Profile</h1>);
+const History = () => (<h1>History</h1>);
+
+const routeStyle = {
+  textAlign: 'center',
+};
 
 const TestComponent = () => (
   <BrowserRouter>
-    <div className="App">
-      <Header />
+    <Header />
+    <Nav />
 
-      <SideNav collapsible="true">
-        <NavButton label="Book now" icon="event" />
-        <div className="divider" />
-        <NavLink path="/haha" label="Dashboard" icon="home" isSelected="true" />
-        <NavLink path="/hehe" label="Settings" icon="person" />
-        <NavLink path="/hehe" label="Settings" icon="history" />
-        <div className="divider" />
-        <NavLink path="/hehe" label="Settings" icon="exit_to_app" />
-      </SideNav>
+    <div style={routeStyle}>
+      <Route exact path="/" component={Dashboard} />
+      <Route path="/profile" component={Profile} />
+      <Route path="/history" component={History} />
     </div>
   </BrowserRouter>
 );

@@ -76,10 +76,21 @@ class Nav extends React.Component {
       <SideNav collapsible>
         <NavButton label="Book now" onClick={this.onBook} icon="event" />
         <div className="divider" />
-        <NavLink path="/" label="Dashboard" onClick={this.onNavChange} icon="home" isSelected={this.isSelected('/')} />
-        <NavLink path="/profile" label="Profile" onClick={this.onNavChange} icon="person" isSelected={this.isSelected('/profile')} />
-        <NavLink path="/history" label="History" onClick={this.onNavChange} icon="history" isSelected={this.isSelected('/history')} />
-        <NavLink path={currentPath} label="Chat with us" onClick={this.onChatUs} fabIcon="fab fa-facebook-messenger" />
+
+
+        {
+          availablePaths.map(availablePath => (
+            <NavLink
+              key={availablePaths.indexOf(availablePath)}
+              path={availablePath.path}
+              label={availablePath.name}
+              onClick={this.onNavChange}
+              icon={availablePath.icon}
+              isSelected={this.isSelected(availablePath.path)}
+            />
+          ))
+        }
+
         <div className="divider" />
         <NavLink path={currentPath} label="Log-out" onClick={this.onLogout} icon="exit_to_app" />
       </SideNav>

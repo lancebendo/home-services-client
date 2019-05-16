@@ -19,6 +19,9 @@ const TestComponent = () => (
     <Header />
 
     <Nav />
+    {/* <NavMain />  NavMain is for Main content of nav currentPath. */}
+    {/* <Main />  Main is for paths that is not in Nav. eg invoice/receipt page */}
+
     <Switch style={routeStyle}>
       <Route path="/" exact component={Dashboard} />
       <Route path="/profile" exact component={Profile} />

@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from './header_logo.png';
-import constants from '../../shared/constants';
+import constants from '../../constants';
 
 const Nav = styled.nav`
 height: 80px;

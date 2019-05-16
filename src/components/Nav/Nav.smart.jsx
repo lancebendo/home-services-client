@@ -1,16 +1,25 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import SideNav from '../../ui/SideNav';
-import NavButton from '../../ui/NavButton';
-import NavLink from '../../ui/NavLink';
+import SideNav from './SideNav.dumb';
+import NavButton from './NavButton.dumb';
+import NavLink from './NavLink.dumb';
+
+import { strUtils } from '../../utilities';
 
 class Nav extends React.Component {
   constructor(props) {
     super(props);
 
     const { location } = this.props;
-    this.state = { currentPath: location.pathname };
+    this.state = {
+      currentPath: location.pathname,
+      availablePaths: [
+        { name: 'Dashboard', path: '/', icon: 'home' },
+        { name: 'Profile', path: '/profile', icon: 'person' },
+        { name: 'History', path: '/history', icon: 'history' },
+      ],
+    };
 
     this.isSelected = this.isSelected.bind(this);
     this.onBook = this.onBook.bind(this);
@@ -59,8 +68,10 @@ class Nav extends React.Component {
 
 
   render() {
-    const { currentPath } = this.state;
+    const { currentPath, availablePaths } = this.state;
 
+    const paths = strUtils.objectPropToArray(availablePaths, 'path');
+    if (!strUtils.strArrayContains(paths, currentPath)) return null;
     return (
       <SideNav collapsible>
         <NavButton label="Book now" onClick={this.onBook} icon="event" />
@@ -75,6 +86,7 @@ class Nav extends React.Component {
     );
   }
 }
+
 
 Nav.propTypes = {
   location: propTypes.objectOf(propTypes.string).isRequired,

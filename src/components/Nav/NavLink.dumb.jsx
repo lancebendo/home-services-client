@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import constants from '../../constants';
+import constants from '../constants';
 
 
 const LinkButton = styled(Link)`

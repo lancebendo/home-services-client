@@ -10,7 +10,7 @@ import styled from 'styled-components';
 
 
 // load test component container
-import TestComponent from './TestComponent';
+import TestComponent from '../TestComponent';
 
 const GlobalStyle = styled.div`
   margin: 0;

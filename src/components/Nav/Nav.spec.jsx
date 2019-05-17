@@ -18,7 +18,7 @@ describe('Nav Smart Component', () => {
   ];
 
   beforeEach(() => {
-    wrapper = mount(<MemoryRouter><Nav availablePaths={mockPaths} /></MemoryRouter>);
+    wrapper = mount(<MemoryRouter><Nav availablePaths={mockPaths} isTest /></MemoryRouter>);
     navComponent = wrapper.find('Nav');
   });
 

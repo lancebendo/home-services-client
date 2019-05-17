@@ -11,14 +11,10 @@ class Nav extends React.Component {
   constructor(props) {
     super(props);
 
-    const { location } = this.props;
+    const { location, availablePaths } = this.props;
     this.state = {
       currentPath: location.pathname,
-      availablePaths: [
-        { name: 'Dashboard', path: '/', icon: 'home' },
-        { name: 'Profile', path: '/profile', icon: 'person' },
-        { name: 'History', path: '/history', icon: 'history' },
-      ],
+      availablePaths,
     };
 
     this.isSelected = this.isSelected.bind(this);
@@ -101,6 +97,7 @@ class Nav extends React.Component {
 
 Nav.propTypes = {
   location: propTypes.objectOf(propTypes.string).isRequired,
+  availablePaths: propTypes.arrayOf(propTypes.object).isRequired,
 };
 
 export default withRouter(Nav);

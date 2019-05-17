@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { mount } from 'enzyme';
 
 import Nav from './Nav.smart';
@@ -9,9 +9,17 @@ import NavLink from './NavLink.dumb';
 
 describe('Nav Smart Component', () => {
   let wrapper;
+  let navComponent;
+
+  const mockPaths = [
+    { name: 'Dashboard', path: '/', icon: 'home' },
+    { name: 'Profile', path: '/profile', icon: 'person' },
+    { name: 'History', path: '/history', icon: 'history' },
+  ];
 
   beforeEach(() => {
-    wrapper = mount(<BrowserRouter><Nav /></BrowserRouter>);
+    wrapper = mount(<MemoryRouter><Nav availablePaths={mockPaths} /></MemoryRouter>);
+    navComponent = wrapper.find('Nav');
   });
 
   afterEach(() => {
@@ -19,18 +27,20 @@ describe('Nav Smart Component', () => {
   });
 
   it('Renders a SideNav dumb component', () => {
-    expect(wrapper.contains(SideNav)).toBe(true);
+    expect(navComponent.find(SideNav)).toBeDefined();
   });
 
   it('Renders a NavButton dumb component', () => {
-    expect(wrapper.contains(NavButton)).toBe(true);
+    expect(navComponent.find(NavButton)).toBeDefined();
   });
 
   it('Renders a NavLink dumb component', () => {
-    expect(wrapper.contains(NavLink)).toBe(true);
+    expect(navComponent.find(NavLink)).toBeDefined();
   });
 
-  it('Updates selected nav link when new path is selected', () => {
-    expect(wrapper.find(Link).prop('to').to.be.equal('/profile'));
+
+  it('Updates selected nav link state when new path is selected', () => {
+    navComponent.instance().onNavChange(null, { path: '/profile' });
+    expect(navComponent.state().currentPath).toBe('/profile');
   });
 });

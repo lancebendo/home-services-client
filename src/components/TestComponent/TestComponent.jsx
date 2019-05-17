@@ -14,11 +14,16 @@ const routeStyle = {
   textAlign: 'center',
 };
 
+const availablePaths = [
+  { name: 'Dashboard', path: '/', icon: 'home' },
+  { name: 'Profile', path: '/profile', icon: 'person' },
+  { name: 'History', path: '/history', icon: 'history' },
+];
 const TestComponent = () => (
   <BrowserRouter>
     <Header />
 
-    <Nav />
+    <Nav availablePaths={availablePaths} />
     {/* <NavMain />  NavMain is for Main content of nav currentPath. */}
     {/* <Main />  Main is for paths that is not in Nav. eg invoice/receipt page */}
 

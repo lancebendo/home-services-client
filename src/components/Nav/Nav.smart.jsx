@@ -65,9 +65,9 @@ class Nav extends React.Component {
 
   render() {
     const { currentPath, availablePaths } = this.state;
-
+    const { isTest } = this.props;
     const paths = strUtils.objectPropToArray(availablePaths, 'path');
-    if (!strUtils.strArrayContains(paths, currentPath)) return null;
+    if (!strUtils.strArrayContains(paths, currentPath) && !isTest) return null;
     return (
       <SideNav collapsible>
         <NavButton label="Book now" onClick={this.onBook} icon="event" />
@@ -94,10 +94,14 @@ class Nav extends React.Component {
   }
 }
 
+Nav.defaultProps = {
+  isTest: false,
+};
 
 Nav.propTypes = {
   location: propTypes.objectOf(propTypes.string).isRequired,
   availablePaths: propTypes.arrayOf(propTypes.object).isRequired,
+  isTest: propTypes.bool,
 };
 
 export default withRouter(Nav);

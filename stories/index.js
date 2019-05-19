@@ -6,6 +6,9 @@ import Nav from '../src/components/Nav';
 import NavButton from '../src/components/Nav/NavButton.dumb';
 import NavLink from '../src/components/Nav/NavLink.dumb';
 
+// Shared Components
+import Modal from '../src/components/Shared/Modal';
+
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
@@ -22,4 +25,4 @@ storiesOf('Nav', module)
 
 // storiesOf('Profile', module).add('Nav Smart Component', () => <BrowserRouter><Nav availablePaths={mockPaths} isTest/></BrowserRouter>);
 
-// storiesOf('Shared Components', module).add('Nav Smart Component', () => <BrowserRouter><Nav availablePaths={mockPaths} isTest/></BrowserRouter>);
+storiesOf('Shared Components', module).add('Nav Smart Component', () => <Modal />);

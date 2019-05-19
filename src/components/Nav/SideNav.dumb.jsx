@@ -6,6 +6,7 @@ import M from 'materialize-css';
 const Ul = styled.ul`
   margin-top: 98px;
   width: 270px;
+  z-index: 1;
 `;
 
 const Li = styled.li`

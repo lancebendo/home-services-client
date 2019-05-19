@@ -14,6 +14,13 @@ export default {
   iconFontColor: '#424242',
   proceedFontColor: '#4d90fe', // theme-attached color
 
+  // font sizes
+  primaryHeaderFontSize: '1.9rem',
+  secondaryHeaderFontSize: '1.4rem',
+  parimaryDescFontSize: '1.15rem',
+  secondaryDescFontSize: '1.01rem',
+  navigationLabelFontSize: '1rem',
+
   borderRadius: '8px',
 
   // media query ranges

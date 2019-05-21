@@ -9,7 +9,8 @@ import constants from '../constants';
 import Header from '../Header';
 import Nav from '../Nav';
 import Modal from '../Shared/Modal';
-
+import FlatCard, { FlatCardContent, FlatCardSection } from '../Shared/FlatCard';
+import TileList, { Tile, TileLink } from '../Shared/TileList';
 
 const customModalStyles = {
   content: {
@@ -20,17 +21,61 @@ const customModalStyles = {
   },
 };
 
-const Dashboard = () => (
-  <MainRoute>
-    <Modal style={customModalStyles} title="Login">
-      <h1>haha</h1>
-      <h2>hehe</h2>
-      <h2>hehe</h2>
-    </Modal>
-  </MainRoute>
+const Address = [
+  { city: 'Manila', street: 'Mendiola' },
+  { city: 'Buena Park', street: 'Valley View' },
+  { city: 'Bailen', street: 'Rizal' },
+  { city: 'Bailen', street: 'Rizal' },
+];
+
+const Dashboard = () => {
+  const x = false;
+  return (
+    <main>
+      <MainRoute>
+        <Modal isOpen={x} style={customModalStyles} title="Login">
+          <span>haha</span>
+          <br />
+          <span>hehe</span>
+          <br />
+          <span>hehe</span>
+        </Modal>
+      </MainRoute>
+    </main>
+  );
+};
+const Profile = () => (
+  <main>
+    <FlatCard>
+      <FlatCardContent>
+        <span>haha</span>
+        <br />
+        <span>hehe</span>
+        <br />
+        <span>hehe</span>
+      </FlatCardContent>
+      <FlatCardSection isLink>
+        <span>hehe</span>
+      </FlatCardSection>
+      <FlatCardSection isLink>
+        <span>hehe</span>
+      </FlatCardSection>
+      <FlatCardSection>
+        <TileList>
+          <TileLink label="+ Add new Address" />
+          {Address.map(ad => (
+            <Tile key={Address.indexOf(ad)}>
+              <span>{ad.city}</span>
+              <br />
+              <span>{ad.street}</span>
+            </Tile>
+          ))}
+        </TileList>
+      </FlatCardSection>
+    </FlatCard>
+  </main>
 );
-const Profile = () => (<h1>Profile</h1>);
-const History = () => (<h1>History</h1>);
+// const History = () => (<h1>History</h1>);
 
 const routeStyle = {
   textAlign: 'center',
@@ -45,10 +90,16 @@ const MainRoute = styled.div`
 
 
 const availablePaths = [
-  { name: 'Dashboard', path: '/', icon: 'home' },
-  { name: 'Profile', path: '/profile', icon: 'person' },
-  { name: 'History', path: '/history', icon: 'history' },
+  {
+    name: 'Dashboard', path: '/', icon: 'home', component: Dashboard,
+  },
+  {
+    name: 'Profile', path: '/profile', icon: 'person', component: Profile,
+  },
+  // { name: 'History', path: '/history', icon: 'history', component: History, },
 ];
+
+
 const TestComponent = () => (
   <BrowserRouter>
     <Header />
@@ -58,9 +109,19 @@ const TestComponent = () => (
     {/* <Main />  Main is for paths that is not in Nav. eg invoice/receipt page */}
 
     <Switch style={routeStyle}>
-      <Route path="/" exact component={Dashboard} />
+      {/* <Route path="/" exact component={Dashboard} />
       <Route path="/profile" exact component={Profile} />
-      <Route path="/history" exact component={History} />
+      <Route path="/history" exact component={History} /> */}
+
+      {availablePaths.map(path => (
+        <Route
+          key={availablePaths.indexOf(path)}
+          path={path.path}
+          exact
+          component={path.component}
+        />
+      ))}
+
       <Route>
         <h1>No Match</h1>
       </Route>

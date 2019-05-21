@@ -11,18 +11,23 @@ const ModalHeader = styled.span`
   font-size: ${constants.primaryHeaderFontSize};
 `;
 
-const ModalContent = styled.div`
+const ModalBody = styled.div`
   position: absolute;
   height: calc(100% - 56px);
   max-height: 100%;
   width: 100%;
   overflow-y: auto;
+  padding: 12px;
+`;
+
+const ModalContent = styled.div`
+  margin: 3px 10px 3px;
 `;
 
 const ModalFixedFooter = styled.div`
   position: absolute;
   bottom: 0;
-  height: 56px;
+  height: 52px;
   width: 100%;
   border-radius: 0 0 2px 2px;
   background-color: #fafafa;
@@ -31,60 +36,100 @@ const ModalFixedFooter = styled.div`
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 `;
 
-class Modal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showModal: false,
-    };
+const Modal = (props) => {
+  const {
+    closeModal, isOpen, title, hasTitleDivider, children, style,
+  } = props;
+  return (
+    <ReactModal
+      isOpen={isOpen}
+      onRequestClose={closeModal}
+      style={style}
+      {...props}
+    >
+      <ModalBody>
+        <ModalHeader>{title}</ModalHeader>
+        {hasTitleDivider ? (<div className="divider" />) : ''}
+        <ModalContent>
+          {children}
+        </ModalContent>
+      </ModalBody>
+      <ModalFixedFooter>
+        <button type="button" onClick={closeModal}>Close</button>
+      </ModalFixedFooter>
+    </ReactModal>
+  );
+};
 
-    this.handleOpenModal = this.handleOpenModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
-  }
+// class Modal extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       showModal: false,
+//     };
 
-  handleOpenModal() {
-    this.setState({ showModal: true });
-  }
+//     this.handleOpenModal = this.handleOpenModal.bind(this);
+//     this.handleCloseModal = this.handleCloseModal.bind(this);
+//   }
 
-  handleCloseModal() {
-    this.setState({ showModal: false });
-  }
+//   handleOpenModal() {
+//     this.setState({ showModal: true });
+//   }
 
-  render() {
-    const { showModal } = this.state;
-    const {
-      children, style, title, hasTitleDivider,
-    } = this.props;
+//   handleCloseModal() {
+//     this.setState({ showModal: false });
+//   }
 
-    return (
-      <div>
-        <button type="button" onClick={this.handleOpenModal}>Trigger Modaldaldalita</button>
-        <ReactModal
-          isOpen={showModal}
-          contentLabel="onRequestClose Example"
-          onRequestClose={this.handleCloseModal}
-          style={style}
-        >
-          <ModalContent>
-            <ModalHeader>{title}</ModalHeader>
-            {hasTitleDivider ? (<div className="divider" />) : ''}
-            {children}
-          </ModalContent>
-          <ModalFixedFooter>
-            <button type="button" onClick={this.handleCloseModal}>Close</button>
+//   render() {
+//     const { showModal } = this.state;
+//     const {
+//       children, style, title, hasTitleDivider,
+//     } = this.props;
 
-          </ModalFixedFooter>
-        </ReactModal>
-      </div>
-    );
-  }
-}
+//     return (
+//       <div>
+//         <button type="button" onClick={this.handleOpenModal}>Trigger Modaldaldalita</button>
+//         <ReactModal
+//           isOpen={showModal}
+//           contentLabel="onRequestClose Example"
+//           onRequestClose={this.handleCloseModal}
+//           style={style}
+//         >
+//           <ModalBody>
+//             <ModalHeader>{title}</ModalHeader>
+//             {hasTitleDivider ? (<div className="divider" />) : ''}
+//             <ModalContent>
+//               {children}
+//             </ModalContent>
+//           </ModalBody>
+//           <ModalFixedFooter>
+//             <button type="button" onClick={this.handleCloseModal}>Close</button>
+//           </ModalFixedFooter>
+//         </ReactModal>
+//       </div>
+//     );
+//   }
+// }
+
+// Modal.defaultProps = {
+//   hasTitleDivider: false,
+// };
+
+// Modal.propTypes = {
+//   children: propTypes.node.isRequired,
+//   style: propTypes.objectOf(propTypes.object).isRequired,
+//   title: propTypes.string.isRequired,
+//   hasTitleDivider: propTypes.bool,
+// };
 
 Modal.defaultProps = {
+  isOpen: false,
   hasTitleDivider: false,
 };
 
 Modal.propTypes = {
+  isOpen: propTypes.bool,
+  closeModal: propTypes.func.isRequired,
   children: propTypes.node.isRequired,
   style: propTypes.objectOf(propTypes.object).isRequired,
   title: propTypes.string.isRequired,

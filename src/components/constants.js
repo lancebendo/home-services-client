@@ -20,6 +20,7 @@ export default {
   parimaryDescFontSize: '1.15rem',
   secondaryDescFontSize: '1.01rem',
   navigationLabelFontSize: '1rem',
+  linkLabelFontSize: '1rem',
 
   borderRadius: '8px',
 

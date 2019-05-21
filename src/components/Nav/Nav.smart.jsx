@@ -11,10 +11,9 @@ class Nav extends React.Component {
   constructor(props) {
     super(props);
 
-    const { location, availablePaths } = this.props;
+    const { location } = this.props;
     this.state = {
       currentPath: location.pathname,
-      availablePaths,
     };
 
     this.isSelected = this.isSelected.bind(this);
@@ -64,8 +63,8 @@ class Nav extends React.Component {
 
 
   render() {
-    const { currentPath, availablePaths } = this.state;
-    const { isTest } = this.props;
+    const { currentPath } = this.state;
+    const { isTest, availablePaths } = this.props;
     const paths = strUtils.objectPropToArray(availablePaths, 'path');
     if (!strUtils.strArrayContains(paths, currentPath) && !isTest) return null;
     return (

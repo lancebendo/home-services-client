@@ -1,6 +1,6 @@
-import TileList from './TileList';
-import Tile from './Tile';
-import TileLink from './TileLink';
+import TileList from './TileList.dumb';
+import Tile from './Tile.dumb';
+import TileLink from './TileLink.dumb';
 
 export { Tile, TileLink };
 export default TileList;

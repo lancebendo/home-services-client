@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
-import M from 'materialize-css';
 
 const Ul = styled.ul`
   margin-top: 98px;
@@ -35,7 +34,7 @@ const CollapsibleSideNav = children => (
 const SideNav = ({ children, collapsible }) => {
   useEffect(() => {
     const elem = document.querySelector('.sidenav');
-    M.Sidenav.init(elem);
+    window.M.Sidenav.init(elem);
   });
 
   return (

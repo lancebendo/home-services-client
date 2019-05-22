@@ -6,6 +6,7 @@ export default {
   alternateHoverColor: '#f5f5f5',
   primaryColor: '#03a9f4',
   alternateColor: '#0277bd',
+  footerColor: '#fafafa',
 
   // font colors
   defaultFontColor: '#212121',

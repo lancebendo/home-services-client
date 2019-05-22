@@ -6,7 +6,7 @@ import TileDiv from './tileStyle';
 const Tile = (props) => {
   const { children } = props;
   return (
-    <TileDiv>
+    <TileDiv className="row">
       {children}
     </TileDiv>
   );

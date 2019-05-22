@@ -5,11 +5,12 @@ import styled from 'styled-components';
 import constants from '../../constants';
 
 const TileListDiv = styled.div`
-@media (max-width: ${constants.largeScreen}) {
+@media only screen and (min-width: ${constants.mediumScreen}) {
     display: flex;
     flex-wrap: wrap;
     height: 100%;
     align-content: stretch;
+    // justify-content: center;
 }
 `;
 

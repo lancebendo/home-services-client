@@ -9,6 +9,7 @@ const TileLinkDiv = styled(TileDiv)`
     border-width: 2px;
     border-style: dashed;
     text-align: center;
+    padding-bottom: 0 !important;
   
     &:hover{
         background-color: ${constants.alternateHoverColor};

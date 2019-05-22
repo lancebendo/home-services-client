@@ -5,9 +5,11 @@ const tileStyle = styled.div`
     background-color: white;
     border: 1px solid ${constants.flatCardBorderColor};
     border-radius: ${constants.borderRadius};
-    padding: 21px;
+    min-height: 130px;
+    position: relative;
+    padding-bottom: 42px;
     
-    @media (max-width: ${constants.largeScreen}) {
+    @media (min-width: ${constants.mediumScreen}) {
         width: 45%;
         margin: 10px !important;
     }

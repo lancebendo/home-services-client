@@ -18,7 +18,7 @@ const FlatCardSectionLink = styled(FlatCardSectionDiv)`
 
 const FlatCardSection = (props) => {
   const { children, isLink, onClick } = props;
-  const clickHandler = isLink ? onClick : null;
+  const clickHandler = isLink ? onClick : () => null;
   const SectionComponent = isLink ? FlatCardSectionLink : FlatCardSectionDiv;
   const classes = isLink ? 'waves-effect waves-light waves-block' : '';
 

@@ -30,7 +30,7 @@ const ModalFixedFooter = styled.div`
   height: 52px;
   width: 100%;
   border-radius: 0 0 2px 2px;
-  background-color: #fafafa;
+  background-color: ${constants.footerColor};
   padding: 4px 6px;
   text-align: right;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -38,13 +38,14 @@ const ModalFixedFooter = styled.div`
 
 const Modal = (props) => {
   const {
-    closeModal, isOpen, title, hasTitleDivider, children, style,
+    closingHandler, isOpen, title, hasTitleDivider, children,
   } = props;
+
+
   return (
     <ReactModal
       isOpen={isOpen}
-      onRequestClose={closeModal}
-      style={style}
+      onRequestClose={closingHandler}
       {...props}
     >
       <ModalBody>
@@ -55,7 +56,7 @@ const Modal = (props) => {
         </ModalContent>
       </ModalBody>
       <ModalFixedFooter>
-        <button type="button" onClick={closeModal}>Close</button>
+        <button type="button" onClick={e => closingHandler(e, props)}>Close</button>
       </ModalFixedFooter>
     </ReactModal>
   );
@@ -68,9 +69,8 @@ Modal.defaultProps = {
 
 Modal.propTypes = {
   isOpen: propTypes.bool,
-  closeModal: propTypes.func.isRequired,
+  closingHandler: propTypes.func.isRequired,
   children: propTypes.node.isRequired,
-  style: propTypes.objectOf(propTypes.object).isRequired,
   title: propTypes.string.isRequired,
   hasTitleDivider: propTypes.bool,
 };

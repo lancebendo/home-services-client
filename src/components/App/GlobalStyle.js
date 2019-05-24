@@ -24,6 +24,19 @@ color: ${constants.defaultFontColor};
   margin-bottom: 0px !important;
 }
 
+.no-border-top {
+  border-top: 0px !important;
+}
+
+.has-bottom-radius {
+  border-radius: 0 0 ${constants.borderRadius} ${constants.borderRadius};
+}
+
+@keyframes modalFade {
+  from {transform: translateY(-50%);opacity: 0;}
+  to {transform: translateY(0);opacity: 1;}
+}
+
 // overwrite overlay style to blend well with materialize
 .ReactModal__Overlay {
     z-index: 999999999;
@@ -33,6 +46,8 @@ color: ${constants.defaultFontColor};
 // overwrites react modal to remove default padding. We DIY
 .ReactModal__Content {
     padding: 0px !important;
+    animation-name: modalFade;
+    animation-duration: .3s;
 }
 
 @media only screen and (min-width: ${constants.mediumScreen}) {

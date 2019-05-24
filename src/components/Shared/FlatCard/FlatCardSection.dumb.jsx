@@ -7,7 +7,9 @@ import constants from '../../constants';
 const FlatCardSectionDiv = styled.div`
   border-top: 1px solid ${constants.flatCardBorderColor};
   padding: 13px 21px;
+  min-height: ${constants.minSectionHeight};
 `;
+
 
 const FlatCardSectionLink = styled(FlatCardSectionDiv)`
 &:hover {
@@ -17,11 +19,15 @@ const FlatCardSectionLink = styled(FlatCardSectionDiv)`
 `;
 
 const FlatCardSection = (props) => {
-  const { children, isLink, onClick } = props;
+  const {
+    children, isLink, isLast, noBorderTop, onClick,
+  } = props;
   const clickHandler = isLink ? onClick : () => null;
   const SectionComponent = isLink ? FlatCardSectionLink : FlatCardSectionDiv;
-  const classes = isLink ? 'waves-effect waves-light waves-block' : '';
 
+  let classes = isLink ? 'waves-effect waves-light waves-block' : '';
+  classes = noBorderTop ? `no-border-top ${classes}` : classes;
+  classes = isLast ? `has-bottom-radius ${classes}` : classes;
   return (
     <SectionComponent onClick={e => clickHandler(e, props)} className={classes}>
       {children}
@@ -31,12 +37,16 @@ const FlatCardSection = (props) => {
 
 FlatCardSection.defaultProps = {
   isLink: false,
+  isLast: false,
+  noBorderTop: false,
   onClick: () => {},
 };
 
 FlatCardSection.propTypes = {
   children: propTypes.node.isRequired,
   isLink: propTypes.bool,
+  isLast: propTypes.bool,
+  noBorderTop: propTypes.bool,
   onClick: propTypes.func,
 };
 

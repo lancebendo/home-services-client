@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 import FlatCard, { FlatCardContent, FlatCardSection } from '../Shared/FlatCard';
 import TileList, {
-  Tile, TileLink, TileContent, TileFooter,
+  Tile, TileLink, TileContent, TileFooter, TileActionButton,
 } from '../Shared/TileList';
 import AddressFormModal from './AddressFormModal';
 
@@ -32,10 +32,8 @@ class AddressTileList extends React.Component {
   openModal = (e, props, params) => {
     e.preventDefault();
 
-    this.setState({
-      selectedAddress: params,
-      isModalOpen: true,
-    });
+    this.setState({ selectedAddress: params },
+      this.setState({ isModalOpen: true }));
   }
 
   closeModal = (e) => {
@@ -51,70 +49,77 @@ class AddressTileList extends React.Component {
     const { addresses } = this.props;
 
     return (
-      <FlatCard {...this.props} header="Addresses">
-        <FlatCardSection>
-          <FlatCardContent>
-            <TileList>
+      <React.Fragment>
 
-              <TileLink name="NewAddressLink" label="+ Add new Address" onClick={e => this.openModal(e, this.props, this.getNewAddress())} />
-              <AddressFormModal
-                isOpen={isModalOpen}
-                address={selectedAddress}
-                closingHandler={this.closeModal}
-              />
+        <AddressFormModal
+          isOpen={isModalOpen}
+          address={selectedAddress}
+          closingHandler={this.closeModal}
+        />
 
-              {addresses.map(address => (
-                <Tile key={address.id}>
-                  <TileContent>
-                    <span>{`${address.houseNumber} ${address.street}`}</span>
-                    <br />
-                    <span>{address.subdivision}</span>
-                    <br />
-                    <span>{`${address.city}, ${address.province}`}</span>
-                  </TileContent>
-                  <TileFooter>
-                    <button onClick={e => this.openModal(e, this.props, address)} type="button" className="noselect btn-flat waves-effect waves-light">
+        <FlatCard {...this.props} headerIcon="location_on" header="Addresses">
+          <FlatCardSection>
+            <FlatCardContent>
+              <TileList>
+
+                <TileLink
+                  name="NewAddressLink"
+                  label="+ Add new address"
+                  onClick={e => this.openModal(e, this.props, this.getNewAddress())}
+                />
+
+                {addresses.map((address, index) => (
+                  <Tile key={address.id}>
+                    <TileContent>
+                      <span>{`${address.houseNumber} ${address.street}`}</span>
+                      <br />
+                      <span>{address.subdivision}</span>
+                      <br />
+                      <span>{`${address.city}, ${address.province}`}</span>
+                    </TileContent>
+                    <TileFooter>
+                      <TileActionButton
+                        tabIndex={index}
+                        onClick={e => this.openModal(e, this.props, address)}
+                        onKeyPress={e => this.openModal(e, this.props, address)}
+                        type="button"
+                        className="btn-flat waves-effect waves-light"
+                      >
+                      Set as default
+                      </TileActionButton>
+                      <TileActionButton
+                        tabIndex={index}
+                        onClick={e => this.openModal(e, this.props, address)}
+                        onKeyPress={e => this.openModal(e, this.props, address)}
+                        type="button"
+                        className="btn-flat waves-effect waves-light"
+                      >
                       Edit
-                    </button>
-                  </TileFooter>
-                </Tile>
-              ))}
+                      </TileActionButton>
+                      <TileActionButton
+                        tabIndex={index}
+                        // onClick={e => this.openModal(e, this.props, address)}
+                        // onKeyPress={e => this.openModal(e, this.props, address)}
+                        type="button"
+                        className="btn-flat waves-effect waves-light"
+                      >
+                      Delete
+                      </TileActionButton>
+                    </TileFooter>
+                  </Tile>
+                ))}
 
-            </TileList>
+              </TileList>
 
-          </FlatCardContent>
+            </FlatCardContent>
 
-        </FlatCardSection>
-      </FlatCard>
+          </FlatCardSection>
+        </FlatCard>
+      </React.Fragment>
+
     );
   }
 }
-
-// const AddressTileList = (props) => {
-//   const { addresses } = props;
-
-//   return (
-//     <FlatCard {...props}>
-//       <FlatCardContent>
-//         <TileList>
-
-//           <TileLink label="+ Add new Address" />
-
-//           {addresses.map(address => (
-//             <Tile key={address.id}>
-//               <span>{`${address.houseNumber} ${address.street}`}</span>
-//               <br />
-//               <span>{address.subdivision}</span>
-//               <br />
-//               <span>{`${address.city}, ${address.province}`}</span>
-//             </Tile>
-//           ))}
-
-//         </TileList>
-//       </FlatCardContent>
-//     </FlatCard>
-//   );
-// };
 
 AddressTileList.propTypes = {
   addresses: propTypes.arrayOf(propTypes.object).isRequired,

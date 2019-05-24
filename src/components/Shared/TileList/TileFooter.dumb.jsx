@@ -11,7 +11,7 @@ background-color: ${constants.footerColor};
 padding: 4px 6px;
 text-align: right;
 border-top: 1px solid rgba(0, 0, 0, 0.1);
-
+border-radius: 0 0 ${constants.borderRadius} ${constants.borderRadius};
 & > * {
     top: 50%;
     transform: translateY(-50%);

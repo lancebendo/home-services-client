@@ -11,17 +11,39 @@ const FlatCardDiv = styled.div`
     border-radius: ${constants.borderRadius};
 `;
 
-const HeaderSection = header => (
-  <FlatCardSection>
-    <h5>{header}</h5>
+const HeaderWrapper = styled.span`
+  font-size: ${constants.secondaryHeaderFontSize};
+  vertical-align: middle;
+`;
+
+const Icon = styled.i`
+  line-height: 1.2;
+  vertical-align: middle;
+`;
+
+const HeaderSection = ({ header, headerIcon }) => (
+  <FlatCardSection noBorderTop>
+    { headerIcon ? (<Icon className="material-icons left">{headerIcon}</Icon>) : null }
+    <HeaderWrapper>
+      {header}
+    </HeaderWrapper>
   </FlatCardSection>
 );
+
+HeaderSection.defaultProps = {
+  headerIcon: null,
+};
+
+HeaderSection.propTypes = {
+  header: propTypes.string.isRequired,
+  headerIcon: propTypes.string,
+};
 
 const FlatCard = (props) => {
   const { children, header } = props;
   return (
     <FlatCardDiv {...props}>
-      {header ? HeaderSection(header) : ''}
+      {header ? (<HeaderSection {...props} />) : null}
       {children}
     </FlatCardDiv>
   );

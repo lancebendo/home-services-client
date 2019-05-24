@@ -24,23 +24,11 @@ const ModalContent = styled.div`
   margin: 3px 10px 3px;
 `;
 
-const ModalFixedFooter = styled.div`
-  position: absolute;
-  bottom: 0;
-  height: 52px;
-  width: 100%;
-  border-radius: 0 0 2px 2px;
-  background-color: ${constants.footerColor};
-  padding: 4px 6px;
-  text-align: right;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-`;
 
 const Modal = (props) => {
   const {
-    closingHandler, isOpen, title, hasTitleDivider, children,
+    closingHandler, isOpen, title, hasTitleDivider, children, footer: Footer,
   } = props;
-
 
   return (
     <ReactModal
@@ -55,9 +43,8 @@ const Modal = (props) => {
           {children}
         </ModalContent>
       </ModalBody>
-      <ModalFixedFooter>
-        <button type="button" onClick={e => closingHandler(e, props)}>Close</button>
-      </ModalFixedFooter>
+
+      <Footer {...props} />
     </ReactModal>
   );
 };
@@ -65,6 +52,7 @@ const Modal = (props) => {
 Modal.defaultProps = {
   isOpen: false,
   hasTitleDivider: false,
+  footer: () => (<div />),
 };
 
 Modal.propTypes = {
@@ -73,6 +61,7 @@ Modal.propTypes = {
   children: propTypes.node.isRequired,
   title: propTypes.string.isRequired,
   hasTitleDivider: propTypes.bool,
+  footer: propTypes.elementType,
 };
 
 export default Modal;

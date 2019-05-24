@@ -14,6 +14,7 @@ export default {
   navFontColor: '#424242',
   iconFontColor: '#424242',
   proceedFontColor: '#4d90fe', // theme-attached color
+  cancelFontColor: '#424242',
 
   // font sizes
   primaryHeaderFontSize: '1.9rem',
@@ -24,6 +25,7 @@ export default {
   linkLabelFontSize: '1rem',
 
   borderRadius: '8px',
+  minSectionHeight: '51px',
 
   // media query ranges
   smallScreen: '600px',

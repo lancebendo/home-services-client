@@ -8,7 +8,7 @@ import Nav from '../Nav';
 
 import Dashboard from '../Dashboard';
 import Profile from '../Profile';
-import TestComponent from '../TestComponent';
+// import TestComponent from '../TestComponent';
 import { PathNotFound } from '../ErrorHandler';
 
 const availablePaths = [
@@ -18,9 +18,9 @@ const availablePaths = [
   {
     name: 'Profile', path: '/profile', icon: 'person', component: Profile,
   },
-  {
-    name: 'Test', path: '/test', icon: 'person', component: TestComponent,
-  },
+  // {
+  //   name: 'Test', path: '/test', icon: 'person', component: TestComponent,
+  // },
   // { name: 'History', path: '/history', icon: 'history', component: History, },
 ];
 

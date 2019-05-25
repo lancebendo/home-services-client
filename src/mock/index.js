@@ -3,7 +3,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable func-names */
 if (!window.isMockInitialized && process.env.NODE_ENV === 'development') {
-  Object.byString = function (o, s) {
+  Object.getByString = function (o, s) {
     s = s.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
     s = s.replace(/^\./, ''); // strip a leading dot
     const a = s.split('.');

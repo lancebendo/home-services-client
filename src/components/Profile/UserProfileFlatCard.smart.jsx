@@ -43,7 +43,7 @@ class UserProfileFlatCard extends React.Component {
 
     this.state = {
       isModalOpen: false,
-      fieldToEdit: '',
+      fieldToEdit: 'firstname', // so the error of uncontrolled... will go away
     };
   }
 
@@ -59,7 +59,7 @@ class UserProfileFlatCard extends React.Component {
   closeModal = () => {
     this.setState({
       isModalOpen: false,
-      fieldToEdit: '',
+      fieldToEdit: 'firstname', // para wala nang error, may default
     });
   };
 
@@ -67,6 +67,7 @@ class UserProfileFlatCard extends React.Component {
     const { user } = this.props;
     const { isModalOpen, fieldToEdit } = this.state;
     const { firstname, lastname, birthday } = user;
+
     return (
       <React.Fragment>
         <UserProfileFormModal
@@ -75,6 +76,7 @@ class UserProfileFlatCard extends React.Component {
           closingHandler={this.closeModal}
           userProfile={user}
         />
+
         <FlatCard {...this.props} headerIcon="person_outline" header="User Profile">
           <UserProfileSection onClick={this.openModal} name="firstname" label="Firstname" value={firstname} />
           {/* <FirstnameFormModal

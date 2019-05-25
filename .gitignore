@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-/src/mock
+# /src/mock
 
 # production
 /build

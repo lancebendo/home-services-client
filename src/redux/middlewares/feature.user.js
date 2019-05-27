@@ -1,6 +1,7 @@
 import {
   USER,
   GET_USER,
+  UPDATE_USER,
   REQUEST_SUCCESS,
   REQUEST_FAIL,
   setUser,
@@ -13,7 +14,15 @@ const userMiddleware = () => next => (action) => {
   switch (action.type) {
     case GET_USER:
       if (process.env.NODE_ENV === 'development') {
-        next(mockRequest('user', USER));
+        next(mockRequest('user', USER, 'read'));
+      } else {
+        throw new Error('Production data source not yet implemented');
+      }
+      break;
+
+    case UPDATE_USER:
+      if (process.env.NODE_ENV === 'development') {
+        next(mockRequest(action.payload, USER, 'update'));
       } else {
         throw new Error('Production data source not yet implemented');
       }

@@ -4,9 +4,6 @@ import propTypes from 'prop-types';
 import FlatCard, { FlatCardSection } from '../Shared/FlatCard';
 import Spinner from '../Shared/Spinner';
 import UserProfileFormModal from './UserProfileFormModal';
-// import FirstnameFormModal from './FirstnameFormModal';
-// import LastnameFormModal from './LastnameFormModal';
-// import BirthdayFormModal from './BirthdayFormModal';
 
 const UserProfileSection = (props) => {
   const { label, value, onClick } = props;
@@ -79,25 +76,11 @@ class UserProfileFlatCard extends React.Component {
 
         <FlatCard {...this.props} headerIcon="person_outline" header="User Profile">
           <UserProfileSection onClick={this.openModal} name="firstname" label="Firstname" value={firstname} />
-          {/* <FirstnameFormModal
-            firstname={firstname}
-            isOpen={isFirstnameModalOpen}
-            closingHandler={this.closeModal}
-          /> */}
 
           <UserProfileSection onClick={this.openModal} name="lastname" label="Lastname" value={lastname} />
-          {/* <LastnameFormModal
-            lastname={lastname}
-            isOpen={isLastnameModalOpen}
-            closingHandler={this.closeModal}
-          /> */}
 
           <UserProfileSection isLast onClick={this.openModal} name="birthday" label="Birthday" value={birthday} />
-          {/* <BirthdayFormModal
-            birthday={birthday}
-            isOpen={isBirthdayModalOpen}
-            closingHandler={this.closeModal}
-          /> */}
+
         </FlatCard>
       </React.Fragment>
     );

@@ -1,10 +1,16 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import Modal, { ModalFooter } from '../Shared/Modal';
+import { createAddress, updateAddress } from '../../redux/actions';
 
 const AddressFormModalFooter = (props) => {
-  const { closingHandler } = props;
+  const {
+    address, closingHandler, create, update,
+  } = props;
+  console.log(address);
+  const submitFunc = address.uid > 0 ? update : create;
   return (
     <ModalFooter>
       <button
@@ -18,8 +24,8 @@ const AddressFormModalFooter = (props) => {
       <button
         type="button"
         className="btn-flat waves-effect waves-light"
-        onKeyPress={e => closingHandler(e, props)}
-        onClick={e => closingHandler(e, props)}
+        onKeyPress={e => submitFunc(props.address, closingHandler(e, props))}
+        onClick={e => submitFunc(props.address, closingHandler(e, props))}
       >
       Done
       </button>
@@ -29,6 +35,15 @@ const AddressFormModalFooter = (props) => {
 
 AddressFormModalFooter.propTypes = {
   closingHandler: propTypes.func.isRequired,
+  create: propTypes.func.isRequired,
+  update: propTypes.func.isRequired,
+  address: propTypes.shape({
+    houseNumber: propTypes.string.isRequired,
+    street: propTypes.string.isRequired,
+    subdivision: propTypes.string.isRequired,
+    city: propTypes.string.isRequired,
+    province: propTypes.string.isRequired,
+  }).isRequired,
 };
 
 class AddressFormModal extends React.Component {
@@ -62,7 +77,7 @@ class AddressFormModal extends React.Component {
     const { address } = this.state;
 
     return (
-      <Modal title="Address Form" {...this.props} onAfterOpen={this.handleAfterOpen} footer={AddressFormModalFooter}>
+      <Modal title="Address Form" {...this.props} {...this.state} onAfterOpen={this.handleAfterOpen} footer={AddressFormModalFooter}>
 
         <div className="input-field col s12">
           <input
@@ -138,6 +153,19 @@ AddressFormModal.propTypes = {
   }).isRequired,
   isOpen: propTypes.bool.isRequired,
   closingHandler: propTypes.func.isRequired,
+  create: propTypes.func.isRequired,
 };
 
-export default AddressFormModal;
+const mapDispatchToProps = dispatch => ({
+  create: (address, callback) => {
+    dispatch(createAddress(address));
+    return callback;
+  },
+
+  update: (address, callback) => {
+    dispatch(updateAddress(address));
+    return callback;
+  },
+});
+
+export default connect(null, mapDispatchToProps)(AddressFormModal);

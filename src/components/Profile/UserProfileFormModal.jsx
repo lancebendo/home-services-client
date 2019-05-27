@@ -1,10 +1,19 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import Modal, { ModalFooter } from '../Shared/Modal';
 
+import { updateUser } from '../../redux/actions';
+
 const UserProfileFormModalFooter = (props) => {
-  const { closingHandler } = props;
+  const { closingHandler, onSubmit } = props;
+
+  const submitAndClose = (e) => {
+    onSubmit(props.userProfile);
+    closingHandler(e, props);
+  };
+
   return (
     <ModalFooter>
       <button
@@ -18,8 +27,8 @@ const UserProfileFormModalFooter = (props) => {
       <button
         type="button"
         className="btn-flat waves-effect waves-light"
-        onKeyPress={e => closingHandler(e, props)}
-        onClick={e => closingHandler(e, props)}
+        onKeyPress={e => submitAndClose(e)}
+        onClick={e => submitAndClose(e)}
       >
         Done
       </button>
@@ -29,6 +38,12 @@ const UserProfileFormModalFooter = (props) => {
 
 UserProfileFormModalFooter.propTypes = {
   closingHandler: propTypes.func.isRequired,
+  onSubmit: propTypes.func.isRequired,
+  userProfile: propTypes.shape({
+    firstname: propTypes.string.isRequired,
+    lastname: propTypes.string.isRequired,
+    birthday: propTypes.string.isRequired,
+  }).isRequired,
 };
 
 class UserProfileFormModal extends React.Component {
@@ -64,7 +79,7 @@ class UserProfileFormModal extends React.Component {
     const { userProfile, fieldToEdit } = this.state;
 
     return (
-      <Modal title={`Edit ${fieldToEdit}`} {...this.props} onAfterOpen={this.handleAfterOpen} footer={UserProfileFormModalFooter}>
+      <Modal title={`Edit ${fieldToEdit}`} {...this.props} {...this.state} onAfterOpen={this.handleAfterOpen} footer={UserProfileFormModalFooter}>
 
         <div className="input-field col s12">
           <input
@@ -92,6 +107,11 @@ UserProfileFormModal.propTypes = {
     birthday: propTypes.string.isRequired,
   }).isRequired,
   fieldToEdit: propTypes.string.isRequired,
+  onSubmit: propTypes.func.isRequired,
 };
 
-export default UserProfileFormModal;
+const mapDispatchToProps = dispatch => ({
+  onSubmit: user => dispatch(updateUser(user)),
+});
+
+export default connect(null, mapDispatchToProps)(UserProfileFormModal);

@@ -1,11 +1,14 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import FlatCard, { FlatCardContent, FlatCardSection } from '../Shared/FlatCard';
 import TileList, {
   Tile, TileLink, TileContent, TileFooter, TileActionButton,
 } from '../Shared/TileList';
 import AddressFormModal from './AddressFormModal';
+
+import { deleteAddress } from '../../redux/actions';
 
 class AddressTileList extends React.Component {
   constructor(props) {
@@ -22,6 +25,7 @@ class AddressTileList extends React.Component {
   }
 
   getNewAddress = () => ({
+    uid: 0,
     houseNumber: '',
     street: '',
     subdivision: '',
@@ -46,7 +50,7 @@ class AddressTileList extends React.Component {
 
   render() {
     const { isModalOpen, selectedAddress } = this.state;
-    const { addresses } = this.props;
+    const { addresses, deleteHandler } = this.props;
 
     return (
       <React.Fragment>
@@ -69,7 +73,7 @@ class AddressTileList extends React.Component {
                 />
 
                 {addresses.map((address, index) => (
-                  <Tile key={address.id}>
+                  <Tile key={address.uid}>
                     <TileContent>
                       <span>{`${address.houseNumber} ${address.street}`}</span>
                       <br />
@@ -98,8 +102,8 @@ class AddressTileList extends React.Component {
                       </TileActionButton>
                       <TileActionButton
                         tabIndex={index}
-                        // onClick={e => this.openModal(e, this.props, address)}
-                        // onKeyPress={e => this.openModal(e, this.props, address)}
+                        onClick={() => deleteHandler(address.uid)}
+                        onKeyPress={() => deleteHandler(address.uid)}
                         type="button"
                         className="btn-flat waves-effect waves-light"
                       >
@@ -123,6 +127,11 @@ class AddressTileList extends React.Component {
 
 AddressTileList.propTypes = {
   addresses: propTypes.arrayOf(propTypes.object).isRequired,
+  deleteHandler: propTypes.func.isRequired,
 };
 
-export default AddressTileList;
+const mapDispatchToProps = dispatch => ({
+  deleteHandler: addressId => dispatch(deleteAddress(addressId)),
+});
+
+export default connect(null, mapDispatchToProps)(AddressTileList);

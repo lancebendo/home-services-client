@@ -13,10 +13,14 @@ import {
 import {
   ADDRESS,
   GET_ADDRESSES,
+  CREATE_ADDRESS,
   UPDATE_ADDRESS,
+  DELETE_ADDRESS,
   SET_ADDRESSES,
   getAddresses,
+  createAddress,
   updateAddress,
+  deleteAddress,
   setAddresses,
 } from './feature.address';
 
@@ -44,10 +48,14 @@ export {
   // feature.address
   ADDRESS,
   GET_ADDRESSES,
+  CREATE_ADDRESS,
   UPDATE_ADDRESS,
+  DELETE_ADDRESS,
   SET_ADDRESSES,
   getAddresses,
+  createAddress,
   updateAddress,
+  deleteAddress,
   setAddresses,
 
   // feature.user

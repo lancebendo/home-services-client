@@ -1,6 +1,14 @@
 const strUtils = {
 
-  strArrayContains: (array, str) => (array.indexOf(str) > -1),
+  strArrayContains: (array, str) => {
+    let result = false;
+    array.forEach((val) => {
+      if (val.includes(str)) {
+        result = true;
+      }
+    });
+    return result;
+  },
 
   objectPropToArray: (array, prop) => {
     const arr = [array.length];

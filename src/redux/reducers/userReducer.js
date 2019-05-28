@@ -2,7 +2,7 @@ import { SET_USER } from '../actions';
 
 const userState = {
   firstname: '',
-  lastname: 'ratbu',
+  lastname: '',
   birthday: '',
 };
 

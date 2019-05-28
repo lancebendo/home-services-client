@@ -73,7 +73,7 @@ class AddressTileList extends React.Component {
                 />
 
                 {addresses.map((address, index) => (
-                  <Tile key={address.uid}>
+                  <Tile key={address.id}>
                     <TileContent>
                       <span>{`${address.houseNumber} ${address.street}`}</span>
                       <br />
@@ -102,8 +102,8 @@ class AddressTileList extends React.Component {
                       </TileActionButton>
                       <TileActionButton
                         tabIndex={index}
-                        onClick={() => deleteHandler(address.uid)}
-                        onKeyPress={() => deleteHandler(address.uid)}
+                        onClick={() => deleteHandler(address.id)}
+                        onKeyPress={() => deleteHandler(address.id)}
                         type="button"
                         className="btn-flat waves-effect waves-light"
                       >

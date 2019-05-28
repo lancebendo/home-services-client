@@ -5,6 +5,9 @@ import FlatCard, { FlatCardSection } from '../Shared/FlatCard';
 import Spinner from '../Shared/Spinner';
 import UserProfileFormModal from './UserProfileFormModal';
 
+import constants from '../constants';
+
+
 const UserProfileSection = (props) => {
   const { label, value, onClick } = props;
   return (
@@ -88,11 +91,7 @@ class UserProfileFlatCard extends React.Component {
 }
 
 UserProfileFlatCard.propTypes = {
-  user: propTypes.shape({
-    firstname: propTypes.string.isRequired,
-    lastname: propTypes.string.isRequired,
-    birthday: propTypes.string.isRequired,
-  }).isRequired,
+  user: propTypes.shape(constants.userShape).isRequired,
 };
 
 export default UserProfileFlatCard;

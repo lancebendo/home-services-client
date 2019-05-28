@@ -21,8 +21,8 @@ const mockMiddleware = ({ dispatch }) => next => (action) => {
               window.mockSource.addresses.push(newAddress);
               window.mockSource.addresses.sort((a, b) => {
                 if (a.isDefault) return -1;
-                if (b.isDefault) return -1;
-                return a.uid - b.uid;
+                if (b.isDefault) return 1;
+                return a.id - b.id;
               });
               dispatch(setAddresses(window.mockSource.addresses));
             } catch (err) {
@@ -46,12 +46,12 @@ const mockMiddleware = ({ dispatch }) => next => (action) => {
           if (feature === ADDRESS) {
             try {
               const newArray = window.mockSource.addresses
-                .filter(x => x.uid !== payload.uid);
+                .filter(x => x.id !== payload.id);
               newArray.push(action.payload);
               newArray.sort((a, b) => {
                 if (a.isDefault) return -1;
                 if (b.isDefault) return -1;
-                return a.uid - b.uid;
+                return a.id - b.id;
               });
               window.mockSource.addresses = newArray;
               dispatch(setAddresses(window.mockSource.addresses));
@@ -72,11 +72,11 @@ const mockMiddleware = ({ dispatch }) => next => (action) => {
           if (feature === ADDRESS) {
             try {
               const newArray = window.mockSource.addresses
-                .filter(x => x.uid !== payload);
+                .filter(x => x.id !== payload);
               newArray.sort((a, b) => {
                 if (a.isDefault) return -1;
                 if (b.isDefault) return -1;
-                return a.uid - b.uid;
+                return a.id - b.id;
               });
               window.mockSource.addresses = newArray;
               dispatch(setAddresses(window.mockSource.addresses));

@@ -1,3 +1,4 @@
+import propTypes from 'prop-types';
 
 export default {
   // background colors
@@ -31,5 +32,19 @@ export default {
   smallScreen: '600px',
   mediumScreen: '992px',
   largeScreen: '1200px',
+
+  // prop type shapes
+  userShape: {
+    firstname: propTypes.string.isRequired,
+    lastname: propTypes.string.isRequired,
+    birthday: propTypes.string.isRequired,
+  },
+  addressShape: {
+    houseNumber: propTypes.string.isRequired,
+    street: propTypes.string.isRequired,
+    subdivision: propTypes.string.isRequired,
+    city: propTypes.string.isRequired,
+    province: propTypes.string.isRequired,
+  },
 
 };

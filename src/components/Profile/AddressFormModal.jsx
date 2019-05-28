@@ -9,8 +9,7 @@ const AddressFormModalFooter = (props) => {
   const {
     address, closingHandler, create, update,
   } = props;
-  console.log(address);
-  const submitFunc = address.uid > 0 ? update : create;
+  const submitFunc = address.id > 0 ? update : create;
   return (
     <ModalFooter>
       <button

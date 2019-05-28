@@ -1,15 +1,18 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch/* , Link */ } from 'react-router-dom';
-import GlobalStyle from './GlobalStyle';
+import { connect } from 'react-redux';
+import propTypes from 'prop-types';
 
 // load components
 import Header from '../Header';
 import Nav from '../Nav';
-
 import Dashboard from '../Dashboard';
 import Profile from '../Profile';
 // import TestComponent from '../TestComponent';
 import { PathNotFound } from '../ErrorHandler';
+
+import GlobalStyle from './GlobalStyle';
+import { getUser, getAddresses } from '../../redux/actions';
 
 const availablePaths = [
   {
@@ -24,31 +27,51 @@ const availablePaths = [
   // { name: 'History', path: '/history', icon: 'history', component: History, },
 ];
 
-const App = () => (
-  <React.Fragment>
-    <GlobalStyle />
+class App extends React.Component {
+  componentDidMount() {
+    const { loadData } = this.props;
+    loadData();
+  }
 
-    <BrowserRouter>
-      <Header />
+  render() {
+    return (
+      <React.Fragment>
+        <GlobalStyle />
 
-      <Nav availablePaths={availablePaths} />
+        <BrowserRouter>
+          <Header />
 
-      <Switch>
-        {availablePaths.map(path => (
-          <Route
-            key={path.name}
-            path={path.path}
-            exact
-            component={path.component}
-          />
-        ))}
+          <Nav availablePaths={availablePaths} />
 
-        <Route component={PathNotFound} />
-      </Switch>
+          <Switch>
+            {availablePaths.map(path => (
+              <Route
+                key={path.name}
+                path={path.path}
+                exact
+                component={path.component}
+              />
+            ))}
 
-    </BrowserRouter>
+            <Route component={PathNotFound} />
+          </Switch>
 
-  </React.Fragment>
-);
+        </BrowserRouter>
 
-export default App;
+      </React.Fragment>
+    );
+  }
+}
+
+App.propTypes = {
+  loadData: propTypes.func.isRequired,
+};
+
+const mapDispatchToProps = dispatch => ({
+  loadData: () => {
+    dispatch(getUser(''));
+    dispatch(getAddresses(''));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(App);

@@ -5,39 +5,23 @@ import propTypes from 'prop-types';
 import UserProfileFlatCard from './UserProfileFlatCard.smart';
 import AddressTileList from './AddressTileList.smart';
 
-import { getUser, getAddresses } from '../../redux/actions';
+import constants from '../constants';
 
-class Profile extends React.Component {
-  componentWillMount() {
-    const { loadData } = this.props;
-    loadData();
-  }
 
-  render() {
-    const { user, addresses } = this.props;
-    return (
-      <main>
-        <UserProfileFlatCard className="row" user={user} />
-        <AddressTileList className="row" addresses={addresses} />
-      </main>
-    );
-  }
-}
+const Profile = (props) => {
+  const { user, addresses } = props;
+  return (
+    <main>
+      <UserProfileFlatCard className="row" user={user} />
+      <AddressTileList className="row" addresses={addresses} />
+    </main>
+  );
+};
+
 
 Profile.propTypes = {
-  loadData: propTypes.func.isRequired,
-  user: propTypes.shape({
-    firstname: propTypes.string.isRequired,
-    lastname: propTypes.string.isRequired,
-    birthday: propTypes.string.isRequired,
-  }).isRequired,
-  addresses: propTypes.arrayOf(propTypes.shape({
-    houseNumber: propTypes.string.isRequired,
-    street: propTypes.string.isRequired,
-    subdivision: propTypes.string.isRequired,
-    city: propTypes.string.isRequired,
-    province: propTypes.string.isRequired,
-  })).isRequired,
+  user: propTypes.shape(constants.userShape).isRequired,
+  addresses: propTypes.arrayOf(propTypes.shape(constants.addressShape)).isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -45,11 +29,5 @@ const mapStateToProps = state => ({
   addresses: state.address.collection,
 });
 
-const mapDispatchToProps = dispatch => ({
-  loadData: () => {
-    dispatch(getUser(''));
-    dispatch(getAddresses(''));
-  },
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps)(Profile);

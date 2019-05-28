@@ -21,18 +21,18 @@ if (!window.isMockInitialized && process.env.NODE_ENV === 'development') {
   window.mockSource = {
 
     user: {
-      uid: 1,
+      id: 1,
       firstname: 'Lance',
       lastname: 'Bendo',
       birthday: 'November 28, 1993',
     },
 
     addresses: [{
-      uid: 1, isDefault: false, city: 'Manila', street: 'Mendiola', subdivision: 'Sampaloc', houseNumber: '4182', province: 'Metro Manila', id: 1,
+      id: 1, isDefault: false, city: 'Manila', street: 'Mendiola', subdivision: 'Sampaloc', houseNumber: '4182', province: 'Metro Manila',
     }, {
-      uid: 2, isDefault: true, city: 'Buena Park', subdivision: 'Las Mariposas', street: 'Valley View', houseNumber: '90620', province: 'California', id: 2,
+      id: 2, isDefault: true, city: 'Buena Park', subdivision: 'Las Mariposas', street: 'Valley View', houseNumber: '90620', province: 'California',
     }, {
-      uid: 3, isDefault: false, city: 'Bailen', subdivision: 'Poblacion II', street: 'Rizal', houseNumber: '4124', province: 'Cavite', id: 3,
+      id: 3, isDefault: false, city: 'Bailen', subdivision: 'Poblacion II', street: 'Rizal', houseNumber: '4124', province: 'Cavite',
     }],
   };
 }

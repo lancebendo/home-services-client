@@ -28,7 +28,7 @@ const availablePaths = [
 ];
 
 class App extends React.Component {
-  componentDidMount() {
+  componentWillMount() {
     const { loadData } = this.props;
     loadData();
   }

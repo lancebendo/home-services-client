@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import SideNav from './SideNav.dumb';
-import NavButton from './NavButton.dumb';
+// import NavButton from './NavButton.dumb';
 import NavLink from './NavLink.dumb';
 
 import { strUtils } from '../../utilities';
@@ -69,8 +69,8 @@ class Nav extends React.Component {
     if (!strUtils.strArrayContains(paths, currentPath) && !isTest) return null;
     return (
       <SideNav collapsible>
-        <NavButton label="Book now" onClick={this.onBook} icon="event" />
-        <div className="divider" />
+        {/* <NavButton label="Book now" onClick={this.onBook} icon="event" />
+        <div className="divider" /> */}
 
 
         {
@@ -85,9 +85,12 @@ class Nav extends React.Component {
             />
           ))
         }
-
+        {/*
         <div className="divider" />
-        <NavLink path={currentPath} label="Log-out" onClick={this.onLogout} icon="exit_to_app" />
+        <NavLink path={currentPath}
+        label="Log-out"
+        onClick={this.onLogout}
+        icon="exit_to_app" /> */}
       </SideNav>
     );
   }

@@ -33,8 +33,6 @@ if (!window.isMockInitialized && process.env.NODE_ENV === 'development') {
       uid: 2, isDefault: true, city: 'Buena Park', subdivision: 'Las Mariposas', street: 'Valley View', houseNumber: '90620', province: 'California', id: 2,
     }, {
       uid: 3, isDefault: false, city: 'Bailen', subdivision: 'Poblacion II', street: 'Rizal', houseNumber: '4124', province: 'Cavite', id: 3,
-    }, {
-      uid: 4, isDefault: false, city: 'Bailen', subdivision: 'Poblacion II', street: 'Rizal', houseNumber: '4124', province: 'Cavite', id: 4,
     }],
   };
 }

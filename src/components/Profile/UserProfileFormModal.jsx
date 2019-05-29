@@ -16,14 +16,7 @@ const UserProfileFormModalFooter = (props) => {
 
   return (
     <ModalFooter>
-      <button
-        type="button"
-        className="btn-flat waves-effect waves-light"
-        onKeyPress={e => closingHandler(e, props)}
-        onClick={e => closingHandler(e, props)}
-      >
-        Cancel
-      </button>
+
       <button
         type="button"
         className="btn-flat waves-effect waves-light"
@@ -31,6 +24,15 @@ const UserProfileFormModalFooter = (props) => {
         onClick={e => submitAndClose(e)}
       >
         Done
+      </button>
+
+      <button
+        type="button"
+        className="btn-flat waves-effect waves-light"
+        onKeyPress={e => closingHandler(e, props)}
+        onClick={e => closingHandler(e, props)}
+      >
+        Cancel
       </button>
     </ModalFooter>
   );

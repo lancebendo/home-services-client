@@ -20,27 +20,36 @@ const addressMiddleware = () => next => (action) => {
 
   switch (action.type) {
     case GET_ADDRESSES:
-      if (isProduction) throw new Error('Production data source not yet implemented');
-      else if (isDevelopment) next(mockRequest('addresses', ADDRESS, 'read'));
+      if (isProduction) {
+        throw new Error('Production data source not yet implemented');
+      } else if (isDevelopment) {
+        next(mockRequest('addresses', ADDRESS, { method: 'read' }));
+      }
 
       break;
 
     case CREATE_ADDRESS:
-      if (isProduction) throw new Error('Production data source not yet implemented');
-      else if (isDevelopment) next(mockRequest(action.payload, ADDRESS, 'create'));
-
+      if (isProduction) {
+        throw new Error('Production data source not yet implemented');
+      } else if (isDevelopment) {
+        next(mockRequest(action.payload, ADDRESS, { method: 'create' }));
+      }
       break;
 
     case UPDATE_ADDRESS:
-      if (isProduction) throw new Error('Production data source not yet implemented');
-      else if (isDevelopment) next(mockRequest(action.payload, ADDRESS, 'update'));
-
+      if (isProduction) {
+        throw new Error('Production data source not yet implemented');
+      } else if (isDevelopment) {
+        next(mockRequest(action.payload, ADDRESS, { method: 'update', ...action.meta }));
+      }
       break;
 
     case DELETE_ADDRESS:
-      if (isProduction) throw new Error('Production data source not yet implemented');
-      else if (isDevelopment) next(mockRequest(action.payload, ADDRESS, 'delete'));
-
+      if (isProduction) {
+        throw new Error('Production data source not yet implemented');
+      } else if (isDevelopment) {
+        next(mockRequest(action.payload, ADDRESS, { method: 'delete' }));
+      }
       break;
 
     case `${ADDRESS} ${REQUEST_SUCCESS}`:

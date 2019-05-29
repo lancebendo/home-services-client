@@ -14,7 +14,7 @@ const userMiddleware = () => next => (action) => {
   switch (action.type) {
     case GET_USER:
       if (process.env.NODE_ENV === 'development') {
-        next(mockRequest('user', USER, 'read'));
+        next(mockRequest('user', USER, { method: 'read' }));
       } else {
         throw new Error('Production data source not yet implemented');
       }
@@ -22,7 +22,7 @@ const userMiddleware = () => next => (action) => {
 
     case UPDATE_USER:
       if (process.env.NODE_ENV === 'development') {
-        next(mockRequest(action.payload, USER, 'update'));
+        next(mockRequest(action.payload, USER, { method: 'update' }));
       } else {
         throw new Error('Production data source not yet implemented');
       }

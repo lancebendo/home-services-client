@@ -20,9 +20,12 @@ export const createAddress = address => ({
   payload: address,
 });
 
-export const updateAddress = address => ({
+export const updateAddress = (address, isSwitchedToDefault = false) => ({
   type: UPDATE_ADDRESS,
   payload: address,
+  meta: {
+    isSwitchedToDefault,
+  },
 });
 
 export const deleteAddress = addressId => ({

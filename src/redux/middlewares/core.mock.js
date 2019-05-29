@@ -35,6 +35,13 @@ const mockMiddleware = ({ dispatch }) => next => (action) => {
         case 'read':
           try {
             const data = Object.getByString(window.mockSource, payload);
+            if (feature === ADDRESS) {
+              data.sort((a, b) => {
+                if (a.isDefault) return -1;
+                if (b.isDefault) return 1;
+                return a.id - b.id;
+              });
+            }
             dispatch(requestSuccess(data, feature));
           } catch (err) {
             dispatch(requestFail(err, feature));
@@ -45,12 +52,18 @@ const mockMiddleware = ({ dispatch }) => next => (action) => {
         case 'update':
           if (feature === ADDRESS) {
             try {
+              const { isSwitchedToDefault } = action.meta;
               const newArray = window.mockSource.addresses
                 .filter(x => x.id !== payload.id);
+              if (!isSwitchedToDefault) {
+                const oldDefault = newArray.find(x => x.isDefault);
+                oldDefault.isDefault = false;
+              }
               newArray.push(action.payload);
+
               newArray.sort((a, b) => {
                 if (a.isDefault) return -1;
-                if (b.isDefault) return -1;
+                if (b.isDefault) return 1;
                 return a.id - b.id;
               });
               window.mockSource.addresses = newArray;

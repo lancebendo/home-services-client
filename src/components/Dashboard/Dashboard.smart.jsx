@@ -33,7 +33,7 @@ const Dashboard = ({ user, address }) => {
       <div className="row">
         <div className="center-align">
 
-          <Title className="header-1">{`Welcome, ${user.firstname} ${user.lastname}`}</Title>
+          <Title className="header-1">Welcome to my React - Redux App</Title>
           <br />
           <Description className="description-1">
             {`Your name is ${user.firstname} ${user.lastname}.

@@ -1,32 +1,63 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 
 import Modal, { ModalFooter } from '../Shared/Modal';
+
 import { createAddress, updateAddress } from '../../redux/actions';
+
+import constants from '../constants';
+
+
+const DefaultLabel = styled.span`
+  font-size: ${constants.secondaryDescFontSize};
+  color: ${constants.descriptionFontColor};
+  padding-left: 20px;
+`;
+
+const DefaultButton = styled.button`
+  background-color: ${constants.primaryColor} !important;
+  color: ${constants.navFontColor} !important;
+`;
+
 
 const AddressFormModalFooter = (props) => {
   const {
-    address, closingHandler, create, update,
+    address, closingHandler, create, update, handleSwitchToDefault,
   } = props;
   const submitFunc = address.id > 0 ? update : create;
   return (
     <ModalFooter>
-      <button
-        type="button"
-        className="btn-flat waves-effect waves-light"
-        onKeyPress={e => closingHandler(e, props)}
-        onClick={e => closingHandler(e, props)}
-      >
-      Cancel
-      </button>
+      {address.isDefault ? (
+        <DefaultLabel className="left">{address.isDefault ? 'DEFAULT ADDRESS' : <br />}</DefaultLabel>
+      ) : (
+        <DefaultButton
+          type="button"
+          className="left btn waves-effect waves-light"
+          onKeyPress={handleSwitchToDefault}
+          onClick={handleSwitchToDefault}
+        >
+        Set as Default
+        </DefaultButton>
+      )}
+
       <button
         type="button"
         className="btn-flat waves-effect waves-light"
         onKeyPress={e => submitFunc(props.address, closingHandler(e, props))}
         onClick={e => submitFunc(props.address, closingHandler(e, props))}
       >
-      Done
+        Done
+      </button>
+
+      <button
+        type="button"
+        className="btn-flat waves-effect waves-light"
+        onKeyPress={e => closingHandler(e, props)}
+        onClick={e => closingHandler(e, props)}
+      >
+        Cancel
       </button>
     </ModalFooter>
   );
@@ -36,13 +67,8 @@ AddressFormModalFooter.propTypes = {
   closingHandler: propTypes.func.isRequired,
   create: propTypes.func.isRequired,
   update: propTypes.func.isRequired,
-  address: propTypes.shape({
-    houseNumber: propTypes.string.isRequired,
-    street: propTypes.string.isRequired,
-    subdivision: propTypes.string.isRequired,
-    city: propTypes.string.isRequired,
-    province: propTypes.string.isRequired,
-  }).isRequired,
+  handleSwitchToDefault: propTypes.func.isRequired,
+  address: propTypes.shape(constants.addressShape).isRequired,
 };
 
 class AddressFormModal extends React.Component {
@@ -54,8 +80,15 @@ class AddressFormModal extends React.Component {
       address,
     };
 
+    this.switchToDefault = this.switchToDefault.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleAfterOpen = this.handleAfterOpen.bind(this);
+  }
+
+  switchToDefault = () => {
+    this.setState(prevState => ({
+      address: { ...prevState.address, isDefault: true },
+    }));
   }
 
   handleInputChange = (e) => {
@@ -76,7 +109,7 @@ class AddressFormModal extends React.Component {
     const { address } = this.state;
 
     return (
-      <Modal title="Address Form" {...this.props} {...this.state} onAfterOpen={this.handleAfterOpen} footer={AddressFormModalFooter}>
+      <Modal title="Address Form" {...this.props} {...this.state} handleSwitchToDefault={this.switchToDefault} onAfterOpen={this.handleAfterOpen} footer={AddressFormModalFooter}>
 
         <div className="input-field col s12">
           <input
@@ -143,13 +176,7 @@ class AddressFormModal extends React.Component {
 }
 
 AddressFormModal.propTypes = {
-  address: propTypes.shape({
-    houseNumber: propTypes.string.isRequired,
-    street: propTypes.string.isRequired,
-    subdivision: propTypes.string.isRequired,
-    city: propTypes.string.isRequired,
-    province: propTypes.string.isRequired,
-  }).isRequired,
+  address: propTypes.shape(constants.addressShape).isRequired,
   isOpen: propTypes.bool.isRequired,
   closingHandler: propTypes.func.isRequired,
   create: propTypes.func.isRequired,

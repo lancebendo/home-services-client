@@ -1,6 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 
 import FlatCard, { FlatCardContent, FlatCardSection } from '../Shared/FlatCard';
 import TileList, {
@@ -9,6 +10,15 @@ import TileList, {
 import AddressFormModal from './AddressFormModal';
 
 import { deleteAddress } from '../../redux/actions';
+
+import constants from '../constants';
+
+
+const DefaultLabel = styled.span`
+  font-size: ${constants.secondaryDescFontSize};
+  color: ${constants.descriptionFontColor};
+`;
+
 
 class AddressTileList extends React.Component {
   constructor(props) {
@@ -80,17 +90,10 @@ class AddressTileList extends React.Component {
                       <span>{address.subdivision}</span>
                       <br />
                       <span>{`${address.city}, ${address.province}`}</span>
+                      <br />
+                      <DefaultLabel>{address.isDefault ? '[Default Address]' : <br />}</DefaultLabel>
                     </TileContent>
                     <TileFooter>
-                      <TileActionButton
-                        tabIndex={index}
-                        onClick={e => this.openModal(e, this.props, address)}
-                        onKeyPress={e => this.openModal(e, this.props, address)}
-                        type="button"
-                        className="btn-flat waves-effect waves-light"
-                      >
-                      Set as default
-                      </TileActionButton>
                       <TileActionButton
                         tabIndex={index}
                         onClick={e => this.openModal(e, this.props, address)}

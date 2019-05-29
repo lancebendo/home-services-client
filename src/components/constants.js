@@ -21,7 +21,7 @@ export default {
   primaryHeaderFontSize: '1.9rem',
   secondaryHeaderFontSize: '1.4rem',
   parimaryDescFontSize: '1.15rem',
-  secondaryDescFontSize: '1.01rem',
+  secondaryDescFontSize: '0.9rem',
   navigationLabelFontSize: '1rem',
   linkLabelFontSize: '1rem',
 

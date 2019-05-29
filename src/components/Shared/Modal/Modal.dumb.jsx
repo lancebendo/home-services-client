@@ -37,7 +37,7 @@ const customStyles = {
     right: 'auto',
     top: '50%',
     bottom: 'auto',
-    minWidth: '20rem',
+    minWidth: '30rem',
     width: '50%',
     maxWidth: '50rem',
   },

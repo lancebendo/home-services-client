@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import FlatCard, { FlatCardContent, FlatCardSection } from '../Shared/FlatCard';
 import TileList, {
-  Tile, TileLink, TileContent, TileFooter, TileActionButton,
+  Tile, TileLink, TileContent, TileFooter,
 } from '../Shared/TileList';
 import AddressFormModal from './AddressFormModal';
 
@@ -94,7 +94,7 @@ class AddressTileList extends React.Component {
                       <DefaultLabel>{address.isDefault ? '[Default Address]' : <br />}</DefaultLabel>
                     </TileContent>
                     <TileFooter>
-                      <TileActionButton
+                      <button
                         tabIndex={index}
                         onClick={e => this.openModal(e, this.props, address)}
                         onKeyPress={e => this.openModal(e, this.props, address)}
@@ -102,8 +102,8 @@ class AddressTileList extends React.Component {
                         className="btn-flat waves-effect waves-light"
                       >
                       Edit
-                      </TileActionButton>
-                      <TileActionButton
+                      </button>
+                      <button
                         tabIndex={index}
                         onClick={() => deleteHandler(address.id)}
                         onKeyPress={() => deleteHandler(address.id)}
@@ -111,7 +111,7 @@ class AddressTileList extends React.Component {
                         className="btn-flat waves-effect waves-light"
                       >
                       Delete
-                      </TileActionButton>
+                      </button>
                     </TileFooter>
                   </Tile>
                 ))}

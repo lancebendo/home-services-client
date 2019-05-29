@@ -39,7 +39,7 @@ color: ${constants.defaultFontColor};
 
 // overwrite overlay style to blend well with materialize
 .ReactModal__Overlay {
-    z-index: 999999999;
+    z-index: 999;
     background-color: rgba(0,0,0,0.5) !important;
 }
 

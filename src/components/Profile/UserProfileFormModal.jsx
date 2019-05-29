@@ -80,6 +80,9 @@ class UserProfileFormModal extends React.Component {
       if (fieldToEdit === 'birthday') {
         const instance = window.M.Datepicker.init(document.querySelector('.datepicker'), {
           format: constants.dateFormat.toLowerCase(),
+          maxDate: new Date(),
+          defaultDate: new Date(),
+          yearRange: 30,
           onSelect(date) {
             context.handleInputChange({ target: { value: date, name: 'birthday' } });
           },

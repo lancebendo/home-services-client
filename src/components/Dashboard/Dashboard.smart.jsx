@@ -2,6 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 import FlatCard, { FlatCardContent } from '../Shared/FlatCard';
 
@@ -37,7 +38,7 @@ const Dashboard = ({ user, address }) => {
           <br />
           <Description className="description-1">
             {`Your name is ${user.firstname} ${user.lastname}.
-              Your birthday was ${user.birthday}. You currently 
+              Your birthday was ${moment(user.birthday).format(constants.dateFormat)}. You currently 
               lived at ${completeAddress}. If you wish to change this, 
               Navigate to Profile page and change the information that 
               you want to change. (Note: If you refresh the browser, the 

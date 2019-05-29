@@ -50,6 +50,16 @@ color: ${constants.defaultFontColor};
     animation-duration: .3s;
 }
 
+//overwrites materialize picker color
+.datepicker-date-display, .datepicker-weekday-display, .datepicker-table td.is-selected{
+  background-color: ${constants.primaryColor} !important;
+}
+.datepicker-cancel, .datepicker-clear, 
+.datepicker-today, .datepicker-done {
+  color: ${constants.primaryColor} !important;
+}
+
+
 @media only screen and (min-width: ${constants.mediumScreen}) {
     main {
       padding: 50px;

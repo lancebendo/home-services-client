@@ -33,11 +33,14 @@ export default {
   mediumScreen: '992px',
   largeScreen: '1200px',
 
+  // formats
+  dateFormat: 'MMMM D, YYYY',
+
   // prop type shapes
   userShape: {
     firstname: propTypes.string.isRequired,
     lastname: propTypes.string.isRequired,
-    birthday: propTypes.string.isRequired,
+    birthday: propTypes.instanceOf(Date).isRequired,
   },
   addressShape: {
     houseNumber: propTypes.string.isRequired,

@@ -24,7 +24,7 @@ if (!window.isMockInitialized && process.env.NODE_ENV === 'development') {
       id: 1,
       firstname: 'Lance',
       lastname: 'Bendo',
-      birthday: 'November 28, 1993',
+      birthday: new Date('November 28, 1993'),
     },
 
     addresses: [{

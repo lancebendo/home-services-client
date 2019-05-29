@@ -1,5 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import moment from 'moment';
 
 import FlatCard, { FlatCardSection } from '../Shared/FlatCard';
 import Spinner from '../Shared/Spinner';
@@ -18,7 +19,7 @@ const UserProfileSection = (props) => {
         </div>
         <div className="col m9 s12">
           <span>
-            {value}
+            {value.toString()}
             {
               label !== 'Firstnamess'
                 ? (<i className="material-icons right">keyboard_arrow_right</i>)
@@ -33,7 +34,11 @@ const UserProfileSection = (props) => {
 
 UserProfileSection.propTypes = {
   label: propTypes.string.isRequired,
-  value: propTypes.string.isRequired,
+  value: propTypes.oneOfType([
+    propTypes.string,
+    propTypes.number,
+    propTypes.instanceOf(Date),
+  ]).isRequired,
   onClick: propTypes.func.isRequired,
 };
 
@@ -82,7 +87,7 @@ class UserProfileFlatCard extends React.Component {
 
           <UserProfileSection onClick={this.openModal} name="lastname" label="Lastname" value={lastname} />
 
-          <UserProfileSection isLast onClick={this.openModal} name="birthday" label="Birthday" value={birthday} />
+          <UserProfileSection isLast onClick={this.openModal} name="birthday" label="Birthday" value={moment(birthday).format(constants.dateFormat)} />
 
         </FlatCard>
       </React.Fragment>

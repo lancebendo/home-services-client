@@ -1,10 +1,14 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 import Modal, { ModalFooter } from '../Shared/Modal';
 
 import { updateUser } from '../../redux/actions';
+
+import constants from '../constants';
+
 
 const UserProfileFormModalFooter = (props) => {
   const { closingHandler, onSubmit } = props;
@@ -41,11 +45,7 @@ const UserProfileFormModalFooter = (props) => {
 UserProfileFormModalFooter.propTypes = {
   closingHandler: propTypes.func.isRequired,
   onSubmit: propTypes.func.isRequired,
-  userProfile: propTypes.shape({
-    firstname: propTypes.string.isRequired,
-    lastname: propTypes.string.isRequired,
-    birthday: propTypes.string.isRequired,
-  }).isRequired,
+  userProfile: propTypes.shape(constants.userShape).isRequired,
 };
 
 class UserProfileFormModal extends React.Component {
@@ -74,12 +74,24 @@ class UserProfileFormModal extends React.Component {
 
   handleAfterOpen() {
     const { userProfile, fieldToEdit } = this.props;
-    this.setState({ userProfile, fieldToEdit }, window.M.updateTextFields);
+    const context = this;
+    this.setState({ userProfile, fieldToEdit }, () => {
+      window.M.updateTextFields();
+      if (fieldToEdit === 'birthday') {
+        const instance = window.M.Datepicker.init(document.querySelector('.datepicker'), {
+          format: constants.dateFormat.toLowerCase(),
+          onSelect(date) {
+            context.handleInputChange({ target: { value: date, name: 'birthday' } });
+          },
+          autoClose: true,
+        });
+        instance.setDate(userProfile.birthday);
+      }
+    });
   }
 
   render() {
     const { userProfile, fieldToEdit } = this.state;
-
     return (
       <Modal title={`Edit ${fieldToEdit}`} {...this.props} {...this.state} onAfterOpen={this.handleAfterOpen} footer={UserProfileFormModalFooter}>
 
@@ -88,9 +100,9 @@ class UserProfileFormModal extends React.Component {
             name={fieldToEdit}
             id={fieldToEdit}
             type="text"
-            className="validate"
+            className={fieldToEdit === 'birthday' ? 'validate datepicker' : 'validate'}
             onChange={this.handleInputChange}
-            value={userProfile[fieldToEdit]}
+            value={fieldToEdit === 'birthday' ? moment(userProfile[fieldToEdit]).format(constants.dateFormat) : userProfile[fieldToEdit]}
           />
           <label htmlFor={fieldToEdit}>{fieldToEdit}</label>
         </div>
@@ -103,11 +115,7 @@ class UserProfileFormModal extends React.Component {
 UserProfileFormModal.propTypes = {
   isOpen: propTypes.bool.isRequired,
   closingHandler: propTypes.func.isRequired,
-  userProfile: propTypes.shape({
-    firstname: propTypes.string.isRequired,
-    lastname: propTypes.string.isRequired,
-    birthday: propTypes.string.isRequired,
-  }).isRequired,
+  userProfile: propTypes.shape(constants.userShape).isRequired,
   fieldToEdit: propTypes.string.isRequired,
   onSubmit: propTypes.func.isRequired,
 };

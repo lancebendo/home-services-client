@@ -9,21 +9,39 @@ ReactModal.setAppElement('#root');
 
 const ModalHeader = styled.span`
   font-size: ${constants.primaryHeaderFontSize};
-`;
-
-const ModalBody = styled.div`
-  position: absolute;
-  height: calc(100% - 56px);
-  max-height: 100%;
-  width: 100%;
-  overflow-y: auto;
   padding: 12px;
 `;
 
-const ModalContent = styled.div`
-  margin: 3px 10px 3px;
+const ModalBody = styled.div`
+  // position: absolute;
+  // height: calc(100% - 56px);
+  // max-height: 100%;
+  // width: 100%;
+  // overflow-y: auto;
+  padding-top: 12px;
 `;
 
+const ModalContent = styled.div`
+  padding: 20px;
+  margin: 3px 10px 3px;
+  margin-bottom: 52px;
+`;
+
+const customStyles = {
+  content: {
+    border: '0',
+    minHeight: '10rem',
+    padding: '2rem',
+    position: 'fixed',
+    left: '50%',
+    right: 'auto',
+    top: '50%',
+    bottom: 'auto',
+    minWidth: '20rem',
+    width: '50%',
+    maxWidth: '50rem',
+  },
+};
 
 const Modal = (props) => {
   const {
@@ -32,7 +50,11 @@ const Modal = (props) => {
 
   return (
     <ReactModal
+      closeTimeoutMS={200}
+      style={customStyles}
       isOpen={isOpen}
+      shouldCloseOnEsc
+      shouldCloseOnOverlayClick={false}
       onRequestClose={closingHandler}
       {...props}
     >

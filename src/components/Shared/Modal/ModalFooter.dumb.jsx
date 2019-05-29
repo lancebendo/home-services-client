@@ -5,6 +5,7 @@ import constants from '../../constants';
 const ModalFixedFooter = styled.div`
 position: absolute;
 bottom: 0;
+left: 0;
 height: 52px;
 width: 100%;
 border-radius: 0 0 2px 2px;

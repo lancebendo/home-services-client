@@ -79,6 +79,7 @@ class UserProfileFormModal extends React.Component {
       window.M.updateTextFields();
       if (fieldToEdit === 'birthday') {
         const instance = window.M.Datepicker.init(document.querySelector('.datepicker'), {
+          container: document.getElementsByClassName('ReactModal__Overlay--after-open')[0],
           format: constants.dateFormat.toLowerCase(),
           maxDate: new Date(),
           defaultDate: new Date(),
@@ -96,7 +97,13 @@ class UserProfileFormModal extends React.Component {
   render() {
     const { userProfile, fieldToEdit } = this.state;
     return (
-      <Modal title={`Edit ${fieldToEdit}`} {...this.props} {...this.state} onAfterOpen={this.handleAfterOpen} footer={UserProfileFormModalFooter}>
+      <Modal
+        title={`Edit ${fieldToEdit}`}
+        {...this.props}
+        {...this.state}
+        onAfterOpen={this.handleAfterOpen}
+        footer={UserProfileFormModalFooter}
+      >
 
         <div className="input-field col s12">
           <input

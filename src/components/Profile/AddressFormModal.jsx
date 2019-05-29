@@ -109,7 +109,14 @@ class AddressFormModal extends React.Component {
     const { address } = this.state;
 
     return (
-      <Modal title="Address Form" {...this.props} {...this.state} handleSwitchToDefault={this.switchToDefault} onAfterOpen={this.handleAfterOpen} footer={AddressFormModalFooter}>
+      <Modal
+        title="Address Form"
+        {...this.props}
+        {...this.state}
+        handleSwitchToDefault={this.switchToDefault}
+        onAfterOpen={this.handleAfterOpen}
+        footer={AddressFormModalFooter}
+      >
 
         <div className="input-field col s12">
           <input

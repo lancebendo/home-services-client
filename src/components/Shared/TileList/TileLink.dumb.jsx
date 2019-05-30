@@ -31,14 +31,14 @@ const TileLinkSpan = styled.span`
 
 const TileLink = (props) => {
   const {
-    label, labelIcon, onClick: clickHandler, modalTrigger,
+    label, labelIcon, onClick: clickHandler, className,
   } = props;
 
   return (
     <TileLinkDiv
       {...props}
       onClick={e => clickHandler(e, props)}
-      className={`${modalTrigger ? 'modal-trigger' : ''} row valign-wrapper waves-effect`}
+      className={`${className} row valign-wrapper waves-effect`}
     >
       <div className="col s6 offset-s3">
         <div className="row center-align no-margin-bottom">
@@ -55,14 +55,14 @@ const TileLink = (props) => {
 TileLink.defaultProps = {
   labelIcon: null,
   onClick: () => {},
-  modalTrigger: false,
+  className: '',
 };
 
 TileLink.propTypes = {
   label: propTypes.string.isRequired,
   labelIcon: propTypes.string,
   onClick: propTypes.func,
-  modalTrigger: propTypes.bool,
+  className: propTypes.string,
 };
 
 export default TileLink;

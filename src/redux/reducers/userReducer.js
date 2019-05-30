@@ -1,6 +1,7 @@
 import { SET_USER } from '../actions';
 
 const userState = {
+  id: 0,
   firstname: '',
   lastname: '',
   birthday: new Date(),

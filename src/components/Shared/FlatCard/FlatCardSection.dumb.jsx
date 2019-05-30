@@ -20,7 +20,7 @@ const FlatCardSectionLink = styled(FlatCardSectionDiv)`
 
 const FlatCardSection = (props) => {
   const {
-    children, isLink, isLast, noBorderTop, onClick,
+    children, isLink, isLast, noBorderTop, onClick, className,
   } = props;
   const clickHandler = isLink ? onClick : () => null;
   const SectionComponent = isLink ? FlatCardSectionLink : FlatCardSectionDiv;
@@ -29,7 +29,7 @@ const FlatCardSection = (props) => {
   classes = noBorderTop ? `no-border-top ${classes}` : classes;
   classes = isLast ? `has-bottom-radius ${classes}` : classes;
   return (
-    <SectionComponent onClick={e => clickHandler(e, props)} className={classes}>
+    <SectionComponent {...props} onClick={e => clickHandler(e, props)} className={`${className} ${classes}`}>
       {children}
     </SectionComponent>
   );
@@ -40,6 +40,7 @@ FlatCardSection.defaultProps = {
   isLast: false,
   noBorderTop: false,
   onClick: () => {},
+  className: '',
 };
 
 FlatCardSection.propTypes = {
@@ -48,6 +49,7 @@ FlatCardSection.propTypes = {
   isLast: propTypes.bool,
   noBorderTop: propTypes.bool,
   onClick: propTypes.func,
+  className: propTypes.string,
 };
 
 export default FlatCardSection;

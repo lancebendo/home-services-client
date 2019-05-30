@@ -10,9 +10,9 @@ import constants from '../constants';
 
 
 const UserProfileSection = (props) => {
-  const { label, value, onClick } = props;
+  const { label, value } = props;
   return (
-    <FlatCardSection {...props} isLink onClick={e => onClick(e, props)}>
+    <FlatCardSection {...props} isLink>
       <div className="row no-margin-bottom valign-wrapper">
         <div className="col m3 s12">
           <span>{label}</span>
@@ -39,64 +39,29 @@ UserProfileSection.propTypes = {
     propTypes.number,
     propTypes.instanceOf(Date),
   ]).isRequired,
-  onClick: propTypes.func.isRequired,
 };
 
-class UserProfileFlatCard extends React.Component {
-  constructor(props) {
-    super(props);
+const UserProfileFlatCard = (props) => {
+  const { user } = props;
 
-    this.state = {
-      isModalOpen: false,
-      fieldToEdit: 'firstname', // so the error of uncontrolled... will go away
-    };
-  }
+  return (
+    <FlatCard {...props} headerIcon="person_outline" header="User Profile">
+      <UserProfileSection className="modal-trigger" data-target={`USER_FORM_${user.id}_firstname`} label="Firstname" value={user.firstname} />
+      <UserProfileFormModal key={`USER_FORM_${user.id}_firstname`} fieldToEdit="firstname" user={user} />
 
-  openModal = (e, props) => {
-    e.preventDefault();
-    const { name } = props;
-    this.setState({
-      isModalOpen: true,
-      fieldToEdit: name,
-    });
-  };
+      <UserProfileSection className="modal-trigger" data-target={`USER_FORM_${user.id}_lastname`} label="Lastname" value={user.lastname} />
+      <UserProfileFormModal key={`USER_FORM_${user.id}_lastname`} fieldToEdit="lastname" user={user} />
 
-  closeModal = () => {
-    this.setState({
-      isModalOpen: false,
-      fieldToEdit: 'firstname', // para wala nang error, may default
-    });
-  };
+      <UserProfileSection isLast className="modal-trigger" data-target={`USER_FORM_${user.id}_birthday`} label="Birthday" value={moment(user.birthday).format(constants.dateFormat)} />
+      <UserProfileFormModal key={`USER_FORM_${user.id}_birthday`} fieldToEdit="birthday" user={user} />
+    </FlatCard>
+  );
+};
 
-  render() {
-    const { user } = this.props;
-    const { isModalOpen, fieldToEdit } = this.state;
-    const { firstname, lastname, birthday } = user;
-
-    return (
-      <React.Fragment>
-        <UserProfileFormModal
-          isOpen={isModalOpen}
-          fieldToEdit={fieldToEdit}
-          closingHandler={this.closeModal}
-          userProfile={user}
-        />
-
-        <FlatCard {...this.props} headerIcon="person_outline" header="User Profile">
-          <UserProfileSection onClick={this.openModal} name="firstname" label="Firstname" value={firstname} />
-
-          <UserProfileSection onClick={this.openModal} name="lastname" label="Lastname" value={lastname} />
-
-          <UserProfileSection isLast onClick={this.openModal} name="birthday" label="Birthday" value={moment(birthday).format(constants.dateFormat)} />
-
-        </FlatCard>
-      </React.Fragment>
-    );
-  }
-}
 
 UserProfileFlatCard.propTypes = {
   user: propTypes.shape(constants.userShape).isRequired,
 };
+
 
 export default UserProfileFlatCard;

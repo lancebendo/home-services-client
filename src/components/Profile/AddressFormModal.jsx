@@ -3,73 +3,34 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import Modal, { ModalFooter } from '../Shared/Modal';
+import Modal, { ModalContent, ModalFooter } from '../Shared/ModalRebuild';
+import Button from '../Shared/Button';
+import Input from '../Shared/Input';
+import Header from '../Shared/Header';
 
 import { createAddress, updateAddress } from '../../redux/actions';
 
 import constants from '../constants';
 
-
-const DefaultLabel = styled.span`
+const DefaultLabel = styled.div`
   font-size: ${constants.secondaryDescFontSize};
   color: ${constants.descriptionFontColor};
   padding-left: 20px;
+  float: left !important;
+  display: table;
+  height: 100%;
+
+  > * {
+    display: table-cell;
+    vertical-align: middle;
+  }
 `;
 
-const DefaultButton = styled.button`
+const DefaultButton = styled(Button)`
   background-color: ${constants.primaryColor} !important;
   color: ${constants.navFontColor} !important;
 `;
 
-
-const AddressFormModalFooter = (props) => {
-  const {
-    address, closingHandler, create, update, handleSwitchToDefault,
-  } = props;
-  const submitFunc = address.id > 0 ? update : create;
-  return (
-    <ModalFooter>
-      {address.isDefault ? (
-        <DefaultLabel className="left">{address.isDefault ? 'DEFAULT ADDRESS' : <br />}</DefaultLabel>
-      ) : (
-        <DefaultButton
-          type="button"
-          className="left btn waves-effect waves-light"
-          onKeyPress={handleSwitchToDefault}
-          onClick={handleSwitchToDefault}
-        >
-        Set as Default
-        </DefaultButton>
-      )}
-
-      <button
-        type="button"
-        className="btn-flat waves-effect waves-light"
-        onKeyPress={e => submitFunc(props.address, closingHandler(e, props))}
-        onClick={e => submitFunc(props.address, closingHandler(e, props))}
-      >
-        Done
-      </button>
-
-      <button
-        type="button"
-        className="btn-flat waves-effect waves-light"
-        onKeyPress={e => closingHandler(e, props)}
-        onClick={e => closingHandler(e, props)}
-      >
-        Cancel
-      </button>
-    </ModalFooter>
-  );
-};
-
-AddressFormModalFooter.propTypes = {
-  closingHandler: propTypes.func.isRequired,
-  create: propTypes.func.isRequired,
-  update: propTypes.func.isRequired,
-  handleSwitchToDefault: propTypes.func.isRequired,
-  address: propTypes.shape(constants.addressShape).isRequired,
-};
 
 class AddressFormModal extends React.Component {
   constructor(props) {
@@ -82,8 +43,9 @@ class AddressFormModal extends React.Component {
 
     this.switchToDefault = this.switchToDefault.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleAfterOpen = this.handleAfterOpen.bind(this);
+    this.cancelHandler = this.cancelHandler.bind(this);
   }
+
 
   switchToDefault = () => {
     this.setState(prevState => ({
@@ -100,76 +62,100 @@ class AddressFormModal extends React.Component {
     }));
   }
 
-  handleAfterOpen() {
+  cancelHandler = () => {
     const { address } = this.props;
-    this.setState({ address }, window.M.updateTextFields);
+    this.setState({
+      address,
+    });
   }
 
   render() {
     const { address } = this.state;
+    const { create, update } = this.props;
+    const isEdit = address.id > 0;
+    const submitHandler = isEdit ? update : create;
+
+    const MODAL_ID = `ADDRESS_FORM_${address.id}`;
 
     return (
-      <Modal title="Address Form" {...this.props} {...this.state} handleSwitchToDefault={this.switchToDefault} onAfterOpen={this.handleAfterOpen} footer={AddressFormModalFooter}>
+      <Modal id={MODAL_ID} isFixedFooter dismissible={false}>
+        <ModalContent>
+          <Header>
+            {isEdit ? 'Edit ' : 'Create '}
+             Address
+          </Header>
 
-        <div className="input-field col s12">
-          <input
-            name="houseNumber"
-            id="unit_number"
+          <Input
             type="text"
             className="validate"
             onChange={this.handleInputChange}
             value={address.houseNumber}
+            field="houseNumber"
+            label="House/Unit Number"
           />
-          <label htmlFor="unit_number">Unit No.</label>
-        </div>
 
-        <div className="input-field col s12">
-          <input
-            name="street"
-            id="street"
+          <Input
             type="text"
             className="validate"
             onChange={this.handleInputChange}
             value={address.street}
+            field="street"
+            label="Street"
           />
-          <label htmlFor="street">Street</label>
-        </div>
 
-        <div className="input-field col s12">
-          <input
-            name="subdivision"
-            id="village_name"
+          <Input
             type="text"
             className="validate"
             onChange={this.handleInputChange}
             value={address.subdivision}
+            field="subdivision"
+            label="Subdivision"
           />
-          <label htmlFor="village_name">Subdivision</label>
-        </div>
 
-        <div className="input-field col s12">
-          <input
-            name="city"
-            id="city"
+          <Input
             type="text"
             className="validate"
             onChange={this.handleInputChange}
             value={address.city}
+            field="city"
+            label="City"
           />
-          <label htmlFor="city">City</label>
-        </div>
 
-        <div className="input-field col s12">
-          <input
-            name="province"
-            id="province"
+          <Input
             type="text"
             className="validate"
             onChange={this.handleInputChange}
             value={address.province}
+            field="province"
+            label="Province"
           />
-          <label htmlFor="city">Province</label>
-        </div>
+        </ModalContent>
+
+        <ModalFooter>
+          {address.isDefault ? (
+            <DefaultLabel>
+              {address.isDefault ? (<span>DEFAULT ADDRESS</span>) : <br />}
+            </DefaultLabel>
+          ) : (
+            <DefaultButton
+              label="Set as Default"
+              className="left"
+              onClick={this.switchToDefault}
+            />
+          )}
+
+          <Button
+            className="modal-close"
+            label="Done"
+            onClick={() => submitHandler(address)}
+          />
+          <Button
+            className="modal-close"
+            label="Cancel"
+            onClick={this.cancelHandler}
+          />
+
+        </ModalFooter>
       </Modal>
     );
   }
@@ -177,9 +163,8 @@ class AddressFormModal extends React.Component {
 
 AddressFormModal.propTypes = {
   address: propTypes.shape(constants.addressShape).isRequired,
-  isOpen: propTypes.bool.isRequired,
-  closingHandler: propTypes.func.isRequired,
   create: propTypes.func.isRequired,
+  update: propTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

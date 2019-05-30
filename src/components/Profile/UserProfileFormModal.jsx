@@ -1,137 +1,112 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { connect } from 'react-redux';
 import moment from 'moment';
+import { connect } from 'react-redux';
 
-import Modal, { ModalFooter } from '../Shared/Modal';
+import Modal, { ModalContent, ModalFooter } from '../Shared/ModalRebuild';
+import Button from '../Shared/Button';
+import Input from '../Shared/Input';
+import Header from '../Shared/Header';
 
 import { updateUser } from '../../redux/actions';
 
 import constants from '../constants';
 
-
-const UserProfileFormModalFooter = (props) => {
-  const { closingHandler, onSubmit } = props;
-
-  const submitAndClose = (e) => {
-    onSubmit(props.userProfile);
-    closingHandler(e, props);
-  };
-
-  return (
-    <ModalFooter>
-
-      <button
-        type="button"
-        className="btn-flat waves-effect waves-light"
-        onKeyPress={e => submitAndClose(e)}
-        onClick={e => submitAndClose(e)}
-      >
-        Done
-      </button>
-
-      <button
-        type="button"
-        className="btn-flat waves-effect waves-light"
-        onKeyPress={e => closingHandler(e, props)}
-        onClick={e => closingHandler(e, props)}
-      >
-        Cancel
-      </button>
-    </ModalFooter>
-  );
-};
-
-UserProfileFormModalFooter.propTypes = {
-  closingHandler: propTypes.func.isRequired,
-  onSubmit: propTypes.func.isRequired,
-  userProfile: propTypes.shape(constants.userShape).isRequired,
-};
-
 class UserProfileFormModal extends React.Component {
   constructor(props) {
     super(props);
 
-    const { userProfile, fieldToEdit } = this.props;
-
+    const { user } = this.props;
     this.state = {
-      userProfile,
-      fieldToEdit,
+      user,
     };
 
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleAfterOpen = this.handleAfterOpen.bind(this);
+    this.cancelHandler = this.cancelHandler.bind(this);
   }
+
+  componentDidMount = () => window.M.updateTextFields();
+
 
   handleInputChange = (e) => {
     const value = e.target.value;
     const name = e.target.name;
 
     this.setState(prevState => ({
-      userProfile: { ...prevState.userProfile, [name]: value },
+      user: { ...prevState.user, [name]: value },
     }));
   }
 
-  handleAfterOpen() {
-    const { userProfile, fieldToEdit } = this.props;
-    const context = this;
-    this.setState({ userProfile, fieldToEdit }, () => {
-      window.M.updateTextFields();
-      if (fieldToEdit === 'birthday') {
-        const instance = window.M.Datepicker.init(document.querySelector('.datepicker'), {
-          container: document.getElementsByClassName('ReactModal__Overlay--after-open')[0],
-          format: constants.dateFormat.toLowerCase(),
-          maxDate: new Date(),
-          defaultDate: new Date(),
-          yearRange: 30,
-          onSelect(date) {
-            context.handleInputChange({ target: { value: date, name: 'birthday' } });
-          },
-          autoClose: true,
-        });
-        instance.setDate(userProfile.birthday);
-      }
-    });
+  cancelHandler = () => {
+    const { user } = this.props;
+    this.setState({ user });
   }
 
-  render() {
-    const { userProfile, fieldToEdit } = this.state;
-    return (
-      <Modal
-        title={`Edit ${fieldToEdit}`}
-        {...this.props}
-        {...this.state}
-        onAfterOpen={this.handleAfterOpen}
-        footer={UserProfileFormModalFooter}
-      >
+  //   handleAfterOpen() {
+  //     const { user, fieldToEdit } = this.props;
+  //     const context = this;
+  //     this.setState({ userProfile, fieldToEdit }, () => {
+  //       window.M.updateTextFields();
+  //       if (fieldToEdit === 'birthday') {
+  //         const instance = window.M.Datepicker.init(document.querySelector('.datepicker'), {
+  //           container: document.getElementsByClassName('ReactModal__Overlay--after-open')[0],
+  //           format: constants.dateFormat.toLowerCase(),
+  //           maxDate: new Date(),
+  //           defaultDate: new Date(),
+  //           yearRange: 30,
+  //           onSelect(date) {
+  //             context.handleInputChange({ target: { value: date, name: 'birthday' } });
+  //           },
+  //           autoClose: true,
+  //         });
+  //         instance.setDate(userProfile.birthday);
+  //       }
+  //     });
+  //   }
 
-        <div className="input-field col s12">
-          <input
-            name={fieldToEdit}
-            id={fieldToEdit}
+  render() {
+    const { user } = this.state;
+    const { fieldToEdit, update } = this.props;
+    const MODAL_ID = `USER_FORM_${user.id}_${fieldToEdit}`;
+    return (
+      <Modal key={user.id} id={MODAL_ID} isFixedFooter dismissible={false}>
+
+        <ModalContent>
+          <Header>{`Edit ${fieldToEdit}`}</Header>
+          <Input
+            field={fieldToEdit}
+            label={fieldToEdit}
             type="text"
             className={fieldToEdit === 'birthday' ? 'validate datepicker' : 'validate'}
             onChange={this.handleInputChange}
-            value={fieldToEdit === 'birthday' ? moment(userProfile[fieldToEdit]).format(constants.dateFormat) : userProfile[fieldToEdit]}
+            value={fieldToEdit === 'birthday' ? moment(user[fieldToEdit]).format(constants.dateFormat) : user[fieldToEdit]}
           />
-          <label htmlFor={fieldToEdit}>{fieldToEdit}</label>
-        </div>
+        </ModalContent>
 
+        <ModalFooter>
+          <Button
+            className="modal-close"
+            label="Done"
+            onClick={() => update(user)}
+          />
+          <Button
+            className="modal-close"
+            label="Cancel"
+            onClick={this.cancelHandler}
+          />
+        </ModalFooter>
       </Modal>
     );
   }
 }
 
 UserProfileFormModal.propTypes = {
-  isOpen: propTypes.bool.isRequired,
-  closingHandler: propTypes.func.isRequired,
-  userProfile: propTypes.shape(constants.userShape).isRequired,
+  user: propTypes.shape(constants.userShape).isRequired,
   fieldToEdit: propTypes.string.isRequired,
-  onSubmit: propTypes.func.isRequired,
+  update: propTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
-  onSubmit: user => dispatch(updateUser(user)),
+  update: user => dispatch(updateUser(user)),
 });
 
 export default connect(null, mapDispatchToProps)(UserProfileFormModal);

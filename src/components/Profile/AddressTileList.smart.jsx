@@ -6,7 +6,9 @@ import FlatCard, { FlatCardContent, FlatCardSection } from '../Shared/FlatCard';
 import TileList, {
   Tile, TileLink, TileContent, TileFooter,
 } from '../Shared/TileList';
-import AddressFormModal from './AddressFormModal2';
+import Button from '../Shared/Button';
+import AddressFormModal from './AddressFormModal';
+import YesNoModal from '../Shared/Prompts';
 
 import constants from '../constants';
 
@@ -37,63 +39,63 @@ class AddressTileList extends React.Component {
     const { addresses } = this.props;
 
     return (
-      <React.Fragment>
-        <FlatCard {...this.props} headerIcon="location_on" header="Addresses">
-          <FlatCardSection>
-            <FlatCardContent>
-              <TileList>
+      <FlatCard {...this.props} headerIcon="location_on" header="Addresses">
+        <FlatCardSection>
+          <FlatCardContent>
+            <TileList>
 
-                <TileLink
-                  name="NewAddressLink"
-                  label="+ Add new address"
-                  modalTrigger
-                  data-target={`ADDRESS_${this.getNewAddress().id}`}
-                />
-                <AddressFormModal address={this.getNewAddress()} />
+              <TileLink
+                label="+ Add new address"
+                className="modal-trigger"
+                data-target={`ADDRESS_FORM_${this.getNewAddress().id}`}
+              />
+              <AddressFormModal address={this.getNewAddress()} />
 
-                {addresses.map((address, index) => (
-                  <React.Fragment key={`ADDRESS_${address.id}`}>
+              {addresses.map((address, index) => (
+                <React.Fragment key={`ADDRESS_${address.id}`}>
 
-                    <AddressFormModal address={address} />
-                    <Tile key={address.id}>
-                      <TileContent>
-                        <span>{`${address.houseNumber} ${address.street}`}</span>
-                        <br />
-                        <span>{address.subdivision}</span>
-                        <br />
-                        <span>{`${address.city}, ${address.province}`}</span>
-                        <br />
-                        <DefaultLabel>{address.isDefault ? '[Default Address]' : <br />}</DefaultLabel>
-                      </TileContent>
-                      <TileFooter>
-                        <button
-                          tabIndex={index}
-                          type="button"
-                          className="btn-flat waves-effect waves-light modal-trigger"
-                          data-target={`ADDRESS_${address.id}`}
-                        >
-                      Edit
-                        </button>
-                        <button
-                          tabIndex={index}
-                          type="button"
-                          className="btn-flat waves-effect waves-light"
-                        >
-                      Delete
-                        </button>
-                      </TileFooter>
-                    </Tile>
-                  </React.Fragment>
-                ))}
+                  <AddressFormModal address={address} />
 
-              </TileList>
+                  <YesNoModal
+                    title="Delete Address"
+                    description="Are you sure you want to proceed?"
+                    id={`ADDRESS_DELETE_${address.id}`}
+                    onClickYes={() => {}}
+                  />
 
-            </FlatCardContent>
+                  <Tile key={address.id}>
+                    <TileContent>
+                      <span>{`${address.houseNumber} ${address.street}`}</span>
+                      <br />
+                      <span>{address.subdivision}</span>
+                      <br />
+                      <span>{`${address.city}, ${address.province}`}</span>
+                      <br />
+                      <DefaultLabel>{address.isDefault ? '[Default Address]' : <br />}</DefaultLabel>
+                    </TileContent>
+                    <TileFooter>
+                      <Button
+                        tabIndex={index}
+                        className="modal-trigger"
+                        data-target={`ADDRESS_FORM_${address.id}`}
+                        label="Edit"
+                      />
+                      <Button
+                        tabIndex={index}
+                        className="modal-trigger"
+                        data-target={`ADDRESS_DELETE_${address.id}`}
+                        label="Delete"
+                      />
+                    </TileFooter>
+                  </Tile>
+                </React.Fragment>
+              ))}
 
-          </FlatCardSection>
-        </FlatCard>
-      </React.Fragment>
+            </TileList>
 
+          </FlatCardContent>
+        </FlatCardSection>
+      </FlatCard>
     );
   }
 }

@@ -1,15 +1,12 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import FlatCard, { FlatCardContent, FlatCardSection } from '../Shared/FlatCard';
 import TileList, {
   Tile, TileLink, TileContent, TileFooter,
 } from '../Shared/TileList';
-import AddressFormModal from './AddressFormModal';
-
-import { deleteAddress } from '../../redux/actions';
+import AddressFormModal from './AddressFormModal2';
 
 import constants from '../constants';
 
@@ -25,17 +22,10 @@ class AddressTileList extends React.Component {
     super(props);
 
     this.getNewAddress = this.getNewAddress.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-
-    this.state = {
-      isModalOpen: false,
-      selectedAddress: this.getNewAddress(),
-    };
   }
 
   getNewAddress = () => ({
-    uid: 0,
+    id: 0,
     houseNumber: '',
     street: '',
     subdivision: '',
@@ -43,34 +33,11 @@ class AddressTileList extends React.Component {
     province: '',
   });
 
-  openModal = (e, props, params) => {
-    e.preventDefault();
-
-    this.setState({ selectedAddress: params },
-      this.setState({ isModalOpen: true }));
-  }
-
-  closeModal = (e) => {
-    e.preventDefault();
-    this.setState({
-      selectedAddress: this.getNewAddress(),
-      isModalOpen: false,
-    });
-  }
-
   render() {
-    const { isModalOpen, selectedAddress } = this.state;
-    const { addresses, deleteHandler } = this.props;
+    const { addresses } = this.props;
 
     return (
       <React.Fragment>
-
-        <AddressFormModal
-          isOpen={isModalOpen}
-          address={selectedAddress}
-          closingHandler={this.closeModal}
-        />
-
         <FlatCard {...this.props} headerIcon="location_on" header="Addresses">
           <FlatCardSection>
             <FlatCardContent>
@@ -79,41 +46,44 @@ class AddressTileList extends React.Component {
                 <TileLink
                   name="NewAddressLink"
                   label="+ Add new address"
-                  onClick={e => this.openModal(e, this.props, this.getNewAddress())}
+                  modalTrigger
+                  data-target={`ADDRESS_${this.getNewAddress().id}`}
                 />
+                <AddressFormModal address={this.getNewAddress()} />
 
                 {addresses.map((address, index) => (
-                  <Tile key={address.id}>
-                    <TileContent>
-                      <span>{`${address.houseNumber} ${address.street}`}</span>
-                      <br />
-                      <span>{address.subdivision}</span>
-                      <br />
-                      <span>{`${address.city}, ${address.province}`}</span>
-                      <br />
-                      <DefaultLabel>{address.isDefault ? '[Default Address]' : <br />}</DefaultLabel>
-                    </TileContent>
-                    <TileFooter>
-                      <button
-                        tabIndex={index}
-                        onClick={e => this.openModal(e, this.props, address)}
-                        onKeyPress={e => this.openModal(e, this.props, address)}
-                        type="button"
-                        className="btn-flat waves-effect waves-light"
-                      >
+                  <React.Fragment key={`ADDRESS_${address.id}`}>
+
+                    <AddressFormModal address={address} />
+                    <Tile key={address.id}>
+                      <TileContent>
+                        <span>{`${address.houseNumber} ${address.street}`}</span>
+                        <br />
+                        <span>{address.subdivision}</span>
+                        <br />
+                        <span>{`${address.city}, ${address.province}`}</span>
+                        <br />
+                        <DefaultLabel>{address.isDefault ? '[Default Address]' : <br />}</DefaultLabel>
+                      </TileContent>
+                      <TileFooter>
+                        <button
+                          tabIndex={index}
+                          type="button"
+                          className="btn-flat waves-effect waves-light modal-trigger"
+                          data-target={`ADDRESS_${address.id}`}
+                        >
                       Edit
-                      </button>
-                      <button
-                        tabIndex={index}
-                        onClick={() => deleteHandler(address.id)}
-                        onKeyPress={() => deleteHandler(address.id)}
-                        type="button"
-                        className="btn-flat waves-effect waves-light"
-                      >
+                        </button>
+                        <button
+                          tabIndex={index}
+                          type="button"
+                          className="btn-flat waves-effect waves-light"
+                        >
                       Delete
-                      </button>
-                    </TileFooter>
-                  </Tile>
+                        </button>
+                      </TileFooter>
+                    </Tile>
+                  </React.Fragment>
                 ))}
 
               </TileList>
@@ -130,11 +100,7 @@ class AddressTileList extends React.Component {
 
 AddressTileList.propTypes = {
   addresses: propTypes.arrayOf(propTypes.object).isRequired,
-  deleteHandler: propTypes.func.isRequired,
 };
 
-const mapDispatchToProps = dispatch => ({
-  deleteHandler: addressId => dispatch(deleteAddress(addressId)),
-});
 
-export default connect(null, mapDispatchToProps)(AddressTileList);
+export default AddressTileList;

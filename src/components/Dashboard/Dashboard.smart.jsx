@@ -62,7 +62,7 @@ const Dashboard = ({ user, address }) => {
           <a className="waves-effect waves-light btn modal-trigger" href="#test">
             test
           </a>
-          <Modal id="test" dismissible isFixedFooter title={user.firstname}>
+          <Modal id="test" dismissible isFixedFooter>
             <Description className="description-1">
               {`Your name is ${user.firstname} ${user.lastname}.
               Your birthday was ${moment(user.birthday).format(constants.dateFormat)}. You currently 

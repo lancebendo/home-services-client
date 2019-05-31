@@ -8,6 +8,7 @@ import Header from '../Header';
 import Nav from '../Nav';
 import Dashboard from '../Dashboard';
 import Profile from '../Profile';
+import History from '../History';
 // import TestComponent from '../TestComponent';
 import { PathNotFound } from '../ErrorHandler';
 
@@ -24,7 +25,9 @@ const availablePaths = [
   // {
   //   name: 'Test', path: '/test', icon: 'person', component: TestComponent,
   // },
-  // { name: 'History', path: '/history', icon: 'history', component: History, },
+  {
+    name: 'History', path: '/history', icon: 'history', component: History,
+  },
 ];
 
 class App extends React.Component {

@@ -22,86 +22,70 @@ const DefaultLabel = styled.span`
 `;
 
 
-class AddressTileList extends React.Component {
-  constructor(props) {
-    super(props);
+const AddressTileList = (props) => {
+  const { addresses, deleteData } = props;
 
-    this.getNewAddress = this.getNewAddress.bind(this);
-  }
+  return (
+    <FlatCard headerIcon="location_on" header="Addresses">
+      <FlatCardSection>
+        <FlatCardContent>
+          <TileList>
 
-  getNewAddress = () => ({
-    id: 0,
-    houseNumber: '',
-    street: '',
-    subdivision: '',
-    city: '',
-    province: '',
-  });
+            <TileLink
+              label="+ Add new address"
+              className="modal-trigger"
+              data-target={`ADDRESS_FORM_${constants.newAddress().id}`}
+            />
 
-  render() {
-    const { addresses, deleteData } = this.props;
+            <AddressFormModal address={constants.newAddress()} />
 
-    return (
-      <FlatCard headerIcon="location_on" header="Addresses">
-        <FlatCardSection>
-          <FlatCardContent>
-            <TileList>
+            {addresses.map((address, index) => (
+              <React.Fragment key={`ADDRESS_${address.id}`}>
 
-              <TileLink
-                label="+ Add new address"
-                className="modal-trigger"
-                data-target={`ADDRESS_FORM_${this.getNewAddress().id}`}
-              />
-              <AddressFormModal address={this.getNewAddress()} />
+                <AddressFormModal address={address} />
 
-              {addresses.map((address, index) => (
-                <React.Fragment key={`ADDRESS_${address.id}`}>
+                <YesNoModal
+                  title="Delete Address"
+                  description="Are you sure you want to proceed?"
+                  id={`ADDRESS_DELETE_${address.id}`}
+                  onClickYes={() => deleteData(address.id)}
+                />
 
-                  <AddressFormModal address={address} />
+                <Tile key={address.id}>
+                  <TileContent>
+                    <span>{`${address.houseNumber} ${address.street}`}</span>
+                    <br />
+                    <span>{address.subdivision}</span>
+                    <br />
+                    <span>{`${address.city}, ${address.province}`}</span>
+                    <br />
+                    <DefaultLabel>{address.isDefault ? '[Default Address]' : <br />}</DefaultLabel>
+                  </TileContent>
+                  <TileFooter>
+                    <Button
+                      tabIndex={index}
+                      className="modal-trigger"
+                      data-target={`ADDRESS_FORM_${address.id}`}
+                      label="Edit"
+                    />
+                    <Button
+                      tabIndex={index}
+                      className="modal-trigger"
+                      data-target={`ADDRESS_DELETE_${address.id}`}
+                      label="Delete"
+                    />
+                  </TileFooter>
+                </Tile>
+              </React.Fragment>
+            ))}
 
-                  <YesNoModal
-                    title="Delete Address"
-                    description="Are you sure you want to proceed?"
-                    id={`ADDRESS_DELETE_${address.id}`}
-                    onClickYes={() => deleteData(address.id)}
-                  />
+          </TileList>
 
-                  <Tile key={address.id}>
-                    <TileContent>
-                      <span>{`${address.houseNumber} ${address.street}`}</span>
-                      <br />
-                      <span>{address.subdivision}</span>
-                      <br />
-                      <span>{`${address.city}, ${address.province}`}</span>
-                      <br />
-                      <DefaultLabel>{address.isDefault ? '[Default Address]' : <br />}</DefaultLabel>
-                    </TileContent>
-                    <TileFooter>
-                      <Button
-                        tabIndex={index}
-                        className="modal-trigger"
-                        data-target={`ADDRESS_FORM_${address.id}`}
-                        label="Edit"
-                      />
-                      <Button
-                        tabIndex={index}
-                        className="modal-trigger"
-                        data-target={`ADDRESS_DELETE_${address.id}`}
-                        label="Delete"
-                      />
-                    </TileFooter>
-                  </Tile>
-                </React.Fragment>
-              ))}
-
-            </TileList>
-
-          </FlatCardContent>
-        </FlatCardSection>
-      </FlatCard>
-    );
-  }
-}
+        </FlatCardContent>
+      </FlatCardSection>
+    </FlatCard>
+  );
+};
 
 AddressTileList.propTypes = {
   deleteData: propTypes.func.isRequired,

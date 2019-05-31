@@ -32,7 +32,7 @@ const addressMiddleware = () => next => (action) => {
       if (isProduction) {
         throw new Error('Production data source not yet implemented');
       } else if (isDevelopment) {
-        next(mockRequest(action.payload, ADDRESS, { method: 'create' }));
+        next(mockRequest(action.payload, ADDRESS, { method: 'create', ...action.meta }));
       }
       break;
 

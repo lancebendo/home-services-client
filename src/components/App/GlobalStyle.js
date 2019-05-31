@@ -32,72 +32,6 @@ color: ${constants.defaultFontColor};
   border-radius: 0 0 ${constants.borderRadius} ${constants.borderRadius};
 }
 
-@keyframes scale-in {
-  from {
-    transform: scale(0);
-    opacity: 0;
-    transform: translate(0,0);
-  }
-
-  to {
-    transform: scale(1);
-    opacity: 1; 
-    transform: translate(-50%,-50%);
-  }
-}
-
-@keyframes scale-out {
-  from {
-    transform: scale(1);
-    opacity: 1;transform: 
-    translate(-50%,-50%);
-  }
-
-  to {
-    transform: scale(0);
-    opacity: 0;
-    transform: translate(0,0);
-  }
-}
-
-@keyframes delay {
-  from {opacity: 1;}
-  to {opacity: 0;}
-}
-
-// overwrite overlay style to blend well with materialize
-.ReactModal__Overlay {
-    z-index: 999;
-    background-color: rgba(0,0,0,0.5) !important;
-    &--after-open {
-      opacity: 1;
-  }
-  &--before-close {
-      opacity: 0;
-  }
-}
-
-// overwrites react modal to remove default padding. We DIY
-.ReactModal__Content {
-    padding: 0px !important;
-}
-
-.ReactModal__Content--after-open {
-  animation-name: scale-in;
-  animation-duration: .2s; 
-  transform: translate(-50%,-50%);
-}
-
-.ReactModal__Overlay--before-close {
-  animation-name: delay;
-  animation-duration: .2s;
-}
-
-.ReactModal__Content--before-close {
-  animation-name: scale-out;
-  animation-duration: .2s;
-}
-
 //overwrites materialize picker color
 .datepicker-date-display, .datepicker-weekday-display, .datepicker-table td.is-selected{
   background-color: ${constants.primaryColor} !important;
@@ -113,12 +47,20 @@ color: ${constants.defaultFontColor};
       padding: 50px;
       padding-left: 310px;
     }
+
+    .modal { width: 60% !important; }
   }
   
   @media only screen and (max-width: ${constants.mediumScreen}) {
     main {
       padding: 50px 15px 0;
     }
+
+    .modal { width: 70% !important; }
+  }
+
+  @media only screen and (max-width: ${constants.smallScreen}) {
+    .modal { width: 90% !important; }
   }
 
 `;

@@ -15,9 +15,12 @@ export const getAddresses = query => ({
   payload: query,
 });
 
-export const createAddress = address => ({
+export const createAddress = (address, isSwitchedToDefault = false) => ({
   type: CREATE_ADDRESS,
   payload: address,
+  meta: {
+    isSwitchedToDefault,
+  },
 });
 
 export const updateAddress = (address, isSwitchedToDefault = false) => ({

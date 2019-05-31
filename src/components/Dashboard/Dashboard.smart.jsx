@@ -6,6 +6,7 @@ import moment from 'moment';
 
 import FlatCard, { FlatCardContent } from '../Shared/FlatCard';
 import Modal from '../Shared/Modal';
+import DataTable from '../Shared/DataTable';
 
 import constants from '../constants';
 
@@ -19,7 +20,7 @@ const Description = styled.span`
 `;
 
 
-const Dashboard = ({ user, address }) => {
+const Dashboard = ({ user, address, addresses }) => {
   const {
     houseNumber, street, subdivision, city, province,
   } = address || '';
@@ -75,6 +76,10 @@ const Dashboard = ({ user, address }) => {
             <button type="button">haha</button>
           </Modal>
 
+          <DataTable
+            dataSource={addresses}
+            dataMappings={[{ header: 'Street', dataField: 'street' }, { header: 'House Number', dataField: 'houseNumber' }]}
+          />
         </FlatCardContent>
       </FlatCard>
     </main>
@@ -84,11 +89,13 @@ const Dashboard = ({ user, address }) => {
 Dashboard.propTypes = {
   user: propTypes.shape(constants.userShape).isRequired,
   address: propTypes.shape(constants.addressShape).isRequired,
+  addresses: propTypes.arrayOf(propTypes.shape(constants.addressShape)).isRequired,
 };
 
 const mapStateToProps = state => ({
   user: state.user,
-  address: state.address.collection.find(ad => ad.isDefault) || {},
+  address: state.address.collection.find(ad => ad.isDefault) || constants.newAddress(),
+  addresses: state.address.collection,
 });
 
 export default connect(mapStateToProps)(Dashboard);

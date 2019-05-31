@@ -39,6 +39,7 @@ class AddressFormModal extends React.Component {
     const { address } = this.props;
     this.state = {
       address,
+      isSwitchedToDefault: false,
     };
 
     this.switchToDefault = this.switchToDefault.bind(this);
@@ -50,6 +51,7 @@ class AddressFormModal extends React.Component {
   switchToDefault = () => {
     this.setState(prevState => ({
       address: { ...prevState.address, isDefault: true },
+      isSwitchedToDefault: true,
     }));
   }
 
@@ -68,7 +70,7 @@ class AddressFormModal extends React.Component {
   }
 
   render() {
-    const { address } = this.state;
+    const { address, isSwitchedToDefault } = this.state;
     const { create, update } = this.props;
     const isEdit = address.id > 0;
     const submitHandler = isEdit ? update : create;
@@ -145,7 +147,7 @@ class AddressFormModal extends React.Component {
           <Button
             className="modal-close"
             label="Done"
-            onClick={() => submitHandler(address)}
+            onClick={() => submitHandler(address, isSwitchedToDefault)}
           />
           <Button
             className="modal-close"
@@ -165,13 +167,13 @@ AddressFormModal.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  create: (address, callback) => {
-    dispatch(createAddress(address));
+  create: (address, isSwitchedToDefault, callback) => {
+    dispatch(createAddress(address, isSwitchedToDefault));
     return callback;
   },
 
-  update: (address, callback) => {
-    dispatch(updateAddress(address));
+  update: (address, isSwitchedToDefault, callback) => {
+    dispatch(updateAddress(address, isSwitchedToDefault));
     return callback;
   },
 });

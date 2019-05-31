@@ -16,8 +16,13 @@ const mockMiddleware = ({ dispatch }) => next => (action) => {
             try {
               const newAddress = {
                 ...action.payload,
-                uid: window.mockSource.addresses.length + 1,
+                id: window.mockSource.addresses.length + 1,
               };
+              const { isSwitchedToDefault } = action.meta;
+              if (isSwitchedToDefault) {
+                const oldDefault = window.mockSource.addresses.find(x => x.isDefault);
+                if (oldDefault) oldDefault.isDefault = false;
+              }
               window.mockSource.addresses.push(newAddress);
               window.mockSource.addresses.sort((a, b) => {
                 if (a.isDefault) return -1;
@@ -55,9 +60,9 @@ const mockMiddleware = ({ dispatch }) => next => (action) => {
               const { isSwitchedToDefault } = action.meta;
               const newArray = window.mockSource.addresses
                 .filter(x => x.id !== payload.id);
-              if (!isSwitchedToDefault) {
+              if (isSwitchedToDefault) {
                 const oldDefault = newArray.find(x => x.isDefault);
-                oldDefault.isDefault = false;
+                if (oldDefault) oldDefault.isDefault = false;
               }
               newArray.push(action.payload);
 

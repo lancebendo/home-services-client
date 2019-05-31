@@ -10,7 +10,7 @@ const addressReducer = (address = addressState, action) => {
     case SET_ADDRESSES:
       return {
         ...address,
-        collection: action.payload,
+        collection: [...action.payload],
       };
 
     default:

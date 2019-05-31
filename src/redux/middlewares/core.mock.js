@@ -88,7 +88,7 @@ const mockMiddleware = ({ dispatch }) => next => (action) => {
                 .filter(x => x.id !== payload);
               newArray.sort((a, b) => {
                 if (a.isDefault) return -1;
-                if (b.isDefault) return -1;
+                if (b.isDefault) return 1;
                 return a.id - b.id;
               });
               window.mockSource.addresses = newArray;

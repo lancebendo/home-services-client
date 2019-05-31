@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import Modal, { ModalContent, ModalFooter } from '../Shared/ModalRebuild';
+import Modal, { ModalContent, ModalFooter } from '../Shared/Modal';
 import Button from '../Shared/Button';
 import Input from '../Shared/Input';
 import Header from '../Shared/Header';
@@ -43,7 +43,7 @@ class AddressFormModal extends React.Component {
 
     this.switchToDefault = this.switchToDefault.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.cancelHandler = this.cancelHandler.bind(this);
+    this.refreshAddress = this.refreshAddress.bind(this);
   }
 
 
@@ -62,11 +62,9 @@ class AddressFormModal extends React.Component {
     }));
   }
 
-  cancelHandler = () => {
+  refreshAddress = () => {
     const { address } = this.props;
-    this.setState({
-      address,
-    });
+    this.setState({ address });
   }
 
   render() {
@@ -78,7 +76,7 @@ class AddressFormModal extends React.Component {
     const MODAL_ID = `ADDRESS_FORM_${address.id}`;
 
     return (
-      <Modal id={MODAL_ID} isFixedFooter dismissible={false}>
+      <Modal id={MODAL_ID} isFixedFooter dismissible={false} onOpenStart={this.refreshAddress}>
         <ModalContent>
           <Header>
             {isEdit ? 'Edit ' : 'Create '}
@@ -152,7 +150,6 @@ class AddressFormModal extends React.Component {
           <Button
             className="modal-close"
             label="Cancel"
-            onClick={this.cancelHandler}
           />
 
         </ModalFooter>

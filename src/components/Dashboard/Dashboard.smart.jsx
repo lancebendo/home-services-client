@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 
 import FlatCard, { FlatCardContent } from '../Shared/FlatCard';
-import Modal from '../Shared/ModalRebuild';
+import Modal from '../Shared/Modal';
 
 import constants from '../constants';
 

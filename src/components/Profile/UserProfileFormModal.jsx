@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import moment from 'moment';
 import { connect } from 'react-redux';
 
-import Modal, { ModalContent, ModalFooter } from '../Shared/ModalRebuild';
+import Modal, { ModalContent, ModalFooter } from '../Shared/Modal';
 import Button from '../Shared/Button';
 import Input from '../Shared/Input';
 import Header from '../Shared/Header';
@@ -21,11 +21,33 @@ class UserProfileFormModal extends React.Component {
       user,
     };
 
-    this.cancelHandler = this.cancelHandler.bind(this);
+    this.onOpenStart = this.onOpenStart.bind(this);
   }
 
-  componentDidMount = () => window.M.updateTextFields();
+  onOpenStart() {
+    const { user, fieldToEdit } = this.props;
+    this.setState({ user });
 
+    if (user[fieldToEdit] instanceof Date) {
+      const context = this;
+      const element = document.querySelector('.datepicker');
+      const instance = window.M.Datepicker.init(element, {
+        container: document.getElementById('root'),
+        format: constants.dateFormat.toLowerCase(),
+        maxDate: new Date(),
+        defaultDate: new Date(),
+        yearRange: 30,
+        autoClose: true,
+        onSelect(date) {
+          context.handleInputChange({ target: { value: date, name: 'birthday' } });
+        },
+      });
+
+      instance.setDate(user.birthday);
+    }
+
+    window.M.updateTextFields();
+  }
 
   handleInputChange = (e) => {
     const value = e.target.value;
@@ -36,39 +58,18 @@ class UserProfileFormModal extends React.Component {
     }));
   }
 
-  cancelHandler = () => {
-    const { user } = this.props;
-    this.setState({ user });
-  }
-
-  //   handleAfterOpen() {
-  //     const { user, fieldToEdit } = this.props;
-  //     const context = this;
-  //     this.setState({ userProfile, fieldToEdit }, () => {
-  //       window.M.updateTextFields();
-  //       if (fieldToEdit === 'birthday') {
-  //         const instance = window.M.Datepicker.init(document.querySelector('.datepicker'), {
-  //           container: document.getElementsByClassName('ReactModal__Overlay--after-open')[0],
-  //           format: constants.dateFormat.toLowerCase(),
-  //           maxDate: new Date(),
-  //           defaultDate: new Date(),
-  //           yearRange: 30,
-  //           onSelect(date) {
-  //             context.handleInputChange({ target: { value: date, name: 'birthday' } });
-  //           },
-  //           autoClose: true,
-  //         });
-  //         instance.setDate(userProfile.birthday);
-  //       }
-  //     });
-  //   }
-
   render() {
     const { user } = this.state;
     const { fieldToEdit, update } = this.props;
     const MODAL_ID = `USER_FORM_${user.id}_${fieldToEdit}`;
     return (
-      <Modal key={user.id} id={MODAL_ID} isFixedFooter dismissible={false}>
+      <Modal
+        {...this.props}
+        id={MODAL_ID}
+        isFixedFooter
+        dismissible={false}
+        onOpenStart={this.onOpenStart}
+      >
 
         <ModalContent>
           <Header>{`Edit ${fieldToEdit}`}</Header>
@@ -78,7 +79,11 @@ class UserProfileFormModal extends React.Component {
             type="text"
             className={fieldToEdit === 'birthday' ? 'validate datepicker' : 'validate'}
             onChange={this.handleInputChange}
-            value={fieldToEdit === 'birthday' ? moment(user[fieldToEdit]).format(constants.dateFormat) : user[fieldToEdit]}
+            value={
+              user[fieldToEdit] instanceof Date
+                ? moment(user[fieldToEdit]).format(constants.dateFormat)
+                : user[fieldToEdit]
+            }
           />
         </ModalContent>
 
@@ -91,7 +96,6 @@ class UserProfileFormModal extends React.Component {
           <Button
             className="modal-close"
             label="Cancel"
-            onClick={this.cancelHandler}
           />
         </ModalFooter>
       </Modal>

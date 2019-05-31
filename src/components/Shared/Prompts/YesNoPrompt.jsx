@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Modal, { ModalContent, ModalFooter } from '../ModalRebuild';
+import Modal, { ModalContent, ModalFooter } from '../Modal';
 import Button from '../Button';
 
 import constants from '../../constants';

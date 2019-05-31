@@ -1,5 +1,6 @@
-import Modal from './Modal.dumb';
-import ModalFooter from './ModalFooter.dumb';
+import Modal from './Modal';
+import ModalContent from './ModalContent';
+import ModalFooter from './ModalFooter';
 
-export { ModalFooter };
+export { ModalContent, ModalFooter };
 export default Modal;

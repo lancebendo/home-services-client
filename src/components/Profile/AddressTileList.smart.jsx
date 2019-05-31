@@ -1,6 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 import FlatCard, { FlatCardContent, FlatCardSection } from '../Shared/FlatCard';
 import TileList, {
@@ -9,6 +10,8 @@ import TileList, {
 import Button from '../Shared/Button';
 import AddressFormModal from './AddressFormModal';
 import YesNoModal from '../Shared/Prompts';
+
+import { deleteAddress } from '../../redux/actions';
 
 import constants from '../constants';
 
@@ -36,10 +39,10 @@ class AddressTileList extends React.Component {
   });
 
   render() {
-    const { addresses } = this.props;
+    const { addresses, deleteData } = this.props;
 
     return (
-      <FlatCard {...this.props} headerIcon="location_on" header="Addresses">
+      <FlatCard headerIcon="location_on" header="Addresses">
         <FlatCardSection>
           <FlatCardContent>
             <TileList>
@@ -60,7 +63,7 @@ class AddressTileList extends React.Component {
                     title="Delete Address"
                     description="Are you sure you want to proceed?"
                     id={`ADDRESS_DELETE_${address.id}`}
-                    onClickYes={() => {}}
+                    onClickYes={() => deleteData(address.id)}
                   />
 
                   <Tile key={address.id}>
@@ -101,8 +104,16 @@ class AddressTileList extends React.Component {
 }
 
 AddressTileList.propTypes = {
-  addresses: propTypes.arrayOf(propTypes.object).isRequired,
+  deleteData: propTypes.func.isRequired,
+  addresses: propTypes.arrayOf(propTypes.shape(constants.addressShape)).isRequired,
 };
 
+const mapStateToProps = state => ({
+  addresses: state.address.collection,
+});
 
-export default AddressTileList;
+const mapDispatchToProps = dispatch => ({
+  deleteData: addressId => dispatch(deleteAddress(addressId)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddressTileList);

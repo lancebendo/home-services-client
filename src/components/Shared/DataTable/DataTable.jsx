@@ -9,7 +9,9 @@ const dataMappingsShape = propTypes.shape({
 });
 
 const DataTable = (props) => {
-  const { dataSource, dataMappings, className } = props;
+  const {
+    dataSource, dataMappings, onRowClick, className,
+  } = props;
   const combinedClass = `${className} `; // not sure to go reponsive
   return (
     <table className={combinedClass}>
@@ -25,6 +27,7 @@ const DataTable = (props) => {
             key={data.id}
             data={data}
             dataFields={dataMappings.map(mapping => mapping.dataField)}
+            onClick={onRowClick}
           />
         ))}
       </tbody>
@@ -34,12 +37,14 @@ const DataTable = (props) => {
 
 DataTable.defaultProps = {
   // actionRows: null,
+  onRowClick: () => {},
   className: '',
 };
 
 DataTable.propTypes = {
   dataSource: propTypes.arrayOf(propTypes.object).isRequired,
   dataMappings: propTypes.arrayOf(dataMappingsShape).isRequired,
+  onRowClick: propTypes.func,
   className: propTypes.string,
 //   actionRows: propTypes.arrayOf(propTypes.shape({
 //     label: propTypes.string.isRequired,

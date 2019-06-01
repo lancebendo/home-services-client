@@ -25,6 +25,20 @@ import {
 } from './feature.address';
 
 import {
+  RESERVATION,
+  GET_RESERVATIONS,
+  CREATE_RESERVATION,
+  UPDATE_RESERVATION,
+  DELETE_RESERVATION,
+  SET_RESERVATIONS,
+  getReservations,
+  createReservation,
+  updateReservation,
+  deleteReservation,
+  setReservations,
+} from './feature.reservation';
+
+import {
   USER,
   GET_USER,
   UPDATE_USER,
@@ -57,6 +71,19 @@ export {
   updateAddress,
   deleteAddress,
   setAddresses,
+
+  // feature.reservation
+  RESERVATION,
+  GET_RESERVATIONS,
+  CREATE_RESERVATION,
+  UPDATE_RESERVATION,
+  DELETE_RESERVATION,
+  SET_RESERVATIONS,
+  getReservations,
+  createReservation,
+  updateReservation,
+  deleteReservation,
+  setReservations,
 
   // feature.user
   USER,

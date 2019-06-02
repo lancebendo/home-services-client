@@ -67,6 +67,8 @@ class AddressFormModal extends React.Component {
   refreshAddress = () => {
     const { address } = this.props;
     this.setState({ address });
+
+    window.M.updateTextFields();
   }
 
   render() {

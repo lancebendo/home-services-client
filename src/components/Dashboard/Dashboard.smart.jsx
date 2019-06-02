@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 
 import UpcomingReservationTable from './UpcomingReservationTable';
+import ReservationFormModal from '../Reservation';
+import Button from '../Shared/Button';
 
 import constants from '../constants';
 
@@ -24,6 +26,7 @@ const test = [
     address: null,
     reservationDate: new Date(),
     status: 1,
+    details: 'Full Cleaning Service',
   },
   {
     id: 2,
@@ -31,6 +34,7 @@ const test = [
     address: null,
     reservationDate: new Date(),
     status: 1,
+    details: 'Full Cleaning Service',
   },
 ];
 
@@ -97,6 +101,14 @@ const Dashboard = ({ user, address }) => {
           />
         </FlatCardContent>
       </FlatCard> */}
+
+      <Button
+        className="modal-trigger"
+        data-target={`RESERVATION_FORM_${test[0].id}`}
+        label="Edit"
+      />
+
+      <ReservationFormModal reservation={test[0]} />
 
       <UpcomingReservationTable className="row" upcomingReservations={test} />
 

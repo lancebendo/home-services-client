@@ -10,9 +10,9 @@ const dataMappingsShape = propTypes.shape({
 
 const DataTable = (props) => {
   const {
-    dataSource, dataMappings, onRowClick, className,
+    dataSource, dataMappings, onRowClick, className, RowModal,
   } = props;
-  const combinedClass = `${className} `; // not sure to go reponsive
+  const combinedClass = `${className} ${onRowClick ? 'highlight' : ''}`; // not sure to go reponsive
   return (
     <table className={combinedClass}>
       <thead>
@@ -28,6 +28,8 @@ const DataTable = (props) => {
             data={data}
             dataFields={dataMappings.map(mapping => mapping.dataField)}
             onClick={onRowClick}
+            isPointerCursor={!!onRowClick}
+            RowModal={RowModal}
           />
         ))}
       </tbody>
@@ -37,14 +39,16 @@ const DataTable = (props) => {
 
 DataTable.defaultProps = {
   // actionRows: null,
-  onRowClick: () => {},
+  onRowClick: null,
   className: '',
+  RowModal: () => (<div />),
 };
 
 DataTable.propTypes = {
   dataSource: propTypes.arrayOf(propTypes.object).isRequired,
   dataMappings: propTypes.arrayOf(dataMappingsShape).isRequired,
   onRowClick: propTypes.func,
+  RowModal: propTypes.elementType,
   className: propTypes.string,
 //   actionRows: propTypes.arrayOf(propTypes.shape({
 //     label: propTypes.string.isRequired,

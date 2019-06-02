@@ -41,7 +41,6 @@ color: ${constants.defaultFontColor};
   color: ${constants.primaryColor} !important;
 }
 
-
 @media only screen and (min-width: ${constants.mediumScreen}) {
     main {
       padding: 50px;

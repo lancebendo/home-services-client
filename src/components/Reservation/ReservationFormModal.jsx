@@ -36,6 +36,8 @@ class ReservationFormModal extends React.Component {
   refresh = () => {
     const { reservation } = this.props;
     this.setState({ reservation });
+
+    window.M.updateTextFields();
   }
 
   render() {
@@ -54,13 +56,32 @@ class ReservationFormModal extends React.Component {
              Reservation
           </Header>
 
+
           <Input
             type="text"
             className="validate"
             onChange={this.handleInputChange}
-            value={reservation.id}
-            field="id"
-            label="id"
+            value={reservation.reservationDate}
+            field="reservationDate"
+            label="Date of Reservation"
+          />
+
+          <Input
+            type="text"
+            className="validate"
+            onChange={this.handleInputChange}
+            value={reservation.status}
+            field="status"
+            label="Reservation Status"
+          />
+
+          <Input
+            type="text"
+            className="validate"
+            onChange={this.handleInputChange}
+            value={reservation.details}
+            field="details"
+            label="Name of Service"
           />
 
         </ModalContent>

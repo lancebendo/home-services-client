@@ -71,6 +71,7 @@ class Constants {
     this.reservationShape = {
       user: propTypes.shape(this.userShape),
       address: propTypes.shape(this.addressShape),
+      details: propTypes.string.isRequired,
       reservationDate: propTypes.instanceOf(Date),
       status: propTypes.number, // 0 for unconfirmed, 1 for confirmed, 2 for done,
     };
@@ -92,6 +93,7 @@ class Constants {
       address: null,
       reservationDate: null,
       status: 0,
+      details: '',
     });
   }
 }

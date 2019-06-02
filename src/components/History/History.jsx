@@ -9,6 +9,7 @@ const test = [
     address: null,
     reservationDate: new Date(),
     status: 1,
+    details: 'Full Cleaning Service',
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ const test = [
     address: null,
     reservationDate: new Date(),
     status: 1,
+    details: 'Full Cleaning Service',
   },
 ];
 

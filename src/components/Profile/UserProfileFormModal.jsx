@@ -1,6 +1,5 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import moment from 'moment';
 import { connect } from 'react-redux';
 
 import Modal, { ModalContent, ModalFooter } from '../Shared/Modal';
@@ -79,11 +78,7 @@ class UserProfileFormModal extends React.Component {
             type="text"
             className={fieldToEdit === 'birthday' ? 'validate datepicker' : 'validate'}
             onChange={this.handleInputChange}
-            value={
-              user[fieldToEdit] instanceof Date
-                ? moment(user[fieldToEdit]).format(constants.dateFormat)
-                : user[fieldToEdit]
-            }
+            value={user[fieldToEdit]}
           />
         </ModalContent>
 

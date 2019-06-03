@@ -31,7 +31,7 @@ and practicing on working with ES6 version of JavaScript.
 ## Notable Technologies used
 * VS Code
 * Github
-* Heroku
+* Heroku (including CI Pipeline with Github)
 
 ## Code Patterns
 * Nir Kaufman's Redux Pattern
@@ -39,7 +39,7 @@ and practicing on working with ES6 version of JavaScript.
   and I chose this approach since it can relate 
   well to action-based programming. It also makes my actions
   more explicit to help me on debugging.
-  click here for additional information link: https://www.youtube.com/watch?v=5gl3cCB_26M&t=586s
+  click the ff. link for additional information: https://www.youtube.com/watch?v=5gl3cCB_26M&t=586s
 
 * Feature-based Project Structure
   * This is an approach that I learned from working

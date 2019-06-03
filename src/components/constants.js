@@ -47,7 +47,7 @@ class Constants {
     this.reservationTableMappings = [
       { header: 'Reservation Number', dataField: 'id' },
       { header: 'Reservation Date', dataField: 'reservationDate' },
-      { header: 'Status', dataField: 'status' },
+      { header: 'Name of Service', dataField: 'details' },
     ];
 
 

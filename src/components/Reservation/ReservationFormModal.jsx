@@ -70,15 +70,6 @@ class ReservationFormModal extends React.Component {
             type="text"
             className="validate"
             onChange={this.handleInputChange}
-            value={reservation.status}
-            field="status"
-            label="Reservation Status"
-          />
-
-          <Input
-            type="text"
-            className="validate"
-            onChange={this.handleInputChange}
             value={reservation.details}
             field="details"
             label="Name of Service"

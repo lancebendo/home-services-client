@@ -5,7 +5,9 @@ import { withRouter } from 'react-router-dom';
 import SideNav from './SideNav.dumb';
 import NavButton from './NavButton.dumb';
 import NavLink from './NavLink.dumb';
+import ReservationFormModal from '../Reservation';
 
+import constants from '../constants';
 import { strUtils } from '../../utilities';
 
 class Nav extends React.Component {
@@ -58,21 +60,23 @@ class Nav extends React.Component {
     const paths = strUtils.objectPropToArray(availablePaths, 'path');
     if (!strUtils.strArrayContains(paths, currentPath) && !isTest) return null;
     return (
-      <SideNav collapsible>
+      <React.Fragment>
 
-        <NavButton
-          label="Book now"
-          icon="event"
-          className="modal-trigger"
-          data-target="RESERVATION_FORM_0"
-        />
-        {/* have to move this to dashboard component
+        <ReservationFormModal data={constants.newReservation()} />
+        <SideNav collapsible>
+
+          <NavButton
+            label="Book now"
+            icon="event"
+            className="modal-trigger"
+            data-target="RESERVATION_FORM_0"
+          />
+          {/* have to move this to dashboard component
         <ReservationFormModal data={constants.newReservation()} /> */}
 
-        <div className="divider" />
+          <div className="divider" />
 
-
-        {
+          {
           availablePaths.map(availablePath => (
             <NavLink
               key={availablePaths.indexOf(availablePath)}
@@ -84,13 +88,14 @@ class Nav extends React.Component {
             />
           ))
         }
-        {/*
+          {/*
         <div className="divider" />
         <NavLink path={currentPath}
         label="Log-out"
         onClick={this.onLogout}
         icon="exit_to_app" /> */}
-      </SideNav>
+        </SideNav>
+      </React.Fragment>
     );
   }
 }

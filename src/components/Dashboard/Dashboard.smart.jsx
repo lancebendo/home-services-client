@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import ReservationFormModal from '../Reservation';
 import UpcomingReservationTable from './UpcomingReservationTable';
 
 import constants from '../constants';
@@ -102,8 +101,6 @@ const Dashboard = ({ user, address }) => {
       </FlatCard> */}
 
       <UpcomingReservationTable className="row" upcomingReservations={test} />
-
-      <ReservationFormModal data={constants.newReservation()} />
     </main>
   );
 };

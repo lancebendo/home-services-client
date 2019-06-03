@@ -37,12 +37,12 @@ const AddressTileList = (props) => {
               data-target={`ADDRESS_FORM_${constants.newAddress().id}`}
             />
 
-            <AddressFormModal address={constants.newAddress()} />
+            <AddressFormModal data={constants.newAddress()} />
 
             {addresses.map((address, index) => (
               <React.Fragment key={`ADDRESS_${address.id}`}>
 
-                <AddressFormModal address={address} />
+                <AddressFormModal data={address} />
 
                 <YesNoModal
                   title="Delete Address"

@@ -10,50 +10,54 @@ const dataMappingsShape = propTypes.shape({
 
 const DataTable = (props) => {
   const {
-    dataSource, dataMappings, onRowClick, className, RowModal,
+    dataSource, dataMappings, className, RowModalMeta,
   } = props;
-  const combinedClass = `${className} ${onRowClick ? 'highlight' : ''}`; // not sure to go reponsive
-  return (
-    <table className={combinedClass}>
-      <thead>
-        <tr>
-          {dataMappings.map(mapping => (<th key={mapping.header}>{mapping.header}</th>))}
-        </tr>
-      </thead>
+  const combinedClass = `${className} ${RowModalMeta ? 'highlight' : ''}`; // not sure to go reponsive
 
-      <tbody>
-        {dataSource.map(data => (
-          <DataRow
-            key={data.id}
-            data={data}
-            dataFields={dataMappings.map(mapping => mapping.dataField)}
-            onClick={onRowClick}
-            isPointerCursor={!!onRowClick}
-            RowModal={RowModal}
-          />
-        ))}
-      </tbody>
-    </table>
+  const modals = dataSource.map(data => (RowModalMeta
+    ? (<RowModalMeta.Element key={data.id} data={data} />)
+    : null));
+
+  return (
+    <React.Fragment>
+      <table className={combinedClass}>
+        <thead>
+          <tr>
+            {dataMappings.map(mapping => (<th key={mapping.header}>{mapping.header}</th>))}
+          </tr>
+        </thead>
+
+        <tbody>
+          {dataSource.map(data => (
+            <DataRow
+              modalTarget={RowModalMeta ? `${RowModalMeta.pathTemplate}_${data.id}` : ''}
+              key={data.id}
+              data={data}
+              dataFields={dataMappings.map(mapping => mapping.dataField)}
+            />
+          ))}
+        </tbody>
+      </table>
+
+      {modals}
+
+    </React.Fragment>
   );
 };
 
 DataTable.defaultProps = {
-  // actionRows: null,
-  onRowClick: null,
   className: '',
-  RowModal: () => (<div />),
+  RowModalMeta: null,
 };
 
 DataTable.propTypes = {
   dataSource: propTypes.arrayOf(propTypes.object).isRequired,
   dataMappings: propTypes.arrayOf(dataMappingsShape).isRequired,
-  onRowClick: propTypes.func,
-  RowModal: propTypes.elementType,
+  RowModalMeta: propTypes.shape({
+    Element: propTypes.elementType,
+    pathTemplate: propTypes.string,
+  }),
   className: propTypes.string,
-//   actionRows: propTypes.arrayOf(propTypes.shape({
-//     label: propTypes.string.isRequired,
-//     onClick: propTypes.func.isRequired,
-//   })),
 };
 
 export default DataTable;

@@ -15,21 +15,15 @@ const Tr = styled.tr`
 const DataRow = (props) => {
   const {
     // eslint-disable-next-line no-unused-vars
-    data, dataFields, clickHandler, isPointerCursor, RowModal,
+    data, dataFields, modalTarget,
   } = props;
-  const Row = isPointerCursor ? Tr : styled.tr``;
+  const Row = modalTarget ? Tr : styled.tr``;
 
-  // if (RowModal) {
-  //   const appRoot = document.getElementById('root');
-  //   const container = document.createElement('div');
-  //   appRoot.appendChild(container);
-  //   const Modal = (<RowModal {...props} />);
-  //   ReactDOM.render(Modal, container);
-  // }
+  const className = modalTarget ? 'modal-trigger' : '';
 
   return (
     <React.Fragment>
-      <Row onClick={e => clickHandler(e, props)}>
+      <Row className={className} data-target={modalTarget}>
         { dataFields.map((field) => {
           let output = data[field];
 
@@ -48,18 +42,14 @@ const DataRow = (props) => {
 };
 
 DataRow.defaultProps = {
-  clickHandler: () => {},
-  isPointerCursor: false,
-  RowModal: () => null,
+  modalTarget: null,
 };
 
 DataRow.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   data: propTypes.object.isRequired,
   dataFields: propTypes.arrayOf(propTypes.string).isRequired,
-  clickHandler: propTypes.func,
-  isPointerCursor: propTypes.bool,
-  RowModal: propTypes.elementType,
+  modalTarget: propTypes.string,
 };
 
 export default DataRow;

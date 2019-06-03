@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 
 import UpcomingReservationTable from './UpcomingReservationTable';
-import ReservationFormModal from '../Reservation';
 import Button from '../Shared/Button';
 
 import constants from '../constants';
@@ -107,8 +106,6 @@ const Dashboard = ({ user, address }) => {
         data-target={`RESERVATION_FORM_${test[0].id}`}
         label="Edit"
       />
-
-      <ReservationFormModal reservation={test[0]} />
 
       <UpcomingReservationTable className="row" upcomingReservations={test} />
 

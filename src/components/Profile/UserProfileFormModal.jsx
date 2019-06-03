@@ -15,7 +15,7 @@ class UserProfileFormModal extends React.Component {
   constructor(props) {
     super(props);
 
-    const { user } = this.props;
+    const { data: user } = this.props;
     this.state = {
       user,
     };
@@ -24,7 +24,7 @@ class UserProfileFormModal extends React.Component {
   }
 
   onOpenStart() {
-    const { user, fieldToEdit } = this.props;
+    const { data: user, fieldToEdit } = this.props;
     this.setState({ user });
 
     if (user[fieldToEdit] instanceof Date) {
@@ -99,7 +99,7 @@ class UserProfileFormModal extends React.Component {
 }
 
 UserProfileFormModal.propTypes = {
-  user: propTypes.shape(constants.userShape).isRequired,
+  data: propTypes.shape(constants.userShape).isRequired,
   fieldToEdit: propTypes.string.isRequired,
   update: propTypes.func.isRequired,
 };

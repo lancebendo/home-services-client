@@ -36,7 +36,7 @@ class AddressFormModal extends React.Component {
   constructor(props) {
     super(props);
 
-    const { address } = this.props;
+    const { data: address } = this.props;
     this.state = {
       address,
       isSwitchedToDefault: false,
@@ -65,7 +65,7 @@ class AddressFormModal extends React.Component {
   }
 
   refreshAddress = () => {
-    const { address } = this.props;
+    const { data: address } = this.props;
     this.setState({ address });
 
     window.M.updateTextFields();
@@ -163,7 +163,7 @@ class AddressFormModal extends React.Component {
 }
 
 AddressFormModal.propTypes = {
-  address: propTypes.shape(constants.addressShape).isRequired,
+  data: propTypes.shape(constants.addressShape).isRequired,
   create: propTypes.func.isRequired,
   update: propTypes.func.isRequired,
 };

@@ -15,7 +15,7 @@ class ReservationFormModal extends React.Component {
   constructor(props) {
     super(props);
 
-    const { reservation } = this.props;
+    const { data: reservation } = this.props;
     this.state = {
       reservation,
     };
@@ -29,12 +29,12 @@ class ReservationFormModal extends React.Component {
     const name = e.target.name;
 
     this.setState(prevState => ({
-      address: { ...prevState.address, [name]: value },
+      reservation: { ...prevState.reservation, [name]: value },
     }));
   }
 
   refresh = () => {
-    const { reservation } = this.props;
+    const { data: reservation } = this.props;
     this.setState({ reservation });
 
     window.M.updateTextFields();
@@ -105,7 +105,7 @@ class ReservationFormModal extends React.Component {
 }
 
 ReservationFormModal.propTypes = {
-  reservation: propTypes.shape(constants.reservationShape).isRequired,
+  data: propTypes.shape(constants.reservationShape).isRequired,
   create: propTypes.func.isRequired,
   update: propTypes.func.isRequired,
 };

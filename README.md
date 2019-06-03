@@ -1,4 +1,6 @@
 # Service Reservation App
+* Developer: Lance Patrick Bendo
+* Demo Link: https://home-services-client.herokuapp.com/
 
 ## Overview
 This is a demo project for a reservation
@@ -18,12 +20,12 @@ a web app with Javascript and at the same time learning
 and practicing on working with ES6 version of JavaScript.
 	
 ## Notable Libraries used
-* REACT
-* REDUX
-* MATERIALIZE
-* STYLED-COMPONENT
-* ESLINT (AIRBNB STYLE)
-* JEST & ENZYME
+* React
+* Redux
+* Materialize
+* Styled-components
+* Eslint (Airbnb Style)
+* Jest & Enzyme
 
 ## Notable Technologies used
 * VS Code

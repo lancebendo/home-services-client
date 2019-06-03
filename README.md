@@ -1,3 +1,5 @@
+# Service Reservation App
+
 ## Overview
 This is a demo project for a reservation
 web app. As of today, the functionalities of

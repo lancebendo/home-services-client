@@ -91,7 +91,7 @@ class Constants {
       id: 0,
       user: null,
       address: null,
-      reservationDate: null,
+      reservationDate: new Date(),
       status: 0,
       details: '',
     });

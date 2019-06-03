@@ -9,42 +9,55 @@ const dataMappingsShape = propTypes.shape({
 });
 
 const DataTable = (props) => {
-  const { dataSource, dataMappings, className } = props;
-  const combinedClass = `${className} `; // not sure to go reponsive
-  return (
-    <table className={combinedClass}>
-      <thead>
-        <tr>
-          {dataMappings.map(mapping => (<th key={mapping.header}>{mapping.header}</th>))}
-        </tr>
-      </thead>
+  const {
+    dataSource, dataMappings, className, RowModalMeta,
+  } = props;
+  const combinedClass = `${className} ${RowModalMeta ? 'highlight' : ''}`; // not sure to go reponsive
 
-      <tbody>
-        {dataSource.map(data => (
-          <DataRow
-            key={data.id}
-            data={data}
-            dataFields={dataMappings.map(mapping => mapping.dataField)}
-          />
-        ))}
-      </tbody>
-    </table>
+  const modals = dataSource.map(data => (RowModalMeta
+    ? (<RowModalMeta.Element key={data.id} data={data} />)
+    : null));
+
+  return (
+    <React.Fragment>
+      <table className={combinedClass}>
+        <thead>
+          <tr>
+            {dataMappings.map(mapping => (<th key={mapping.header}>{mapping.header}</th>))}
+          </tr>
+        </thead>
+
+        <tbody>
+          {dataSource.map(data => (
+            <DataRow
+              modalTarget={RowModalMeta ? `${RowModalMeta.pathTemplate}_${data.id}` : ''}
+              key={data.id}
+              data={data}
+              dataFields={dataMappings.map(mapping => mapping.dataField)}
+            />
+          ))}
+        </tbody>
+      </table>
+
+      {modals}
+
+    </React.Fragment>
   );
 };
 
 DataTable.defaultProps = {
-  // actionRows: null,
   className: '',
+  RowModalMeta: null,
 };
 
 DataTable.propTypes = {
   dataSource: propTypes.arrayOf(propTypes.object).isRequired,
   dataMappings: propTypes.arrayOf(dataMappingsShape).isRequired,
+  RowModalMeta: propTypes.shape({
+    Element: propTypes.elementType,
+    pathTemplate: propTypes.string,
+  }),
   className: propTypes.string,
-//   actionRows: propTypes.arrayOf(propTypes.shape({
-//     label: propTypes.string.isRequired,
-//     onClick: propTypes.func.isRequired,
-//   })),
 };
 
 export default DataTable;

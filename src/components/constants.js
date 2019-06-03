@@ -43,6 +43,15 @@ class Constants {
     // formats
     this.dateFormat = 'MMMM D, YYYY';
 
+    // format or mappings for DataTables
+    this.reservationTableMappings = [
+      { header: 'Reservation Number', dataField: 'id' },
+      { header: 'Reservation Date', dataField: 'reservationDate' },
+      { header: 'Status', dataField: 'status' },
+    ];
+
+
+    // all the properties below should be in a separate project
 
     // prop type shapes
     this.userShape = {
@@ -60,10 +69,11 @@ class Constants {
     };
 
     this.reservationShape = {
-      user: propTypes.shape(this.userShape).isRequired,
-      address: propTypes.shape(this.addressShape).isRequired,
-      reservationDate: propTypes.instanceOf(Date).isRequired,
-      status: propTypes.number.isRequired,
+      user: propTypes.shape(this.userShape),
+      address: propTypes.shape(this.addressShape),
+      details: propTypes.string.isRequired,
+      reservationDate: propTypes.instanceOf(Date),
+      status: propTypes.number, // 0 for unconfirmed, 1 for confirmed, 2 for done,
     };
 
 
@@ -81,8 +91,9 @@ class Constants {
       id: 0,
       user: null,
       address: null,
-      reservationDate: null,
+      reservationDate: new Date(),
       status: 0,
+      details: '',
     });
   }
 }

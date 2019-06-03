@@ -47,13 +47,13 @@ const UserProfileFlatCard = (props) => {
   return (
     <FlatCard {...props} headerIcon="person_outline" header="User Profile">
       <UserProfileSection className="modal-trigger" data-target={`USER_FORM_${user.id}_firstname`} label="Firstname" value={user.firstname} />
-      <UserProfileFormModal key={`USER_FORM_${user.id}_firstname`} fieldToEdit="firstname" user={user} />
+      <UserProfileFormModal key={`USER_FORM_${user.id}_firstname`} fieldToEdit="firstname" data={user} />
 
       <UserProfileSection className="modal-trigger" data-target={`USER_FORM_${user.id}_lastname`} label="Lastname" value={user.lastname} />
-      <UserProfileFormModal key={`USER_FORM_${user.id}_lastname`} fieldToEdit="lastname" user={user} />
+      <UserProfileFormModal key={`USER_FORM_${user.id}_lastname`} fieldToEdit="lastname" data={user} />
 
       <UserProfileSection isLast className="modal-trigger" data-target={`USER_FORM_${user.id}_birthday`} label="Birthday" value={moment(user.birthday).format(constants.dateFormat)} />
-      <UserProfileFormModal key={`USER_FORM_${user.id}_birthday`} fieldToEdit="birthday" user={user} />
+      <UserProfileFormModal key={`USER_FORM_${user.id}_birthday`} fieldToEdit="birthday" data={user} />
     </FlatCard>
   );
 };

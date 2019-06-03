@@ -23,7 +23,7 @@ const Header = () => (
   <header className="navbar-fixed">
     <Nav className="valign-wrapper">
       <LogoLink to="/" className="brand-logo">
-        Home Services
+        Demo
       </LogoLink>
 
       <a href="#" data-target="Sidenav" className="sidenav-trigger">

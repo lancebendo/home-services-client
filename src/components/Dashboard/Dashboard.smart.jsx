@@ -4,9 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import FlatCard, { FlatCardContent } from '../Shared/FlatCard';
-import Modal from '../Shared/Modal';
-import DataTable from '../Shared/DataTable';
+import UpcomingReservationTable from './UpcomingReservationTable';
 
 import constants from '../constants';
 
@@ -19,8 +17,26 @@ const Description = styled.span`
   font-size: ${constants.parimaryDescFontSize};
 `;
 
+const test = [
+  {
+    id: 1,
+    user: null,
+    address: null,
+    reservationDate: new Date(),
+    status: 1,
+    details: 'Full Cleaning Service',
+  },
+  {
+    id: 2,
+    user: null,
+    address: null,
+    reservationDate: new Date(),
+    status: 1,
+    details: 'Full Cleaning Service',
+  },
+];
 
-const Dashboard = ({ user, address, addresses }) => {
+const Dashboard = ({ user, address }) => {
   const {
     houseNumber, street, subdivision, city, province,
   } = address || '';
@@ -49,7 +65,7 @@ const Dashboard = ({ user, address, addresses }) => {
           </Description>
         </div>
       </div>
-      <FlatCard>
+      {/* <FlatCard className="row">
         <FlatCardContent>
 
           <p>
@@ -66,11 +82,11 @@ const Dashboard = ({ user, address, addresses }) => {
           <Modal id="test" dismissible isFixedFooter>
             <Description className="description-1">
               {`Your name is ${user.firstname} ${user.lastname}.
-              Your birthday was ${moment(user.birthday).format(constants.dateFormat)}. You currently 
-              lived at ${completeAddress}. If you wish to change this, 
-              Navigate to Profile page and change the information that 
-              you want to change. (Note: If you refresh the browser, the 
-              changes will be reverted to it's default value because the 
+              Your birthday was ${moment(user.birthday).format(constants.dateFormat)}. You currently
+              lived at ${completeAddress}. If you wish to change this,
+              Navigate to Profile page and change the information that
+              you want to change. (Note: If you refresh the browser, the
+              changes will be reverted to it's default value because the
               data is not persisted. This is for demo only.)`}
             </Description>
             <button type="button">haha</button>
@@ -78,10 +94,13 @@ const Dashboard = ({ user, address, addresses }) => {
 
           <DataTable
             dataSource={addresses}
-            dataMappings={[{ header: 'Street', dataField: 'street' }, { header: 'House Number', dataField: 'houseNumber' }]}
+            dataMappings={[{ header: 'Street', dataField: 'street' },
+            { header: 'House Number', dataField: 'houseNumber' }]}
           />
         </FlatCardContent>
-      </FlatCard>
+      </FlatCard> */}
+
+      <UpcomingReservationTable className="row" upcomingReservations={test} />
     </main>
   );
 };
@@ -89,13 +108,11 @@ const Dashboard = ({ user, address, addresses }) => {
 Dashboard.propTypes = {
   user: propTypes.shape(constants.userShape).isRequired,
   address: propTypes.shape(constants.addressShape).isRequired,
-  addresses: propTypes.arrayOf(propTypes.shape(constants.addressShape)).isRequired,
 };
 
 const mapStateToProps = state => ({
   user: state.user,
   address: state.address.collection.find(ad => ad.isDefault) || constants.newAddress(),
-  addresses: state.address.collection,
 });
 
 export default connect(mapStateToProps)(Dashboard);

@@ -1,10 +1,13 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import SideNav from './SideNav.dumb';
-// import NavButton from './NavButton.dumb';
-import NavLink from './NavLink.dumb';
 
+import SideNav from './SideNav.dumb';
+import NavButton from './NavButton.dumb';
+import NavLink from './NavLink.dumb';
+import ReservationFormModal from '../Reservation';
+
+import constants from '../constants';
 import { strUtils } from '../../utilities';
 
 class Nav extends React.Component {
@@ -17,7 +20,6 @@ class Nav extends React.Component {
     };
 
     this.isSelected = this.isSelected.bind(this);
-    this.onBook = this.onBook.bind(this);
     this.onNavChange = this.onNavChange.bind(this);
     this.onLogout = this.onLogout.bind(this);
   }
@@ -26,16 +28,6 @@ class Nav extends React.Component {
   isSelected = (path) => {
     const { currentPath } = this.state;
     return currentPath === path;
-  }
-
-
-  onBook = (e) => {
-    e.preventDefault();
-
-    // eslint-disable-next-line no-console
-    console.log('Book!');
-
-    // create an action to create a modal or portal
   }
 
 
@@ -68,12 +60,23 @@ class Nav extends React.Component {
     const paths = strUtils.objectPropToArray(availablePaths, 'path');
     if (!strUtils.strArrayContains(paths, currentPath) && !isTest) return null;
     return (
-      <SideNav collapsible>
-        {/* <NavButton label="Book now" onClick={this.onBook} icon="event" />
-        <div className="divider" /> */}
+      <React.Fragment>
 
+        <ReservationFormModal data={constants.newReservation()} />
+        <SideNav collapsible>
 
-        {
+          <NavButton
+            label="Book now"
+            icon="event"
+            className="modal-trigger"
+            data-target="RESERVATION_FORM_0"
+          />
+          {/* have to move this to dashboard component
+        <ReservationFormModal data={constants.newReservation()} /> */}
+
+          <div className="divider" />
+
+          {
           availablePaths.map(availablePath => (
             <NavLink
               key={availablePaths.indexOf(availablePath)}
@@ -85,13 +88,14 @@ class Nav extends React.Component {
             />
           ))
         }
-        {/*
+          {/*
         <div className="divider" />
         <NavLink path={currentPath}
         label="Log-out"
         onClick={this.onLogout}
         icon="exit_to_app" /> */}
-      </SideNav>
+        </SideNav>
+      </React.Fragment>
     );
   }
 }

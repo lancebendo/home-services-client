@@ -47,6 +47,7 @@ const mockMiddleware = ({ dispatch }) => next => (action) => {
                 return a.id - b.id;
               });
             }
+
             dispatch(requestSuccess(data, feature));
           } catch (err) {
             dispatch(requestFail(err, feature));

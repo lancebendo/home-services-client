@@ -18,23 +18,90 @@ if (!window.isMockInitialized && process.env.NODE_ENV === 'development') {
     return o;
   };
 
-  window.mockSource = {
+  class MockSource {
+    constructor() {
+      this.user = {
+        id: 1,
+        firstname: 'Lance',
+        lastname: 'Bendo',
+        birthday: new Date('November 28, 1993'),
+      };
 
-    user: {
-      id: 1,
-      firstname: 'Lance',
-      lastname: 'Bendo',
-      birthday: new Date('November 28, 1993'),
-    },
+      this.addresses = [
+        {
+          id: 1,
+          isDefault: false,
+          city: 'Manila',
+          street: 'Mendiola',
+          subdivision: 'Sampaloc',
+          houseNumber: '4182',
+          province: 'Metro Manila',
+        },
+        {
+          id: 2,
+          isDefault: true,
+          city: 'Buena Park',
+          subdivision: 'Las Mariposas',
+          street: 'Valley View',
+          houseNumber: '90620',
+          province: 'California',
+        },
+        {
+          id: 3,
+          isDefault: false,
+          city: 'Bailen',
+          subdivision: 'Poblacion II',
+          street: 'Rizal',
+          houseNumber: '4124',
+          province: 'Cavite',
+        },
+      ];
 
-    addresses: [{
-      id: 1, isDefault: false, city: 'Manila', street: 'Mendiola', subdivision: 'Sampaloc', houseNumber: '4182', province: 'Metro Manila',
-    }, {
-      id: 2, isDefault: true, city: 'Buena Park', subdivision: 'Las Mariposas', street: 'Valley View', houseNumber: '90620', province: 'California',
-    }, {
-      id: 3, isDefault: false, city: 'Bailen', subdivision: 'Poblacion II', street: 'Rizal', houseNumber: '4124', province: 'Cavite',
-    }],
-  };
+      this.reservations = [
+        {
+          id: 1,
+          user: this.user,
+          address: this.addresses.find(ad => ad.isDefault),
+          reservationDate: new Date(),
+          status: 2,
+          details: 'Basic Service',
+        },
+        {
+          id: 2,
+          user: this.user,
+          address: this.addresses.find(ad => ad.isDefault),
+          reservationDate: new Date(),
+          status: 2,
+          details: 'Premium Service',
+        },
+        {
+          id: 3,
+          user: this.user,
+          address: this.addresses.find(ad => ad.isDefault),
+          reservationDate: new Date(),
+          status: 1,
+          details: 'Basic Service',
+        },
+        {
+          id: 4,
+          user: this.user,
+          address: this.addresses.find(ad => ad.isDefault),
+          reservationDate: new Date(),
+          status: 0,
+          details: 'Basic Service',
+        },
+        {
+          id: 5,
+          user: this.user,
+          address: this.addresses.find(ad => ad.isDefault),
+          reservationDate: new Date(),
+          status: 0,
+          details: 'Premium Service',
+        },
+      ];
+    }
+  }
+  window.mockSource = new MockSource();
 }
 
 window.isMockInitialized = true;

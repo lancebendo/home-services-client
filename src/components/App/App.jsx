@@ -13,7 +13,7 @@ import History from '../History';
 import { PathNotFound } from '../ErrorHandler';
 
 import GlobalStyle from './GlobalStyle';
-import { getUser, getAddresses } from '../../redux/actions';
+import { getUser, getAddresses, getReservations } from '../../redux/actions';
 
 const availablePaths = [
   {
@@ -74,6 +74,7 @@ const mapDispatchToProps = dispatch => ({
   loadData: () => {
     dispatch(getUser(''));
     dispatch(getAddresses(''));
+    dispatch(getReservations(''));
   },
 });
 

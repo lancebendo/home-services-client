@@ -1,5 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import FlatCard, { FlatCardSection } from '../Shared/FlatCard';
 import DataTable from '../Shared/DataTable';
@@ -26,4 +27,8 @@ PastReservationTable.propTypes = {
   pastReservations: propTypes.arrayOf(propTypes.shape(constants.reservationShape)).isRequired,
 };
 
-export default PastReservationTable;
+const mapStateToProps = state => ({
+  pastReservations: state.reservation.collection.filter(res => res.status > 1),
+});
+
+export default connect(mapStateToProps)(PastReservationTable);

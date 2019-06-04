@@ -17,25 +17,6 @@ const Description = styled.span`
   font-size: ${constants.parimaryDescFontSize};
 `;
 
-const test = [
-  {
-    id: 1,
-    user: null,
-    address: null,
-    reservationDate: new Date(),
-    status: 1,
-    details: 'Full Cleaning Service',
-  },
-  {
-    id: 2,
-    user: null,
-    address: null,
-    reservationDate: new Date(),
-    status: 1,
-    details: 'Full Cleaning Service',
-  },
-];
-
 const Dashboard = ({ user, address }) => {
   const {
     houseNumber, street, subdivision, city, province,
@@ -100,7 +81,7 @@ const Dashboard = ({ user, address }) => {
         </FlatCardContent>
       </FlatCard> */}
 
-      <UpcomingReservationTable className="row" upcomingReservations={test} />
+      <UpcomingReservationTable className="row" />
     </main>
   );
 };

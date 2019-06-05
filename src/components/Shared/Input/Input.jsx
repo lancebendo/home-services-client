@@ -25,7 +25,7 @@ const Input = (props) => {
       <Inp
         {...props}
         value={output}
-        id={`${_type}_${_id}_${field}`}
+        id={constants.getElementId(_type, _id, field)}
         name={field}
       />
       <label htmlFor={field}>{label}</label>

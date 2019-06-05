@@ -50,6 +50,7 @@ class Constants {
       { header: 'Name of Service', dataField: 'details' },
     ];
 
+    this.getElementId = (dataType, id, dataField) => `${dataType}_${id}_${dataField}`;
 
     // all the properties below should be in a separate project
 

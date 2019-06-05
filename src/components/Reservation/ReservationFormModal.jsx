@@ -38,8 +38,7 @@ class ReservationFormModal extends React.Component {
     this.setState({ reservation });
 
     const context = this;
-    const element = document.getElementById(`reservation_${reservation.id}_reservationDate`);
-    console.log(element);
+    const element = document.getElementById(constants.getElementId('reservation', reservation.id, 'reservationDate'));
     const instance = window.M.Datepicker.init(element, {
       container: document.getElementById('root'),
       format: constants.dateFormat.toLowerCase(),

@@ -29,7 +29,7 @@ class UserProfileFormModal extends React.Component {
 
     if (user[fieldToEdit] instanceof Date) {
       const context = this;
-      const element = document.getElementById(`user_${user.id}_birthday`);
+      const element = document.getElementById(constants.getElementId('user', user.id, 'birthday'));
       const instance = window.M.Datepicker.init(element, {
         container: document.getElementById('root'),
         format: constants.dateFormat.toLowerCase(),

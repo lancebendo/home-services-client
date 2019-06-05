@@ -37,6 +37,23 @@ class ReservationFormModal extends React.Component {
     const { data: reservation } = this.props;
     this.setState({ reservation });
 
+    const context = this;
+    const element = document.getElementById(`reservation_${reservation.id}_reservationDate`);
+    console.log(element);
+    const instance = window.M.Datepicker.init(element, {
+      container: document.getElementById('root'),
+      format: constants.dateFormat.toLowerCase(),
+      minDate: new Date(),
+      defaultDate: new Date(),
+      yearRange: 30,
+      autoClose: true,
+      onSelect(date) {
+        context.handleInputChange({ target: { value: date, name: 'reservationDate' } });
+      },
+    });
+
+    instance.setDate(reservation.reservationDate);
+
     window.M.updateTextFields();
   }
 
@@ -56,8 +73,9 @@ class ReservationFormModal extends React.Component {
              Reservation
           </Header>
 
-
           <Input
+            _id={reservation.id}
+            _type="reservation"
             type="text"
             className="validate"
             onChange={this.handleInputChange}
@@ -67,6 +85,8 @@ class ReservationFormModal extends React.Component {
           />
 
           <Input
+            _id={reservation.id}
+            _type="reservation"
             type="text"
             className="validate"
             onChange={this.handleInputChange}

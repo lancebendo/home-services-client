@@ -88,6 +88,8 @@ class AddressFormModal extends React.Component {
           </Header>
 
           <Input
+            _id={address.id}
+            _type="address"
             type="text"
             className="validate"
             onChange={this.handleInputChange}
@@ -97,6 +99,8 @@ class AddressFormModal extends React.Component {
           />
 
           <Input
+            _id={address.id}
+            _type="address"
             type="text"
             className="validate"
             onChange={this.handleInputChange}
@@ -106,6 +110,8 @@ class AddressFormModal extends React.Component {
           />
 
           <Input
+            _id={address.id}
+            _type="address"
             type="text"
             className="validate"
             onChange={this.handleInputChange}
@@ -115,6 +121,8 @@ class AddressFormModal extends React.Component {
           />
 
           <Input
+            _id={address.id}
+            _type="address"
             type="text"
             className="validate"
             onChange={this.handleInputChange}
@@ -124,6 +132,8 @@ class AddressFormModal extends React.Component {
           />
 
           <Input
+            _id={address.id}
+            _type="address"
             type="text"
             className="validate"
             onChange={this.handleInputChange}

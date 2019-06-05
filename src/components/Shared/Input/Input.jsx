@@ -11,7 +11,9 @@ const Inp = styled.input`
 
 
 const Input = (props) => {
-  const { field, label, value } = props;
+  const {
+    _type, _id, field, label, value,
+  } = props;
 
   let output = value;
 
@@ -23,7 +25,7 @@ const Input = (props) => {
       <Inp
         {...props}
         value={output}
-        id={field}
+        id={`${_type}_${_id}_${field}`}
         name={field}
       />
       <label htmlFor={field}>{label}</label>
@@ -32,6 +34,8 @@ const Input = (props) => {
 };
 
 Input.propTypes = {
+  _id: propTypes.number.isRequired,
+  _type: propTypes.string.isRequired,
   field: propTypes.string.isRequired,
   label: propTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types

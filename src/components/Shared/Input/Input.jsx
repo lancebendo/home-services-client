@@ -28,7 +28,7 @@ const Input = (props) => {
         id={constants.getElementId(_type, _id, field)}
         name={field}
       />
-      <label htmlFor={field}>{label}</label>
+      <label htmlFor={constants.getElementId(_type, _id, field)}>{label}</label>
     </div>
   );
 };

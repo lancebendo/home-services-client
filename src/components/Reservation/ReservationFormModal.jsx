@@ -53,7 +53,9 @@ class ReservationFormModal extends React.Component {
 
     instance.setDate(reservation.reservationDate);
 
-    window.M.updateTextFields();
+    if (reservation.id > 0) {
+      window.M.updateTextFields();
+    }
   }
 
   render() {

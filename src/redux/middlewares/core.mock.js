@@ -1,5 +1,13 @@
 import {
-  ADDRESS, USER, MOCK_REQUEST, setAddresses, setUser, requestSuccess, requestFail,
+  ADDRESS,
+  USER,
+  MOCK_REQUEST,
+  setAddresses,
+  setUser,
+  requestSuccess,
+  requestFail,
+  RESERVATION,
+  setReservations,
 } from '../actions';
 
 const mockMiddleware = ({ dispatch }) => next => (action) => {
@@ -33,6 +41,18 @@ const mockMiddleware = ({ dispatch }) => next => (action) => {
             } catch (err) {
               dispatch(requestFail(err, feature));
             }
+          } else if (feature === RESERVATION) {
+            try {
+              const newReservation = {
+                ...action.payload,
+                id: window.mockSource.reservations.length + 1,
+              };
+              window.mockSource.reservations.push(newReservation);
+              window.mockSource.reservations.sort((a, b) => a.id - b.id);
+              dispatch(setReservations(window.mockSource.reservations));
+            } catch (err) {
+              dispatch(requestFail(err, feature));
+            }
           }
 
           break;
@@ -46,6 +66,8 @@ const mockMiddleware = ({ dispatch }) => next => (action) => {
                 if (b.isDefault) return 1;
                 return a.id - b.id;
               });
+            } else if (feature !== USER) {
+              data.sort((a, b) => a.id - b.id);
             }
 
             dispatch(requestSuccess(data, feature));
@@ -82,7 +104,18 @@ const mockMiddleware = ({ dispatch }) => next => (action) => {
               window.mockSource.user = action.payload;
               dispatch(setUser(window.mockSource.user));
             } catch (err) {
-              requestFail(err, feature);
+              dispatch(requestFail(err, feature));
+            }
+          } else if (feature === RESERVATION) {
+            try {
+              const newArray = window.mockSource.reservations
+                .filter(x => x.id !== payload.id);
+              newArray.push(action.payload);
+              newArray.sort((a, b) => a.id - b.id);
+              window.mockSource.reservations = newArray;
+              dispatch(setReservations(window.mockSource.reservations));
+            } catch (err) {
+              dispatch(requestFail(err, feature));
             }
           }
           break;

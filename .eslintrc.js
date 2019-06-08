@@ -1,24 +1,20 @@
-{
+const path = require('path');
+
+module.exports = {
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "jest": true
     },
     "extends": "airbnb",
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
     "parser": "babel-eslint",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
+    "settings": {
+        "import/resolver": {
+          node: {
+            paths: [path.resolve(__dirname, './src')]
+          },
         },
-        "ecmaVersion": 2018,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
-    ],
+      },
     "rules": {
         "linebreak-style": 0,
         "prefer-destructuring": "off",

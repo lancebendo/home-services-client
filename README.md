@@ -31,6 +31,7 @@ and practicing on working with ES6 version of JavaScript.
 ## Notable Technologies used
 * VS Code
 * Github
+* Travis CI
 * Heroku (including CI Pipeline with Github)
 
 ## Code Patterns

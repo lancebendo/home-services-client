@@ -1,0 +1,13 @@
+dist: trusty
+sudo: required
+language: node_js
+node_js:
+- '10'
+notifications:
+  email:
+  - lunchbendo@gmail.com
+script:
+- npm run lint
+- npm run build
+- npm install -g serve
+- npm run test

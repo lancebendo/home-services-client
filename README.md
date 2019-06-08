@@ -1,4 +1,4 @@
-# Service Reservation App
+# Service Reservation App  [![Build Status](https://travis-ci.com/lancebendo/home-services-client.svg?branch=master)](https://travis-ci.com/lancebendo/home-services-client)
 * Developer: Lance Patrick Bendo
 * Demo Link: https://home-services-client.herokuapp.com/
 

@@ -32,7 +32,7 @@ and practicing on working with ES6 version of JavaScript.
 * VS Code
 * Github
 * Travis CI
-* Heroku (including CI Pipeline with Github)
+* Heroku
 
 ## Code Patterns
 * Nir Kaufman's Redux Pattern

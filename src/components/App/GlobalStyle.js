@@ -47,7 +47,7 @@ color: ${constants.defaultFontColor};
       padding-left: 310px;
     }
 
-    .modal { width: 60% !important; }
+    .modal { width: 40% !important; }
   }
   
   @media only screen and (max-width: ${constants.mediumScreen}) {
@@ -55,7 +55,7 @@ color: ${constants.defaultFontColor};
       padding: 50px 15px 0;
     }
 
-    .modal { width: 70% !important; }
+    .modal { width: 50% !important; }
   }
 
   @media only screen and (max-width: ${constants.smallScreen}) {

@@ -65,7 +65,6 @@ class UserProfileFormModal extends React.Component {
       <Modal
         {...this.props}
         id={MODAL_ID}
-        isFixedFooter
         dismissible={false}
         onOpenStart={this.onOpenStart}
       >

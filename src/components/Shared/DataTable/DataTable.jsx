@@ -1,5 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import styled from 'styled-components';
 
 import DataRow from './DataRow';
 
@@ -7,6 +8,30 @@ const dataMappingsShape = propTypes.shape({
   dataField: propTypes.string.isRequired,
   header: propTypes.string,
 });
+
+const Table = styled.table`
+  height: 300px;
+
+  td:empty {
+    border-left: 0;
+    border-right: 0;
+  }
+  
+  .highlight>tbody>tr {
+    -webkit-transition: background-color .25s ease; */
+    /* transition: background-color .25s ease; */
+  }
+`;
+
+const FillerRow = styled.tr`
+  &:hover {
+    background-color: transparent !important;
+  }
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+`;
 
 const DataTable = (props) => {
   const {
@@ -20,7 +45,7 @@ const DataTable = (props) => {
 
   return (
     <React.Fragment>
-      <table className={combinedClass}>
+      <Table className={combinedClass}>
         <thead>
           <tr>
             {dataMappings.map(mapping => (<th key={mapping.header}>{mapping.header}</th>))}
@@ -36,8 +61,12 @@ const DataTable = (props) => {
               dataFields={dataMappings.map(mapping => mapping.dataField)}
             />
           ))}
+
+          <FillerRow>
+            {dataMappings.map(() => (<td key={Math.random()} />))}
+          </FillerRow>
         </tbody>
-      </table>
+      </Table>
 
       {modals}
 

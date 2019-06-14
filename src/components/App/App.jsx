@@ -15,7 +15,7 @@ import { PathNotFound } from '../ErrorHandler';
 import GlobalStyle from './GlobalStyle';
 import { getUser, getAddresses, getReservations } from '../../redux/actions';
 
-const availablePaths = [
+const sidenavPaths = [
   {
     name: 'Dashboard', path: '/', icon: 'home', component: Dashboard,
   },
@@ -28,6 +28,9 @@ const availablePaths = [
   {
     name: 'History', path: '/history', icon: 'history', component: History,
   },
+  // {
+  //   name: 'Job Applicants', path: '/history', icon: 'person', component: History,
+  // },
 ];
 
 class App extends React.Component {
@@ -44,10 +47,10 @@ class App extends React.Component {
         <BrowserRouter>
           <Header />
 
-          <Nav availablePaths={availablePaths} />
+          <Nav availablePaths={sidenavPaths} />
 
           <Switch>
-            {availablePaths.map(path => (
+            {sidenavPaths.map(path => (
               <Route
                 key={path.name}
                 path={path.path}

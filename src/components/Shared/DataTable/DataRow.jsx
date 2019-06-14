@@ -7,6 +7,11 @@ import styled from 'styled-components';
 import constants from '../../constants';
 
 const Tr = styled.tr`
+  line-height: 20px;
+  height: 20px;
+`;
+
+const TrLink = styled(Tr)`
   &:hover {
     cursor: pointer;
   }
@@ -17,7 +22,7 @@ const DataRow = (props) => {
     // eslint-disable-next-line no-unused-vars
     data, dataFields, modalTarget,
   } = props;
-  const Row = modalTarget ? Tr : styled.tr``;
+  const Row = modalTarget ? TrLink : Tr;
 
   const className = modalTarget ? 'modal-trigger' : '';
 

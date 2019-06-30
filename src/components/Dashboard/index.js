@@ -1,3 +1,3 @@
-import Dashboard from './Dashboard.smart';
+import Dashboard from './Dashboard';
 
 export default Dashboard;

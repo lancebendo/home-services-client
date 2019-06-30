@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Collection extends Component {
+class Collection extends React.Component {
     state = { }
 
     render() {

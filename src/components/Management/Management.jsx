@@ -4,9 +4,9 @@ import ServiceDomainCard from './ServiceDomainCard';
 
 const Management = () => (
   <main>
-    <ServiceDomainCard />
-    <ServiceDomainCard />
-    <ServiceDomainCard />
+    <ServiceDomainCard className="row" />
+    <ServiceDomainCard className="row" />
+    <ServiceDomainCard className="row" />
   </main>
 );
 

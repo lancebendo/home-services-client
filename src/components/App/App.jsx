@@ -7,6 +7,7 @@ import propTypes from 'prop-types';
 import Header from '../Header';
 import Nav from '../Nav';
 import Dashboard from '../Dashboard';
+import Management from '../Management';
 import Profile from '../Profile';
 import History from '../History';
 // import TestComponent from '../TestComponent';
@@ -20,7 +21,10 @@ const sidenavPaths = [
     name: 'Dashboard', path: '/', icon: 'home', component: Dashboard,
   },
   {
-    name: 'Profile', path: '/profile', icon: 'person', component: Profile,
+    name: 'Management', path: '/management', icon: 'supervisor_account', component: Management,
+  },
+  {
+    name: 'My Profile', path: '/profile', icon: 'person', component: Profile,
   },
   // {
   //   name: 'Test', path: '/test', icon: 'person', component: TestComponent,

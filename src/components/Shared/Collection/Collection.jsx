@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import styled from 'styled-components';
 
 import CollectionItem from './CollectionItem';
@@ -27,6 +28,7 @@ class Collection extends React.Component {
     state = { }
 
     render() {
+      const { isLoading, hasMoreData } = this.props;
       return (
         <Ul className="collection">
           <CollectionItem
@@ -44,11 +46,28 @@ class Collection extends React.Component {
           </CollectionGroup>
           <DefaultCollectionItem />
           <CollectionItem title="New Service" primaryIcon="new" onClick={() => {}} primaryContent="hahaha" secondaryContent="hahahahaha" />
-          <CollectionItemLoader />
-          <CollectionSeeMore onClick={() => console.log('Dito yung load logic')} />
+          { isLoading
+            ? <CollectionItemLoader />
+            : null
+          }
+          { !isLoading && hasMoreData
+            // eslint-disable-next-line no-console
+            ? <CollectionSeeMore onClick={() => console.log('Dito yung load logic')} />
+            : null
+        }
         </Ul>
       );
     }
 }
+
+Collection.defaultProps = {
+  isLoading: false,
+  hasMoreData: false,
+};
+
+Collection.propTypes = {
+  isLoading: propTypes.bool,
+  hasMoreData: propTypes.bool,
+};
 
 export default Collection;

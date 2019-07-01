@@ -11,7 +11,7 @@ const ManageFlatCardSection = styled(FlatCardSection)`
 // eslint-disable-next-line react/prop-types
 const ManageLink = () => (
   <Link to="/management/service">
-    <ManageFlatCardSection isLink>Manage</ManageFlatCardSection>
+    <ManageFlatCardSection isLink isLast>Manage</ManageFlatCardSection>
   </Link>
 );
 

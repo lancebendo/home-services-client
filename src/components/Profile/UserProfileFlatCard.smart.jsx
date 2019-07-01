@@ -21,7 +21,7 @@ const UserProfileSection = (props) => {
           <span>
             {value.toString()}
             {
-              label !== 'Firstnamess'
+              label !== 'Firstname'
                 ? (<i className="material-icons right">keyboard_arrow_right</i>)
                 : (<Spinner size="small" className="right" />)
             }

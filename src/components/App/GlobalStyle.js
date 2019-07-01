@@ -48,7 +48,7 @@ color: ${constants.defaultFontColor};
     }
 
     .nav-content {
-      padding-left: 40px;
+      padding: 0px 40px 5px;
       margin-left: 270px;
     }
 
@@ -58,6 +58,10 @@ color: ${constants.defaultFontColor};
   @media only screen and (max-width: ${constants.mediumScreen}) {
     main {
       padding: 50px 15px 0;
+    }
+
+    .nav-content {
+      padding: 0px 3px 3px;
     }
 
     .modal { width: 50% !important; }

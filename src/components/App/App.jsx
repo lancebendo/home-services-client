@@ -9,6 +9,10 @@ import Nav from '../Nav';
 import Dashboard from '../Dashboard';
 import Management from '../Management';
 import Profile from '../Profile';
+
+// management components
+import Services from '../Services';
+
 // import TestComponent from '../TestComponent';
 import { PathNotFound } from '../ErrorHandler';
 
@@ -53,6 +57,7 @@ class App extends React.Component {
               />
             ))}
 
+            <Route path="/management/service/" exact component={Services} />
             <Route component={PathNotFound} />
           </Switch>
 

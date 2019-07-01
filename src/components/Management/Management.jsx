@@ -1,8 +1,12 @@
 import React from 'react';
 
+import ServiceDomainCard from './ServiceDomainCard';
+
 const Management = () => (
   <main>
-    <h1>hahaha Management</h1>
+    <ServiceDomainCard />
+    <ServiceDomainCard />
+    <ServiceDomainCard />
   </main>
 );
 

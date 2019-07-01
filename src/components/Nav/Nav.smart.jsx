@@ -26,7 +26,9 @@ class Nav extends React.Component {
 
 
   isSelected = (path) => {
-    const { currentPath } = this.state;
+    let { currentPath } = this.state;
+    if (currentPath.slice(-1) !== '/') currentPath = `${currentPath}/`;
+    console.log(`${currentPath} ${path}`);
     return currentPath === path;
   }
 

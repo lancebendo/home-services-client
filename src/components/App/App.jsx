@@ -9,7 +9,6 @@ import Nav from '../Nav';
 import Dashboard from '../Dashboard';
 import Management from '../Management';
 import Profile from '../Profile';
-import History from '../History';
 // import TestComponent from '../TestComponent';
 import { PathNotFound } from '../ErrorHandler';
 
@@ -21,20 +20,11 @@ const sidenavPaths = [
     name: 'Dashboard', path: '/', icon: 'home', component: Dashboard,
   },
   {
-    name: 'Management', path: '/management', icon: 'supervisor_account', component: Management,
+    name: 'Management', path: '/management/', icon: 'supervisor_account', component: Management,
   },
   {
-    name: 'My Profile', path: '/profile', icon: 'person', component: Profile,
+    name: 'My Profile', path: '/profile/', icon: 'person', component: Profile,
   },
-  // {
-  //   name: 'Test', path: '/test', icon: 'person', component: TestComponent,
-  // },
-  {
-    name: 'History', path: '/history', icon: 'history', component: History,
-  },
-  // {
-  //   name: 'Job Applicants', path: '/history', icon: 'person', component: History,
-  // },
 ];
 
 class App extends React.Component {

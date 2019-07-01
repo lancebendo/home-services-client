@@ -1,17 +1,13 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 
 import FlatCard, { FlatCardSection } from '../Shared/FlatCard';
+import ManageLink from './ManageLink';
 
-const ServiceDomainCard = (props) => {
-  // eslint-disable-next-line react/prop-types
-  const { history } = props;
-  return (
-    <FlatCard {...props} headerIcon="settings" header="Services">
-      <FlatCardSection>Haha</FlatCardSection>
-      <FlatCardSection isLink onClick={() => history.push('/management/service')}>Manage</FlatCardSection>
-    </FlatCard>
-  );
-};
+const ServiceDomainCard = props => (
+  <FlatCard {...props} headerIcon="settings" header="Services">
+    <FlatCardSection>Haha</FlatCardSection>
+    <ManageLink path="management/service" />
+  </FlatCard>
+);
 
-export default withRouter(ServiceDomainCard);
+export default ServiceDomainCard;

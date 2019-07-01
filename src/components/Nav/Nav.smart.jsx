@@ -26,8 +26,11 @@ class Nav extends React.Component {
 
 
   isSelected = (path) => {
-    let { currentPath } = this.state;
-    if (currentPath.slice(-1) !== '/') currentPath = `${currentPath}/`;
+    const { location } = this.props;
+    let { pathname: currentPath } = location;
+    const hrefParts = currentPath.split('/');
+    currentPath = hrefParts.length > 1 && hrefParts[1] !== '' ? `/${hrefParts[1]}/` : `${hrefParts[0]}/`;
+
     return currentPath === path;
   }
 
@@ -54,12 +57,22 @@ class Nav extends React.Component {
     // I'm pretty sure this is where you will create logout action
   }
 
+  checkPath() {
+    const { location } = this.props;
+    const { pathname: path } = location;
+    const { availablePaths } = this.props;
+    const paths = strUtils.objectPropToArray(availablePaths, 'path');
+    const hrefParts = path.split('/');
+    const currentPathFirstPart = hrefParts.length > 1 && hrefParts[0] !== '' ? `/${hrefParts[1]}/` : `${hrefParts[0]}/`;
+    return strUtils.strArrayContains(paths, currentPathFirstPart);
+  }
 
   render() {
+    // di ko lang inaalis pero useless na tong currentpath state
     const { currentPath } = this.state;
     const { isTest, availablePaths } = this.props;
-    const paths = strUtils.objectPropToArray(availablePaths, 'path');
-    if (!strUtils.strArrayContains(paths, currentPath) && !isTest) return null;
+
+    if (!this.checkPath(currentPath) && !isTest) return null;
     return (
       <React.Fragment>
 

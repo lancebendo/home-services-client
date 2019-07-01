@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import propTypes from 'prop-types';
 
 const Ul = styled.ul`
-  margin-top: 98px;
+  margin-top: 108px;
   width: 270px;
   z-index: 1;
 `;

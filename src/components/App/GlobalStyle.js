@@ -43,8 +43,13 @@ color: ${constants.defaultFontColor};
 
 @media only screen and (min-width: ${constants.mediumScreen}) {
     main {
-      padding: 50px;
-      padding-left: 310px;
+      padding: 53px;
+      margin-left: 270px;
+    }
+
+    .nav-content {
+      padding-left: 40px;
+      margin-left: 270px;
     }
 
     .modal { width: 40% !important; }

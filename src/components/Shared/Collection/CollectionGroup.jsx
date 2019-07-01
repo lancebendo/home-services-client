@@ -14,6 +14,7 @@ const CollectionGroup = ({ name, children }) => (
   <React.Fragment>
     <Group className="collection-item">
       {name}
+      <span className="badge">{`${children.length} item(s)`}</span>
     </Group>
     {children}
   </React.Fragment>

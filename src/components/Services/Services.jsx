@@ -1,6 +1,7 @@
 import React from 'react';
 
-import ServiceMenu from './ServicesMenu';
+import Collection from '../Shared/Collection';
+import ServicesMenu from './ServicesMenu';
 
 class Services extends React.Component {
   constructor(props) {
@@ -11,11 +12,13 @@ class Services extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <ServiceMenu />
+        <ServicesMenu />
 
         <main>
-          <h1>Services</h1>
-          <button type="button" href="/" className="btn-floating waves-effect"><i className="material-icons">add</i></button>
+          <div className="section">
+            <h5>Manage Services</h5>
+            <Collection />
+          </div>
         </main>
       </React.Fragment>
     );

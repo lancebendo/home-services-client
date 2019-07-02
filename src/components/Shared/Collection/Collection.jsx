@@ -2,8 +2,6 @@ import React from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
 
-import CollectionItem from './CollectionItem';
-import CollectionGroup from './CollectionGroup';
 import CollectionItemLoader from './CollectionItemLoader';
 import DefaultCollectionItem from './DefaultCollectionItem';
 import CollectionSeeMore from './CollectionSeeMore';
@@ -28,10 +26,10 @@ class Collection extends React.Component {
     state = { }
 
     render() {
-      const { isLoading, hasMoreData } = this.props;
+      const { isLoading, hasMoreData, children } = this.props;
       return (
         <Ul className="collection">
-          <CollectionItem
+          {/* <CollectionItem
             title="Upcoming Reservation"
             primaryContent="July 2, 2019 @ 12:00 PM - 12:30 PM"
             secondaryContent="7860 Buena Park, CA"
@@ -43,9 +41,13 @@ class Collection extends React.Component {
           <CollectionGroup name="Today">
             <CollectionItem title="Upcoming Reservation" primaryIcon="grade" onClick={() => {}} />
             <CollectionItem title="New Promo" primaryContent="hahaha" primaryIcon="grade" />
-          </CollectionGroup>
-          <DefaultCollectionItem />
-          <CollectionItem title="New Service" primaryIcon="new" onClick={() => {}} primaryContent="hahaha" secondaryContent="hahahahaha" />
+          </CollectionGroup> */}
+          {
+            children && children.length < 1
+              ? children
+              : (<DefaultCollectionItem />)
+          }
+
           { isLoading
             ? <CollectionItemLoader />
             : null
@@ -63,11 +65,13 @@ class Collection extends React.Component {
 Collection.defaultProps = {
   isLoading: false,
   hasMoreData: false,
+  children: null,
 };
 
 Collection.propTypes = {
   isLoading: propTypes.bool,
   hasMoreData: propTypes.bool,
+  children: propTypes.node,
 };
 
 export default Collection;

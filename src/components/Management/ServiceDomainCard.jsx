@@ -6,7 +6,7 @@ import ManageLink from './ManageLink';
 const ServiceDomainCard = props => (
   <FlatCard {...props} headerIcon="settings" header="Services">
     <FlatCardSection>Haha</FlatCardSection>
-    <ManageLink path="management/service/" />
+    <ManageLink path="/management/service/" />
   </FlatCard>
 );
 

@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { BackButton } from '../Shared/Button';
+
 const ExtendedHeaderRoot = document.getElementById('nav-extended-content-root');
 
-class DashboardFilter extends React.Component {
+class AddonsMenu extends React.Component {
   constructor(props) {
     super(props);
     this.element = document.createElement('div');
@@ -16,11 +18,11 @@ class DashboardFilter extends React.Component {
     render() {
       return ReactDOM.createPortal(
         (
-          <span>Filter tools here</span>
+          <BackButton link="/management/" />
         ),
         this.element,
       );
     }
 }
 
-export default DashboardFilter;
+export default AddonsMenu;

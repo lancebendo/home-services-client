@@ -6,7 +6,7 @@ import ManageLink from './ManageLink';
 const AddonDomainCard = props => (
   <FlatCard {...props} headerIcon="settings" header="Addons">
     <FlatCardSection>Haha</FlatCardSection>
-    <ManageLink path="management/addon/" />
+    <ManageLink path="/management/addon/" />
   </FlatCard>
 );
 

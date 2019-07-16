@@ -9,7 +9,7 @@ import Header from '../Shared/Header';
 
 import { updateUser } from '../../redux/actions';
 
-import constants from '../constants';
+import constants from '../ReactConstants';
 
 class UserProfileFormModal extends React.Component {
   constructor(props) {

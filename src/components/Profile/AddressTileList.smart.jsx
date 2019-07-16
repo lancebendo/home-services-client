@@ -13,7 +13,7 @@ import YesNoModal from '../Shared/Prompts';
 
 import { deleteAddress } from '../../redux/actions';
 
-import constants from '../constants';
+import constants from '../ReactConstants';
 
 
 const DefaultLabel = styled.span`

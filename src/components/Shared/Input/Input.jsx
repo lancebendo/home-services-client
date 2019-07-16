@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import moment from 'moment';
 import styled from 'styled-components';
 
-import constants from '../../constants';
+import constants from '../../ReactConstants';
 
 const Inp = styled.input`
   color: ${constants.defaultFontColor} !important;

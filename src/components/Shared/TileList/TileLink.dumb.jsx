@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
 
-import constants from '../../constants';
+import constants from '../../ReactConstants';
 import TileDiv from './tileStyle';
 
 const TileLinkDiv = styled(TileDiv)`

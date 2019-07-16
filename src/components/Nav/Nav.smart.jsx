@@ -7,7 +7,7 @@ import NavButton from './NavButton.dumb';
 import NavLink from './NavLink.dumb';
 import ReservationFormModal from '../Reservation';
 
-import constants from '../constants';
+import constants from '../ReactConstants';
 import { strUtils } from '../../utilities';
 
 class Nav extends React.Component {

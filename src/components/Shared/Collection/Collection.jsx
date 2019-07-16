@@ -6,7 +6,7 @@ import CollectionItemLoader from './CollectionItemLoader';
 import DefaultCollectionItem from './DefaultCollectionItem';
 import CollectionSeeMore from './CollectionSeeMore';
 
-import constants from '../../constants';
+import constants from '../../ReactConstants';
 
 const Ul = styled.ul`
   border-radius: ${constants.borderRadius};

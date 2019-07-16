@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import constants from '../constants';
+import constants from '../ReactConstants';
 
 const GlobalStyle = createGlobalStyle`
 margin: 0;

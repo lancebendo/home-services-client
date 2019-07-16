@@ -10,7 +10,7 @@ import Header from '../Shared/Header';
 
 import { createAddress, updateAddress } from '../../redux/actions';
 
-import constants from '../constants';
+import constants from '../ReactConstants';
 
 const DefaultLabel = styled.div`
   font-size: ${constants.secondaryDescFontSize};

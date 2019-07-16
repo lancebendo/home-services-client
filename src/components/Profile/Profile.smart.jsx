@@ -5,7 +5,7 @@ import propTypes from 'prop-types';
 import UserProfileFlatCard from './UserProfileFlatCard.smart';
 import AddressTileList from './AddressTileList.smart';
 
-import constants from '../constants';
+import constants from '../ReactConstants';
 
 
 const Profile = (props) => {

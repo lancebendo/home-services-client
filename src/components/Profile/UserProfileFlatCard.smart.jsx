@@ -6,7 +6,7 @@ import FlatCard, { FlatCardSection } from '../Shared/FlatCard';
 import Spinner from '../Shared/Spinner';
 import UserProfileFormModal from './UserProfileFormModal';
 
-import constants from '../constants';
+import constants from '../ReactConstants';
 
 
 const UserProfileSection = (props) => {

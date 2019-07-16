@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 import Input from '../Shared/Input';
 
-import constants from '../constants';
+import constants from '../ReactConstants';
 
 class ReservationSummary extends React.Component {
   constructor(props) {

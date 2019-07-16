@@ -9,7 +9,7 @@ import Header from '../Shared/Header';
 
 import { createReservation, updateReservation } from '../../redux/actions';
 
-import constants from '../constants';
+import constants from '../ReactConstants';
 
 class ReservationFormModal extends React.Component {
   constructor(props) {

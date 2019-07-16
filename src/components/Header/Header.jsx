@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import constants from '../constants';
+import constants from '../ReactConstants';
 
 // const Nav = styled.nav`
 // background-color: ${constants.primaryColor};

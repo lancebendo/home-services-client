@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import constants from '../../constants';
+import constants from '../../ReactConstants';
 
 const TileFooter = styled.div`
 position: absolute;

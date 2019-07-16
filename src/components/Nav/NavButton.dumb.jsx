@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
 
-import constants from '../constants';
+import constants from '../ReactConstants';
 
 const Button = styled.a`
 border-radius: 270px;

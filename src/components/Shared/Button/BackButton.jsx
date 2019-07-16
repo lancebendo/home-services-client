@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
 
-import constants from '../../constants';
+import constants from '../../ReactConstants';
 
 import Icon from '../Icon';
 

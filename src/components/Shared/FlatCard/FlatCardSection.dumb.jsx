@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import propTypes from 'prop-types';
 
-import constants from '../../constants';
+import constants from '../../ReactConstants';
 
 const FlatCardSectionDiv = styled.div`
   border-top: 1px solid ${constants.flatCardBorderColor};

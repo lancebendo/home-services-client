@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
 
-import constants from '../../constants';
+import constants from '../../ReactConstants';
 
 const Header = styled.div`
   font-size: ${constants.primaryHeaderFontSize};

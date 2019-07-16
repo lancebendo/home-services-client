@@ -1,6 +1,6 @@
 import propTypes from 'prop-types';
 
-class Constants {
+class ReactConstants {
   constructor() {
     // background colors
     this.flatCardBorderColor = '#e0e0e0';
@@ -99,4 +99,4 @@ class Constants {
   }
 }
 
-export default new Constants();
+export default new ReactConstants();

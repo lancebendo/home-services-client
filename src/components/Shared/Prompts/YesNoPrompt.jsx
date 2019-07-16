@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Modal, { ModalContent, ModalFooter } from '../Modal';
 import Button from '../Button';
 
-import constants from '../../constants';
+import constants from '../../ReactConstants';
 
 const Title = styled.span`
   font-size: ${constants.primaryHeaderFontSize};

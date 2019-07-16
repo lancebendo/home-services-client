@@ -20,6 +20,8 @@ module.exports = {
         "prefer-destructuring": "off",
         "react/no-did-update-set-state": "off",
         "jsx-a11y/label-has-for": false,
+        "import/prefer-default-export": "off",
+        "no-underscore-dangle": "off",
         "jsx-a11y/label-has-associated-control": "off",
         "jsx-a11y/no-noninteractive-element-interactions": "off",
         "jsx-a11y/click-events-have-key-events": "off"

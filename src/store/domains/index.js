@@ -3,13 +3,13 @@ import constants from '../../constants';
 import createReducer from './createReducer';
 import middleware from './middleware';
 import {
-  get, set, insert, update, remove,
+  get, set, insert, update, remove, GET, SET, INSERT, UPDATE, DELETE,
 } from './actions';
 
 
 // ACTIONS
 export {
-  get, set, insert, update, remove,
+  get, set, insert, update, remove, GET, SET, INSERT, UPDATE, DELETE,
 };
 
 

@@ -4,10 +4,17 @@
     ACTION CREATORS
 */
 
+export const GET = 'GET';
+export const SET = 'SET';
+export const INSERT = 'INSERT';
+export const UPDATE = 'UPDATE';
+export const DELETE = 'DELETE';
+
+
 const isBatchType = payload => (payload instanceof Array ? 'BATCH_' : '');
 
 export const get = (domainType, query = null, meta = {}) => ({
-  type: `[${domainType}] GET`,
+  type: `[${domainType}] ${GET}`,
   payload: query,
   meta: {
     ...meta,
@@ -17,7 +24,7 @@ export const get = (domainType, query = null, meta = {}) => ({
 });
 
 export const set = (domainType, payload, meta = {}) => ({
-  type: `[${domainType}] SET`,
+  type: `[${domainType}] ${SET}`,
   payload,
   meta: {
     ...meta,
@@ -26,7 +33,7 @@ export const set = (domainType, payload, meta = {}) => ({
 });
 
 export const insert = (domainType, payload, meta = {}) => ({
-  type: `[${domainType}] INSERT_${isBatchType(payload)}`,
+  type: `[${domainType}] ${INSERT}_${isBatchType(payload)}`,
   payload,
   meta: {
     ...meta,
@@ -36,7 +43,7 @@ export const insert = (domainType, payload, meta = {}) => ({
 });
 
 export const update = (domainType, payload, meta = {}) => ({
-  type: `[${domainType}] UPDATE_${isBatchType(payload)}`,
+  type: `[${domainType}] ${UPDATE}_${isBatchType(payload)}`,
   payload,
   meta: {
     ...meta,
@@ -46,7 +53,7 @@ export const update = (domainType, payload, meta = {}) => ({
 });
 
 export const remove = (domainType, payload, meta = {}) => ({
-  type: `[${domainType}] DELETE_${isBatchType(payload)}`,
+  type: `[${domainType}] ${DELETE}_${isBatchType(payload)}`,
   payload,
   meta: {
     ...meta,

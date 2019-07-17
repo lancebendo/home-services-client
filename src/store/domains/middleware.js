@@ -6,16 +6,20 @@ as of 7/16/2019
    - the domainType is in action.meta.domainType
 */
 
+import {
+  GET, INSERT, UPDATE, DELETE,
+} from './actions';
+
 const middleware = () => next => (action) => {
   next(action);
 
-  if (action.type.includes('GET_')) {
+  if (action.type.includes(`${GET}_`)) {
     // api call on api middleware
 
-  } else if (action.type.includes('INSERT_BATCH_')) {
+  } else if (action.type.includes(`${INSERT}_BATCH_`)) {
     // api call on api middleware
 
-  } else if (action.type.includes('INSERT_')) {
+  } else if (action.type.includes(`${INSERT}_`)) {
     // api call on api middleware
     /*
     HERE'S AN EXAMPLE!
@@ -27,16 +31,16 @@ const middleware = () => next => (action) => {
     ))
     */
 
-  } else if (action.type.includes('UPDATE_BATCH')) {
+  } else if (action.type.includes(`${UPDATE}_BATCH`)) {
     // api call on api middleware
 
-  } else if (action.type.includes('UPDATE_')) {
+  } else if (action.type.includes(`${UPDATE}_`)) {
     // api call on api middleware
 
-  } else if (action.type.includes('DELETE_BATCH')) {
+  } else if (action.type.includes(`${DELETE}_BATCH`)) {
     // api call on api middleware
 
-  } else if (action.type.includes('DELETE')) {
+  } else if (action.type.includes(DELETE)) {
     // api call on api middleware
 
   }

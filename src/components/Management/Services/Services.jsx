@@ -23,20 +23,20 @@ class Services extends React.Component {
 
   // serviceCreate
   createService = (service) => {
-    // eslint-disable-next-line no-alert
+    // eslint-disable-next-line no-console
     console.log({ service });
   }
 
   // serviceUpdate
   updateService = (service) => {
-    // eslint-disable-next-line no-alert
+    // eslint-disable-next-line no-console
     console.log({ service });
   }
 
   // addressService
   deleteService = (serviceId) => {
-    // eslint-disable-next-line no-alert
-    alert(`delete ${serviceId}`);
+    // eslint-disable-next-line no-console
+    console.log(`delete ${serviceId}`);
   }
 
   render() {

@@ -25,25 +25,26 @@ class Profile extends Component {
 
   // userUpdate
   updateUser = (user) => {
+    // eslint-disable-next-line no-console
     console.log(`update ${user.id}`);
   }
 
   // addressCreate
   createAddress = (address) => {
-    // eslint-disable-next-line no-alert
+    // eslint-disable-next-line no-console
     console.log(`create ${address.id}`);
   }
 
   // addressUpdate
   updateAddress = (address) => {
-    // eslint-disable-next-line no-alert
+    // eslint-disable-next-line no-console
     console.log(`update ${address.id}`);
   }
 
   // addressDelete
   deleteAddress = (addressId) => {
-    // eslint-disable-next-line no-alert
-    alert(`delete ${addressId}`);
+    // eslint-disable-next-line no-console
+    console.log(`delete ${addressId}`);
   }
 
   render() {

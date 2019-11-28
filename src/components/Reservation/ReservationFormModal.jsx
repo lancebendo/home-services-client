@@ -35,7 +35,6 @@ class ReservationFormModal extends React.Component {
       const elem = document.getElementsByName('services')[0];
       const instance = window.M.FormSelect.getInstance(elem);
       value = instance.getSelectedValues();
-      console.log(value);
     }
 
     this.setState(prevState => ({
@@ -105,6 +104,14 @@ class ReservationFormModal extends React.Component {
             field="details"
             label="Name of Service"
           />
+          {/*
+          ano plano dito sa select
+
+          select is reservation.services
+
+          yung options ay loop of available services tapos value is if it's in reservation services.
+
+          */}
 
           <select multiple name="services" value={reservation.services} onChange={this.handleInputChange}>
             <option value="" disabled>Choose service(s)</option>

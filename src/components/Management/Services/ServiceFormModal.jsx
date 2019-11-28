@@ -39,7 +39,10 @@ class ServiceFormModal extends React.Component {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.refreshService = this.refreshService.bind(this);
+  }
 
+  componentDidMount() {
     window.M.updateTextFields();
   }
 
@@ -52,6 +55,13 @@ class ServiceFormModal extends React.Component {
     }));
   }
 
+  refreshService = () => {
+    const { data: service } = this.props;
+    this.setState({ service });
+
+    window.M.updateTextFields();
+  }
+
   render() {
     const { service } = this.state;
     const { createHandler, updateHandler } = this.props;
@@ -61,7 +71,12 @@ class ServiceFormModal extends React.Component {
     const MODAL_ID = `SERVICE_FORM_${service.id}`;
 
     return (
-      <Modal id={MODAL_ID} isFixedFooter dismissible={false} onOpenStart={this.refreshAddress}>
+      <Modal
+        id={MODAL_ID}
+        isFixedFooter
+        dismissible={false}
+        onOpenStart={this.refreshService}
+      >
         <ModalContent>
           <Header>
             {isEdit ? 'Edit ' : 'Create '}
@@ -107,12 +122,12 @@ class ServiceFormModal extends React.Component {
 
           <Button
             className="modal-close"
-            label="Done"
+            label="Submit"
             onClick={() => submitHandler(service)}
           />
           <Button
             className="modal-close"
-            label="Cancel"
+            label="Close"
           />
 
         </ModalFooter>

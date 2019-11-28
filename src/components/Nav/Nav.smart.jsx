@@ -78,9 +78,8 @@ class Nav extends React.Component {
 
         <ReservationFormModal
           data={constants.newReservation()}
-          // eslint-disable-next-line no-console
-          createHandler={reservation => console.log({ reservation })}
         />
+
         <SideNav collapsible>
 
           <NavButton

@@ -1,5 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import styled from 'styled-components';
 
 import Modal, { ModalContent, ModalFooter } from '../Shared/Modal';
 import Button from '../Shared/Button';
@@ -7,6 +8,12 @@ import Input from '../Shared/Input';
 import Header from '../Shared/Header';
 
 import constants from '../ReactConstants';
+
+
+const CancelButton = styled(Button)`
+  background-color: ${constants.color} !important;
+  color: ${constants.navFontColor} !important;
+`;
 
 class ReservationFormModal extends React.Component {
   constructor(props) {
@@ -21,10 +28,27 @@ class ReservationFormModal extends React.Component {
     this.refresh = this.refresh.bind(this);
   }
 
-
   componentDidMount() {
     const elems = document.querySelectorAll('select');
     window.M.FormSelect.init(elems);
+  }
+
+  // create reservation
+  createHandler = (reservation) => {
+    // eslint-disable-next-line no-console
+    console.log({ reservation, type: 'create' });
+  }
+
+  // update reservation
+  updateHandler = (reservation) => {
+    // eslint-disable-next-line no-console
+    console.log({ reservation, type: 'update' });
+  }
+
+  // cancel reservation
+  cancelHandler = (reservationId) => {
+    // eslint-disable-next-line no-console
+    console.log(reservationId);
   }
 
   handleInputChange = (e) => {
@@ -69,9 +93,9 @@ class ReservationFormModal extends React.Component {
 
   render() {
     const { reservation } = this.state;
-    const { createHandler, updateHandler } = this.props;
+    // const { createHandler, updateHandler } = this.props;
     const isEdit = reservation.id > 0;
-    const submitHandler = isEdit ? updateHandler : createHandler;
+    const submitHandler = isEdit ? this.updateHandler : this.createHandler;
 
     const MODAL_ID = `RESERVATION_FORM_${reservation.id}`;
 
@@ -125,14 +149,23 @@ class ReservationFormModal extends React.Component {
 
         <ModalFooter>
 
+          {reservation.id > 0 ? (
+            <CancelButton
+              label="Cancel Reservation"
+              className="left red lighten-3 modal-close"
+              onClick={() => this.cancelHandler(reservation.id)}
+            />
+          ) : null}
+
           <Button
             className="modal-close"
-            label="Done"
+            label="Submit"
             onClick={() => submitHandler(reservation)}
           />
+
           <Button
             className="modal-close"
-            label="Cancel"
+            label="Close"
           />
 
         </ModalFooter>
@@ -141,15 +174,8 @@ class ReservationFormModal extends React.Component {
   }
 }
 
-ReservationFormModal.defaultProps = {
-  createHandler: () => {},
-  updateHandler: () => {},
-};
-
 ReservationFormModal.propTypes = {
   data: propTypes.shape(constants.reservationShape).isRequired,
-  createHandler: propTypes.func,
-  updateHandler: propTypes.func,
 };
 
 

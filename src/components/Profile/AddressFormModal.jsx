@@ -155,12 +155,12 @@ class AddressFormModal extends React.Component {
 
           <Button
             className="modal-close"
-            label="Done"
+            label="Submit"
             onClick={() => submitHandler(address)}
           />
           <Button
             className="modal-close"
-            label="Cancel"
+            label="Close"
           />
 
         </ModalFooter>

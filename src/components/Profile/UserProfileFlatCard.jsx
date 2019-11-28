@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import moment from 'moment';
 
 import FlatCard, { FlatCardSection } from '../Shared/FlatCard';
-import Spinner from '../Shared/Spinner';
+// import Spinner from '../Shared/Spinner';
 import UserProfileFormModal from './UserProfileFormModal';
 
 import constants from '../ReactConstants';
@@ -20,11 +20,12 @@ const UserProfileSection = (props) => {
         <div className="col m9 s12">
           <span>
             {value.toString()}
-            {
+            {/* {
               label !== 'Firstname'
                 ? (<i className="material-icons right">keyboard_arrow_right</i>)
                 : (<Spinner size="small" className="right" />)
-            }
+            } */}
+            <i className="material-icons right">keyboard_arrow_right</i>
           </span>
         </div>
       </div>

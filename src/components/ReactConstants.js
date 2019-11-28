@@ -76,6 +76,7 @@ class ReactConstants {
       user: propTypes.shape(this.userShape),
       address: propTypes.shape(this.addressShape),
       details: propTypes.string.isRequired,
+      adminNotes: propTypes.string.isRequired,
       reservationDate: propTypes.instanceOf(Date),
       status: propTypes.number, // 0 for unconfirmed, 1 for confirmed, 2 for done,
     };
@@ -105,6 +106,7 @@ class ReactConstants {
       reservationDate: new Date(),
       status: 0,
       details: '',
+      adminNotes: '',
       services: [],
     });
 

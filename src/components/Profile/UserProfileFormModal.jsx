@@ -84,12 +84,12 @@ class UserProfileFormModal extends React.Component {
         <ModalFooter>
           <Button
             className="modal-close"
-            label="Done"
+            label="Submit"
             onClick={() => updateHandler(user)}
           />
           <Button
             className="modal-close"
-            label="Cancel"
+            label="Close"
           />
         </ModalFooter>
       </Modal>

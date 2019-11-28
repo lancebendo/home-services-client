@@ -1,14 +1,11 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import Modal, { ModalContent, ModalFooter } from '../Shared/Modal';
 import Button from '../Shared/Button';
 import Input from '../Shared/Input';
 import Header from '../Shared/Header';
-
-import { createAddress, updateAddress } from '../../redux/actions';
 
 import constants from '../ReactConstants';
 
@@ -39,7 +36,7 @@ class AddressFormModal extends React.Component {
     const { data: address } = this.props;
     this.state = {
       address,
-      isSwitchedToDefault: false,
+      // isSwitchedToDefault: false,
     };
 
     this.switchToDefault = this.switchToDefault.bind(this);
@@ -51,7 +48,7 @@ class AddressFormModal extends React.Component {
   switchToDefault = () => {
     this.setState(prevState => ({
       address: { ...prevState.address, isDefault: true },
-      isSwitchedToDefault: true,
+      // isSwitchedToDefault: true,
     }));
   }
 
@@ -72,10 +69,10 @@ class AddressFormModal extends React.Component {
   }
 
   render() {
-    const { address, isSwitchedToDefault } = this.state;
-    const { create, update } = this.props;
+    const { address } = this.state;
+    const { createHandler, updateHandler } = this.props;
     const isEdit = address.id > 0;
-    const submitHandler = isEdit ? update : create;
+    const submitHandler = isEdit ? updateHandler : createHandler;
 
     const MODAL_ID = `ADDRESS_FORM_${address.id}`;
 
@@ -159,7 +156,7 @@ class AddressFormModal extends React.Component {
           <Button
             className="modal-close"
             label="Done"
-            onClick={() => submitHandler(address, isSwitchedToDefault)}
+            onClick={() => submitHandler(address)}
           />
           <Button
             className="modal-close"
@@ -174,20 +171,8 @@ class AddressFormModal extends React.Component {
 
 AddressFormModal.propTypes = {
   data: propTypes.shape(constants.addressShape).isRequired,
-  create: propTypes.func.isRequired,
-  update: propTypes.func.isRequired,
+  createHandler: propTypes.func.isRequired,
+  updateHandler: propTypes.func.isRequired,
 };
 
-const mapDispatchToProps = dispatch => ({
-  create: (address, isSwitchedToDefault, callback) => {
-    dispatch(createAddress(address, isSwitchedToDefault));
-    return callback;
-  },
-
-  update: (address, isSwitchedToDefault, callback) => {
-    dispatch(updateAddress(address, isSwitchedToDefault));
-    return callback;
-  },
-});
-
-export default connect(null, mapDispatchToProps)(AddressFormModal);
+export default AddressFormModal;

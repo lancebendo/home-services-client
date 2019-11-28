@@ -76,7 +76,10 @@ class Nav extends React.Component {
     return (
       <React.Fragment>
 
-        <ReservationFormModal data={constants.newReservation()} />
+        <ReservationFormModal
+          data={constants.newReservation()}
+          createHandler={reservation => console.log({ reservation })}
+        />
         <SideNav collapsible>
 
           <NavButton

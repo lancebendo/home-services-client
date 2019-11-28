@@ -6,21 +6,23 @@ const IconTag = styled.i`
   line-height: inherit !important;
 `;
 
-const Icon = ({ icon, isFontAwesome }) => {
+const Icon = ({ icon, isFontAwesome, className }) => {
   const I = !isFontAwesome
-    ? (<IconTag className="material-icons">{icon}</IconTag>)
-    : (<IconTag className={`fa fa-${icon}`} aria-hidden="true" />);
+    ? (<IconTag className={`${className} material-icons`}>{icon}</IconTag>)
+    : (<IconTag className={`fa fa-${icon} ${className}`} aria-hidden="true" />);
 
   return I;
 };
 
 Icon.defaultProps = {
   isFontAwesome: false,
+  className: '',
 };
 
 Icon.propTypes = {
   icon: propTypes.string.isRequired,
   isFontAwesome: propTypes.bool,
+  className: propTypes.string,
 };
 
 export default Icon;

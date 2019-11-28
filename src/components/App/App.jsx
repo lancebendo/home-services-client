@@ -11,9 +11,8 @@ import Management from '../Management';
 import Profile from '../Profile';
 
 // management components
-import Services from '../Services';
-import Addons from '../Addons';
-import Promos from '../Promos';
+import Services from '../Management/Services';
+import Promos from '../Management/Promos';
 
 // import TestComponent from '../TestComponent';
 import { PathNotFound } from '../ErrorHandler';
@@ -60,7 +59,6 @@ class App extends React.Component {
             ))}
 
             <Route path="/management/service/" exact component={Services} />
-            <Route path="/management/addon/" exact component={Addons} />
             <Route path="/management/promo/" exact component={Promos} />
             <Route component={PathNotFound} />
           </Switch>

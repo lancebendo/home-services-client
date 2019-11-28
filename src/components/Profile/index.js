@@ -1,3 +1,3 @@
-import Profile from './Profile.smart';
+import Profile from './Profile';
 
 export default Profile;

@@ -26,24 +26,14 @@ class Collection extends React.Component {
     state = { }
 
     render() {
-      const { isLoading, hasMoreData, children } = this.props;
+      const {
+        isLoading, hasMoreData, seeMoreHandler, children,
+      } = this.props;
       return (
         <Ul className="collection">
-          {/* <CollectionItem
-            title="Upcoming Reservation"
-            primaryContent="July 2, 2019 @ 12:00 PM - 12:30 PM"
-            secondaryContent="7860 Buena Park, CA"
-            primaryIcon="schedule"
-            secondaryIcon="schedule"
-            primaryIconBackground={constants.proceedFontColor}
-            onClick={() => {}}
-          />
-          <CollectionGroup name="Today">
-            <CollectionItem title="Upcoming Reservation" primaryIcon="grade" onClick={() => {}} />
-            <CollectionItem title="New Promo" primaryContent="hahaha" primaryIcon="grade" />
-          </CollectionGroup> */}
+
           {
-            children && children.length < 1
+            children || children.length > 0
               ? children
               : (<DefaultCollectionItem />)
           }
@@ -54,7 +44,7 @@ class Collection extends React.Component {
           }
           { !isLoading && hasMoreData
             // eslint-disable-next-line no-console
-            ? <CollectionSeeMore onClick={() => console.log('Dito yung load logic')} />
+            ? <CollectionSeeMore onClick={seeMoreHandler} />
             : null
         }
         </Ul>
@@ -65,12 +55,14 @@ class Collection extends React.Component {
 Collection.defaultProps = {
   isLoading: false,
   hasMoreData: false,
+  seeMoreHandler: () => {},
   children: null,
 };
 
 Collection.propTypes = {
   isLoading: propTypes.bool,
   hasMoreData: propTypes.bool,
+  seeMoreHandler: propTypes.func,
   children: propTypes.node,
 };
 

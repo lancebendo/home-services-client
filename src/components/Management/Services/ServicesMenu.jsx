@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { BackButton } from '../Shared/Button';
+import { BackButton } from '../../Shared/Button';
 
 const ExtendedHeaderRoot = document.getElementById('nav-extended-content-root');
 
-class PromosMenu extends React.Component {
+class ServiceMenu extends React.Component {
   constructor(props) {
     super(props);
     this.element = document.createElement('div');
@@ -18,11 +18,13 @@ class PromosMenu extends React.Component {
     render() {
       return ReactDOM.createPortal(
         (
-          <BackButton link="/management/" />
+          <React.Fragment>
+            <BackButton link="/management/" />
+          </React.Fragment>
         ),
         this.element,
       );
     }
 }
 
-export default PromosMenu;
+export default ServiceMenu;

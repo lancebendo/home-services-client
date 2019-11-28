@@ -1,13 +1,11 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 import Modal, { ModalContent, ModalFooter } from '../Shared/Modal';
 import Button from '../Shared/Button';
 import Input from '../Shared/Input';
 import Header from '../Shared/Header';
 
-import { updateUser } from '../../redux/actions';
 
 import constants from '../ReactConstants';
 
@@ -59,7 +57,7 @@ class UserProfileFormModal extends React.Component {
 
   render() {
     const { user } = this.state;
-    const { fieldToEdit, update } = this.props;
+    const { fieldToEdit, updateHandler } = this.props;
     const MODAL_ID = `USER_FORM_${user.id}_${fieldToEdit}`;
     return (
       <Modal
@@ -87,7 +85,7 @@ class UserProfileFormModal extends React.Component {
           <Button
             className="modal-close"
             label="Done"
-            onClick={() => update(user)}
+            onClick={() => updateHandler(user)}
           />
           <Button
             className="modal-close"
@@ -102,11 +100,7 @@ class UserProfileFormModal extends React.Component {
 UserProfileFormModal.propTypes = {
   data: propTypes.shape(constants.userShape).isRequired,
   fieldToEdit: propTypes.string.isRequired,
-  update: propTypes.func.isRequired,
+  updateHandler: propTypes.func.isRequired,
 };
 
-const mapDispatchToProps = dispatch => ({
-  update: user => dispatch(updateUser(user)),
-});
-
-export default connect(null, mapDispatchToProps)(UserProfileFormModal);
+export default UserProfileFormModal;

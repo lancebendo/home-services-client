@@ -23,6 +23,8 @@ const SecondaryContentP = styled.p`
 
 const CollectionItem = (props) => {
   const {
+    isModalTrigger,
+    dataTarget,
     title,
     primaryContent,
     secondaryContent,
@@ -32,16 +34,18 @@ const CollectionItem = (props) => {
     onClick,
   } = props;
 
-  let classes = 'collection-item avatar';
-  classes = onClick ? `${classes} waves-effect waves-block` : classes;
-  const FinalLi = onClick ? Li : styled.li``;
+  const isClickable = onClick || isModalTrigger;
 
+  let classes = 'collection-item avatar';
+  classes = isClickable ? `${classes} ${isModalTrigger ? 'modal-trigger' : ''} waves-effect waves-block` : classes;
+
+  const FinalLi = isClickable ? Li : styled.li``;
   const PrimaryI = primaryIconBackground
     ? styled.i`background-color: ${primaryIconBackground} !important;`
     : styled.i``;
 
   return (
-    <FinalLi className={classes}>
+    <FinalLi className={classes} onClick={onClick || null} data-target={dataTarget}>
       <PrimaryI className="material-icons circle">{primaryIcon}</PrimaryI>
       <span className="title">{title}</span>
       { primaryContent ? <PrimaryContentP>{primaryContent}</PrimaryContentP> : null }
@@ -57,6 +61,8 @@ const CollectionItem = (props) => {
 };
 
 CollectionItem.defaultProps = {
+  isModalTrigger: false,
+  dataTarget: '',
   primaryContent: null,
   secondaryContent: null,
   primaryIconBackground: null,
@@ -65,6 +71,8 @@ CollectionItem.defaultProps = {
 };
 
 CollectionItem.propTypes = {
+  isModalTrigger: propTypes.bool,
+  dataTarget: propTypes.string,
   title: propTypes.string.isRequired,
   primaryContent: propTypes.string,
   secondaryContent: propTypes.string,

@@ -1,13 +1,10 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 import Modal, { ModalContent, ModalFooter } from '../Shared/Modal';
 import Button from '../Shared/Button';
 import Input from '../Shared/Input';
 import Header from '../Shared/Header';
-
-import { createReservation, updateReservation } from '../../redux/actions';
 
 import constants from '../ReactConstants';
 
@@ -24,9 +21,22 @@ class ReservationFormModal extends React.Component {
     this.refresh = this.refresh.bind(this);
   }
 
+
+  componentDidMount() {
+    const elems = document.querySelectorAll('select');
+    window.M.FormSelect.init(elems);
+  }
+
   handleInputChange = (e) => {
-    const value = e.target.value;
+    let value = e.target.value;
     const name = e.target.name;
+
+    if (name === 'services') {
+      const elem = document.getElementsByName('services')[0];
+      const instance = window.M.FormSelect.getInstance(elem);
+      value = instance.getSelectedValues();
+      console.log(value);
+    }
 
     this.setState(prevState => ({
       reservation: { ...prevState.reservation, [name]: value },
@@ -60,9 +70,9 @@ class ReservationFormModal extends React.Component {
 
   render() {
     const { reservation } = this.state;
-    const { create, update } = this.props;
+    const { createHandler, updateHandler } = this.props;
     const isEdit = reservation.id > 0;
-    const submitHandler = isEdit ? update : create;
+    const submitHandler = isEdit ? updateHandler : createHandler;
 
     const MODAL_ID = `RESERVATION_FORM_${reservation.id}`;
 
@@ -96,6 +106,14 @@ class ReservationFormModal extends React.Component {
             label="Name of Service"
           />
 
+          <select multiple name="services" value={reservation.services} onChange={this.handleInputChange}>
+            <option value="" disabled>Choose service(s)</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+          </select>
+          <label>Materialize Multiple Select</label>
+
         </ModalContent>
 
         <ModalFooter>
@@ -116,22 +134,16 @@ class ReservationFormModal extends React.Component {
   }
 }
 
-ReservationFormModal.propTypes = {
-  data: propTypes.shape(constants.reservationShape).isRequired,
-  create: propTypes.func.isRequired,
-  update: propTypes.func.isRequired,
+ReservationFormModal.defaultProps = {
+  createHandler: () => {},
+  updateHandler: () => {},
 };
 
-const mapDispatchToProps = dispatch => ({
-  create: (reservation, callback) => {
-    dispatch(createReservation(reservation));
-    return callback;
-  },
+ReservationFormModal.propTypes = {
+  data: propTypes.shape(constants.reservationShape).isRequired,
+  createHandler: propTypes.func,
+  updateHandler: propTypes.func,
+};
 
-  update: (reservation, callback) => {
-    dispatch(updateReservation(reservation));
-    return callback;
-  },
-});
 
-export default connect(null, mapDispatchToProps)(ReservationFormModal);
+export default ReservationFormModal;

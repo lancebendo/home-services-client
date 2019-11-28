@@ -56,12 +56,14 @@ class ReactConstants {
 
     // prop type shapes
     this.userShape = {
+      id: propTypes.number.isRequired,
       firstname: propTypes.string.isRequired,
       lastname: propTypes.string.isRequired,
       birthday: propTypes.instanceOf(Date).isRequired,
     };
 
     this.addressShape = {
+      id: propTypes.number.isRequired,
       houseNumber: propTypes.string.isRequired,
       street: propTypes.string.isRequired,
       subdivision: propTypes.string.isRequired,
@@ -70,11 +72,19 @@ class ReactConstants {
     };
 
     this.reservationShape = {
+      id: propTypes.number.isRequired,
       user: propTypes.shape(this.userShape),
       address: propTypes.shape(this.addressShape),
       details: propTypes.string.isRequired,
       reservationDate: propTypes.instanceOf(Date),
       status: propTypes.number, // 0 for unconfirmed, 1 for confirmed, 2 for done,
+    };
+
+    this.serviceShape = {
+      id: propTypes.number.isRequired,
+      name: propTypes.string.isRequired,
+      description: propTypes.string.isRequired,
+      rate: propTypes.number.isRequired,
     };
 
 
@@ -95,6 +105,14 @@ class ReactConstants {
       reservationDate: new Date(),
       status: 0,
       details: '',
+      services: [],
+    });
+
+    this.newService = () => ({
+      id: 0,
+      name: '',
+      description: '',
+      rate: 0.00,
     });
   }
 }

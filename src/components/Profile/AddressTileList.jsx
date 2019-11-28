@@ -1,7 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
 
 import FlatCard, { FlatCardContent, FlatCardSection } from '../Shared/FlatCard';
 import TileList, {
@@ -10,8 +9,6 @@ import TileList, {
 import Button from '../Shared/Button';
 import AddressFormModal from './AddressFormModal';
 import YesNoModal from '../Shared/Prompts';
-
-import { deleteAddress } from '../../redux/actions';
 
 import constants from '../ReactConstants';
 
@@ -23,7 +20,9 @@ const DefaultLabel = styled.span`
 
 
 const AddressTileList = (props) => {
-  const { addresses, deleteData } = props;
+  const {
+    addresses, createHandler, updateHandler, deleteHandler,
+  } = props;
 
   return (
     <FlatCard headerIcon="location_on" header="Addresses">
@@ -37,18 +36,26 @@ const AddressTileList = (props) => {
               data-target={`ADDRESS_FORM_${constants.newAddress().id}`}
             />
 
-            <AddressFormModal data={constants.newAddress()} />
+            <AddressFormModal
+              data={constants.newAddress()}
+              createHandler={createHandler}
+              updateHandler={updateHandler}
+            />
 
             {addresses.map((address, index) => (
               <React.Fragment key={`ADDRESS_${address.id}`}>
 
-                <AddressFormModal data={address} />
+                <AddressFormModal
+                  data={address}
+                  createHandler={createHandler}
+                  updateHandler={updateHandler}
+                />
 
                 <YesNoModal
                   title="Delete Address"
                   description="Are you sure you want to proceed?"
                   id={`ADDRESS_DELETE_${address.id}`}
-                  onClickYes={() => deleteData(address.id)}
+                  onClickYes={() => deleteHandler(address.id)}
                 />
 
                 <Tile key={address.id}>
@@ -88,16 +95,10 @@ const AddressTileList = (props) => {
 };
 
 AddressTileList.propTypes = {
-  deleteData: propTypes.func.isRequired,
   addresses: propTypes.arrayOf(propTypes.shape(constants.addressShape)).isRequired,
+  createHandler: propTypes.func.isRequired,
+  updateHandler: propTypes.func.isRequired,
+  deleteHandler: propTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  addresses: state.address.collection,
-});
-
-const mapDispatchToProps = dispatch => ({
-  deleteData: addressId => dispatch(deleteAddress(addressId)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(AddressTileList);
+export default AddressTileList;

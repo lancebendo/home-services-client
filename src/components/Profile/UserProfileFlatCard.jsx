@@ -42,18 +42,18 @@ UserProfileSection.propTypes = {
 };
 
 const UserProfileFlatCard = (props) => {
-  const { user } = props;
+  const { user, updateHandler } = props;
 
   return (
     <FlatCard {...props} headerIcon="person_outline" header="User Profile">
       <UserProfileSection className="modal-trigger" data-target={`USER_FORM_${user.id}_firstname`} label="Firstname" value={user.firstname} />
-      <UserProfileFormModal key={`USER_FORM_${user.id}_firstname`} fieldToEdit="firstname" data={user} />
+      <UserProfileFormModal updateHandler={updateHandler} key={`USER_FORM_${user.id}_firstname`} fieldToEdit="firstname" data={user} />
 
       <UserProfileSection className="modal-trigger" data-target={`USER_FORM_${user.id}_lastname`} label="Lastname" value={user.lastname} />
-      <UserProfileFormModal key={`USER_FORM_${user.id}_lastname`} fieldToEdit="lastname" data={user} />
+      <UserProfileFormModal updateHandler={updateHandler} key={`USER_FORM_${user.id}_lastname`} fieldToEdit="lastname" data={user} />
 
       <UserProfileSection isLast className="modal-trigger" data-target={`USER_FORM_${user.id}_birthday`} label="Birthday" value={moment(user.birthday).format(constants.dateFormat)} />
-      <UserProfileFormModal key={`USER_FORM_${user.id}_birthday`} fieldToEdit="birthday" data={user} />
+      <UserProfileFormModal updateHandler={updateHandler} key={`USER_FORM_${user.id}_birthday`} fieldToEdit="birthday" data={user} />
     </FlatCard>
   );
 };
@@ -61,6 +61,7 @@ const UserProfileFlatCard = (props) => {
 
 UserProfileFlatCard.propTypes = {
   user: propTypes.shape(constants.userShape).isRequired,
+  updateHandler: propTypes.func.isRequired,
 };
 
 

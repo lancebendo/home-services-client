@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Collection from '../Shared/Collection';
-import AddonsMenu from './AddonsMenu';
+import Collection from '../../Shared/Collection';
+import PromosMenu from './PromosMenu';
 
-class Addons extends React.Component {
+class Promos extends React.Component {
   constructor(props) {
     super(props);
     this.state = { };
@@ -12,11 +12,11 @@ class Addons extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <AddonsMenu />
+        <PromosMenu />
 
         <main>
           <div className="section">
-            <h5>Manage Addons</h5>
+            <h5>Manage Promos</h5>
             <Collection />
           </div>
         </main>
@@ -25,4 +25,4 @@ class Addons extends React.Component {
   }
 }
 
-export default Addons;
+export default Promos;

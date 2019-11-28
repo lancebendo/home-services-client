@@ -1,14 +1,12 @@
 import React from 'react';
 
-import ServiceDomainCard from './ServiceDomainCard';
-import AddonDomainCard from './AddonDomainCard';
-import PromoDomainCard from './PromoDomainCard';
+import ServiceDomainCard from './Services/ServiceDomainCard';
+// import PromoDomainCard from './Promos/PromoDomainCard';
 
 const Management = () => (
   <main>
     <ServiceDomainCard className="row" />
-    <AddonDomainCard className="row" />
-    <PromoDomainCard className="row" />
+    {/* <PromoDomainCard className="row" /> */}
   </main>
 );
 

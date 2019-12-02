@@ -90,6 +90,14 @@ class ReactConstants {
 
 
     // object factories
+
+    this.newCustomer = () => ({
+      id: 0,
+      firstname: '',
+      lastname: '',
+      birthday: new Date(),
+    });
+
     this.newAddress = () => ({
       id: 0,
       houseNumber: '',

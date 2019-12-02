@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+// import axios from 'axios';
+import api from '../../../api';
 
 import Collection, { CollectionItem } from '../../Shared/Collection';
-import Button from '../../Shared/Button';
-import ServicesMenu from './ServicesMenu';
+import Button, { BackButton } from '../../Shared/Button';
 import ServiceFormModal from './ServiceFormModal';
 
 import constants from '../../ReactConstants';
@@ -16,33 +17,48 @@ const DefaultButton = styled(Button)`
 class Services extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { };
+    this.state = {
+      services: [],
+    };
+
+    this.load = this.load.bind(this);
+    this.load();
   }
 
   // load
+  load = () => {
+    api.get('service')
+      .then((res) => {
+        this.setState({
+          services: res.data,
+        });
+      });
+  }
 
   // serviceCreate
   createService = (service) => {
-    // eslint-disable-next-line no-console
-    console.log({ service });
+    api.post('service', service)
+      .then(() => this.load());
   }
 
   // serviceUpdate
   updateService = (service) => {
-    // eslint-disable-next-line no-console
-    console.log({ service });
+    api.put(`service/${service.id}`, service)
+      .then(() => this.load());
   }
 
   // addressService
   deleteService = (serviceId) => {
-    // eslint-disable-next-line no-console
-    console.log(`delete ${serviceId}`);
+    api.delete(`service/${serviceId}`)
+      .then(() => this.load());
   }
 
   render() {
+    const { services } = this.state;
+
     return (
       <React.Fragment>
-        <ServicesMenu />
+        <BackButton link="/management/" />
 
         <main>
 
@@ -67,25 +83,31 @@ class Services extends React.Component {
             for loop for services here.
             */}
 
-              <CollectionItem
-                title="Upcoming Reservation"
-                primaryContent="July 2, 2019 @ 12:00 PM - 12:30 PM"
-                secondaryContent="7860 Buena Park, CA"
-                primaryIcon="schedule"
-                secondaryIcon="schedule"
-                primaryIconBackground={constants.proceedFontColor}
-                isModalTrigger
-                dataTarget={`SERVICE_FORM_${constants.newService().id}`}
-              />
+              {
+              services.map(service => (
+                <React.Fragment>
 
-              <CollectionItem
-                title="Upcoming Reservation"
-                primaryContent="July 2, 2019 @ 12:00 PM - 12:30 PM"
-                secondaryContent="7860 Buena Park, CA"
-                primaryIcon="schedule"
-                secondaryIcon="schedule"
-                primaryIconBackground={constants.proceedFontColor}
-              />
+                  <CollectionItem
+                    key={service.id}
+                    title={service.name}
+                    primaryContent={service.description}
+                    secondaryContent={`$${service.rate}`}
+                    primaryIcon="schedule"
+                    secondaryIcon="schedule"
+                    primaryIconBackground={constants.proceedFontColor}
+                    isModalTrigger
+                    dataTarget={`SERVICE_FORM_${service.id}`}
+                  />
+
+                  <ServiceFormModal
+                    data={service}
+                    updateHandler={this.updateService}
+                  />
+
+                </React.Fragment>
+              ))
+            }
+
             </Collection>
           </div>
         </main>

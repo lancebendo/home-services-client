@@ -8,11 +8,12 @@ import Header from '../Header';
 import Nav from '../Nav';
 import Dashboard from '../Dashboard';
 import Management from '../Management';
-import Profile from '../Profile';
+// import Profile from '../Profile';
 
 // management components
 import Services from '../Management/Services';
-import Promos from '../Management/Promos';
+import Customers, { Profile } from '../Management/Customers';
+// import Promos from '../Management/Promos';
 
 // import TestComponent from '../TestComponent';
 import { PathNotFound } from '../ErrorHandler';
@@ -27,9 +28,9 @@ const sidenavPaths = [
   {
     name: 'Management', path: '/management/', icon: 'supervisor_account', component: Management,
   },
-  {
-    name: 'My Profile', path: '/profile/', icon: 'person', component: Profile,
-  },
+  // {
+  //   name: 'My Profile', path: '/profile/', icon: 'person', component: Profiles,
+  // },
 ];
 
 class App extends React.Component {
@@ -59,7 +60,8 @@ class App extends React.Component {
             ))}
 
             <Route path="/management/service/" exact component={Services} />
-            <Route path="/management/promo/" exact component={Promos} />
+            <Route path="/management/customer/" exact component={Customers} />
+            <Route path="/management/customer/:id" exact component={Profile} />
             <Route component={PathNotFound} />
           </Switch>
 

@@ -33,9 +33,7 @@ class Collection extends React.Component {
         <Ul className="collection">
 
           {
-            children || children.length > 0
-              ? children
-              : (<DefaultCollectionItem />)
+            children && children.length > 0 ? children : (<DefaultCollectionItem />)
           }
 
           { isLoading

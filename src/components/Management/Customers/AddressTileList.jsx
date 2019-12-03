@@ -60,11 +60,9 @@ const AddressTileList = (props) => {
 
                 <Tile key={address.id}>
                   <TileContent>
-                    <span>{`${address.houseNumber} ${address.street}`}</span>
+                    <span>{`${address.addressLine1} ${address.addressLine2}`}</span>
                     <br />
-                    <span>{address.subdivision}</span>
-                    <br />
-                    <span>{`${address.city}, ${address.province}`}</span>
+                    <span>{`${address.city}, ${address.state}`}</span>
                     <br />
                     <DefaultLabel>{address.isDefault ? '[Default Address]' : <br />}</DefaultLabel>
                   </TileContent>

@@ -22,15 +22,29 @@ class ReservationFormModal extends React.Component {
     const { data: reservation } = this.props;
     this.state = {
       reservation,
+      // services: [],
+      // customers: [],
+      // addresses: [],
+      // customerIsSelected: false,
+      // canSubmit: false,
     };
+
+    this.load = this.load.bind(this);
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.refresh = this.refresh.bind(this);
   }
 
   componentDidMount() {
+    this.load();
+
     const elems = document.querySelectorAll('select');
     window.M.FormSelect.init(elems);
+  }
+
+  // load
+  load = () => {
+
   }
 
   // create reservation
@@ -71,7 +85,7 @@ class ReservationFormModal extends React.Component {
     this.setState({ reservation });
 
     const context = this;
-    const element = document.getElementById(constants.getElementId('reservation', reservation.id, 'reservationDate'));
+    const element = document.getElementById(constants.getElementId('reservation', reservation.id, 'date'));
     const instance = window.M.Datepicker.init(element, {
       container: document.getElementById('root'),
       format: constants.dateFormat.toLowerCase(),
@@ -80,11 +94,11 @@ class ReservationFormModal extends React.Component {
       yearRange: 30,
       autoClose: true,
       onSelect(date) {
-        context.handleInputChange({ target: { value: date, name: 'reservationDate' } });
+        context.handleInputChange({ target: { value: date, name: 'date' } });
       },
     });
 
-    instance.setDate(reservation.reservationDate);
+    instance.setDate(reservation.date);
 
     if (reservation.id > 0) {
       window.M.updateTextFields();
@@ -107,14 +121,56 @@ class ReservationFormModal extends React.Component {
              Reservation
           </Header>
 
+          {/*
+        yung selected, depende lang kung null or walang value yung assigned field
+*/}
+          <select
+            name="customer"
+            value={reservation.customer ? reservation.customer : '0'}
+            onChange={this.handleInputChange}
+          >
+            <option value="0" disabled>Choose customer</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+          </select>
+          <label>Materialize Multiple Select</label>
+
+          <select
+            disabled
+            name="address"
+            value={reservation.address ? reservation.address : '0'}
+            onChange={this.handleInputChange}
+          >
+            <option value="0" disabled>Choose address</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+          </select>
+          <label>Materialize Multiple Select</label>
+
+          <select
+            multiple
+            name="services"
+            value={reservation.services.length ? reservation.services : '0'}
+            onChange={this.handleInputChange}
+          >
+            <option value="0" disabled>Choose service(s)</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+          </select>
+          <label>Materialize Multiple Select</label>
+
+
           <Input
             _id={reservation.id}
             _type="reservation"
             type="text"
             className="validate"
             onChange={this.handleInputChange}
-            value={reservation.reservationDate}
-            field="reservationDate"
+            value={reservation.date}
+            field="date"
             label="Date of Reservation"
           />
 
@@ -124,26 +180,10 @@ class ReservationFormModal extends React.Component {
             type="text"
             className="validate"
             onChange={this.handleInputChange}
-            value={reservation.details}
-            field="details"
-            label="Name of Service"
+            value={reservation.additionalDetails}
+            field="additionalDetails"
+            label="Additional details"
           />
-          {/*
-          ano plano dito sa select
-
-          select is reservation.services
-
-          yung options ay loop of available services tapos value is if it's in reservation services.
-
-          */}
-
-          <select multiple name="services" value={reservation.services} onChange={this.handleInputChange}>
-            <option value="" disabled>Choose service(s)</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
-          </select>
-          <label>Materialize Multiple Select</label>
 
         </ModalContent>
 

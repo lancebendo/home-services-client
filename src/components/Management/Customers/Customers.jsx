@@ -28,31 +28,19 @@ class Customers extends React.Component {
   }
 
   // load
-load = () => {
-  api.get('customer')
-    .then((res) => {
-      this.setState({
-        customers: res.data,
+  load = () => {
+    api.get('customer')
+      .then((res) => {
+        this.setState({
+          customers: res.data,
+        });
       });
-    });
-}
+  }
 
   // CustomerCreate
   createCustomer = (customer) => {
     api.post('customer', customer)
       .then(() => this.load());
-  }
-
-  // CustomerUpdate
-  updateCustomer = (Customer) => {
-    // eslint-disable-next-line no-console
-    console.log({ Customer });
-  }
-
-  // addressCustomer
-  deleteCustomer = (CustomerId) => {
-    // eslint-disable-next-line no-console
-    console.log(`delete ${CustomerId}`);
   }
 
   render() {

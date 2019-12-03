@@ -64,20 +64,19 @@ class ReactConstants {
 
     this.addressShape = {
       id: propTypes.number.isRequired,
-      houseNumber: propTypes.string.isRequired,
-      street: propTypes.string.isRequired,
-      subdivision: propTypes.string.isRequired,
+      addressLine1: propTypes.string.isRequired,
+      addressLine2: propTypes.string.isRequired,
       city: propTypes.string.isRequired,
-      province: propTypes.string.isRequired,
+      state: propTypes.string.isRequired,
     };
 
     this.reservationShape = {
       id: propTypes.number.isRequired,
-      user: propTypes.shape(this.userShape),
+      customer: propTypes.shape(this.userShape),
       address: propTypes.shape(this.addressShape),
-      details: propTypes.string.isRequired,
+      additionalDetails: propTypes.string.isRequired,
       adminNotes: propTypes.string.isRequired,
-      reservationDate: propTypes.instanceOf(Date),
+      date: propTypes.instanceOf(Date),
       status: propTypes.number, // 0 for unconfirmed, 1 for confirmed, 2 for done,
     };
 
@@ -100,20 +99,19 @@ class ReactConstants {
 
     this.newAddress = () => ({
       id: 0,
-      houseNumber: '',
-      street: '',
-      subdivision: '',
+      addressLine1: '',
+      addressLine2: '',
       city: '',
-      province: '',
+      state: '',
     });
 
     this.newReservation = () => ({
       id: 0,
-      user: null,
+      customer: null,
       address: null,
-      reservationDate: new Date(),
+      date: new Date(),
       status: 0,
-      details: '',
+      additionalDetails: '',
       adminNotes: '',
       services: [],
     });

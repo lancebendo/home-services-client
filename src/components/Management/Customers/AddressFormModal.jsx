@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
 import Modal, { ModalContent, ModalFooter } from '../../Shared/Modal';
 import Button from '../../Shared/Button';
@@ -9,24 +9,24 @@ import Header from '../../Shared/Header';
 
 import constants from '../../ReactConstants';
 
-const DefaultLabel = styled.div`
-  font-size: ${constants.secondaryDescFontSize};
-  color: ${constants.descriptionFontColor};
-  padding-left: 20px;
-  float: left !important;
-  display: table;
-  height: 100%;
+// const DefaultLabel = styled.div`
+//   font-size: ${constants.secondaryDescFontSize};
+//   color: ${constants.descriptionFontColor};
+//   padding-left: 20px;
+//   float: left !important;
+//   display: table;
+//   height: 100%;
 
-  > * {
-    display: table-cell;
-    vertical-align: middle;
-  }
-`;
+//   > * {
+//     display: table-cell;
+//     vertical-align: middle;
+//   }
+// `;
 
-const DefaultButton = styled(Button)`
-  background-color: ${constants.primaryColor} !important;
-  color: ${constants.navFontColor} !important;
-`;
+// const DefaultButton = styled(Button)`
+//   background-color: ${constants.primaryColor} !important;
+//   color: ${constants.navFontColor} !important;
+// `;
 
 
 class AddressFormModal extends React.Component {
@@ -90,9 +90,9 @@ class AddressFormModal extends React.Component {
             type="text"
             className="validate"
             onChange={this.handleInputChange}
-            value={address.houseNumber}
-            field="houseNumber"
-            label="House/Unit Number"
+            value={address.addressLine1}
+            field="addressLine1"
+            label="Street Address line 1"
           />
 
           <Input
@@ -101,20 +101,9 @@ class AddressFormModal extends React.Component {
             type="text"
             className="validate"
             onChange={this.handleInputChange}
-            value={address.street}
-            field="street"
-            label="Street"
-          />
-
-          <Input
-            _id={address.id}
-            _type="address"
-            type="text"
-            className="validate"
-            onChange={this.handleInputChange}
-            value={address.subdivision}
-            field="subdivision"
-            label="Subdivision"
+            value={address.addressLine2}
+            field="addressLine2"
+            label="Street Address line 2"
           />
 
           <Input
@@ -134,14 +123,14 @@ class AddressFormModal extends React.Component {
             type="text"
             className="validate"
             onChange={this.handleInputChange}
-            value={address.province}
-            field="province"
-            label="Province"
+            value={address.state}
+            field="state"
+            label="State"
           />
         </ModalContent>
 
         <ModalFooter>
-          {address.isDefault ? (
+          {/* {address.isDefault ? (
             <DefaultLabel>
               {address.isDefault ? (<span>DEFAULT ADDRESS</span>) : <br />}
             </DefaultLabel>
@@ -151,7 +140,7 @@ class AddressFormModal extends React.Component {
               className="left"
               onClick={this.switchToDefault}
             />
-          )}
+          )} */}
 
           <Button
             className="modal-close"

@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-// import styled from 'styled-components';
+import styled from 'styled-components';
 
 import Modal, { ModalContent, ModalFooter } from '../../Shared/Modal';
 import Button from '../../Shared/Button';
@@ -28,6 +28,10 @@ import constants from '../../ReactConstants';
 //   color: ${constants.navFontColor} !important;
 // `;
 
+const CancelButton = styled(Button)`
+  background-color: ${constants.color} !important;
+  color: ${constants.navFontColor} !important;
+`;
 
 class ServiceFormModal extends React.Component {
   constructor(props) {
@@ -64,7 +68,7 @@ class ServiceFormModal extends React.Component {
 
   render() {
     const { service } = this.state;
-    const { createHandler, updateHandler } = this.props;
+    const { createHandler, updateHandler, deleteHandler } = this.props;
     const isEdit = service.id > 0;
     const submitHandler = isEdit ? updateHandler : createHandler;
 
@@ -120,6 +124,14 @@ class ServiceFormModal extends React.Component {
 
         <ModalFooter>
 
+          {service.id > 0 ? (
+            <CancelButton
+              label="Delete"
+              className="left red lighten-3 modal-close"
+              onClick={() => deleteHandler(service.id)}
+            />
+          ) : null}
+
           <Button
             className="modal-close"
             label="Submit"
@@ -139,12 +151,14 @@ class ServiceFormModal extends React.Component {
 ServiceFormModal.defaultProps = {
   createHandler: () => {},
   updateHandler: () => {},
+  deleteHandler: () => {},
 };
 
 ServiceFormModal.propTypes = {
   data: propTypes.shape(constants.serviceShape).isRequired,
   createHandler: propTypes.func,
   updateHandler: propTypes.func,
+  deleteHandler: propTypes.func,
 };
 
 export default ServiceFormModal;

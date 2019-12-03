@@ -22,6 +22,9 @@ class Services extends React.Component {
     };
 
     this.load = this.load.bind(this);
+  }
+
+  componentDidMount() {
     this.load();
   }
 
@@ -102,6 +105,7 @@ class Services extends React.Component {
                   <ServiceFormModal
                     data={service}
                     updateHandler={this.updateService}
+                    deleteHandler={this.deleteService}
                   />
 
                 </React.Fragment>

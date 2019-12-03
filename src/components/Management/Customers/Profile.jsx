@@ -8,7 +8,8 @@ import AddressTileList from './AddressTileList';
 import constants from '../../ReactConstants';
 import api from '../../../api';
 // import { createAddress, updateAddress, deleteAddress } from '../../redux/actions';
-import { BackButton } from '../../Shared/Button';
+import Button, { BackButton } from '../../Shared/Button';
+import { PathNotFound } from '../../ErrorHandler';
 
 class Profile extends Component {
   constructor(props) {
@@ -18,10 +19,10 @@ class Profile extends Component {
     this.state = {
       customer: constants.newCustomer(),
       addresses: [],
+      isLoading: true,
     };
 
     this.load = this.load.bind(this);
-    this.load();
 
     this.updateCustomer = this.updateCustomer.bind(this);
     this.deleteCustomer = this.deleteCustomer.bind(this);
@@ -31,52 +32,90 @@ class Profile extends Component {
     this.deleteAddress = this.deleteAddress.bind(this);
   }
 
+  componentDidMount() {
+    this.load();
+  }
+
   // load
 load = () => {
+  this.setState({ isLoading: true });
+
   // eslint-disable-next-line react/destructuring-assignment
   const { id } = this.props.match.params;
   api.get(`customer/${id}`)
-    .then((res) => {
-      this.setState({
-        customer: res.data,
-      });
-    });
+    .then((resCustomer) => {
+      // load address muna
+      api.get(`customer/${id}/address`)
+        .then((resAddress) => {
+          this.setState({
+            customer: resCustomer.data,
+            addresses: resAddress.data,
+            isLoading: false,
+          });
+        }).catch(() => this.setState({ isLoading: false }));
+    }).catch(() => this.setState({ isLoading: false }));
 }
 
   // userUpdate
   updateCustomer = (customer) => {
-    // eslint-disable-next-line no-console
-    console.log(`update ${customer.id}`);
+    api.put(`customer/${customer.id}`, customer)
+      .then(() => this.load());
   }
 
-  deleteCustomer = (customer) => {
-    // eslint-disable-next-line no-console
-    console.log(`delete ${customer.id}`);
+  deleteCustomer = (customerId) => {
+    const { history } = this.props;
+
+    api.delete(`customer/${customerId}`)
+      .then(() => history.push('/management/customer/'));
   }
 
   // addressCreate
   createAddress = (address) => {
-    // eslint-disable-next-line no-console
-    console.log(`create ${address.id}`);
+    const { customer } = this.state;
+
+    api.post(`customer/${customer.id}/address`, address)
+      .then(() => this.load());
   }
 
   // addressUpdate
   updateAddress = (address) => {
-    // eslint-disable-next-line no-console
-    console.log(`update ${address.id}`);
+    console.log('haha');
+    const { customer } = this.state;
+
+    api.put(`customer/${customer.id}/address/${address.id}`, address)
+      .then(() => this.load());
   }
 
   // addressDelete
   deleteAddress = (addressId) => {
-    // eslint-disable-next-line no-console
-    console.log(`delete ${addressId}`);
+    const { customer } = this.state;
+
+    api.delete(`customer/${customer.id}/address/${addressId}`)
+      .then(() => this.load());
   }
 
   render() {
-    const { customer, addresses } = this.state;
+    const { customer, addresses, isLoading } = this.state;
+
+    // if customer is not found, display not found
+    if (isLoading) return (<div />);
+
+    if (customer.id < 1) {
+      return (<PathNotFound />);
+    }
+
     return (
       <main>
         <BackButton link="/management/customer/" />
+
+        <div className="row">
+          <Button
+            label="Delete Customer"
+            className="right red lighten-3 modal-close"
+            onClick={() => this.deleteCustomer(customer.id)}
+          />
+        </div>
+
         <UserProfileFlatCard className="row" user={customer} updateHandler={this.updateCustomer} />
 
         <AddressTileList

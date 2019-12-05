@@ -88,10 +88,9 @@ class Services extends React.Component {
 
               {
               services.map(service => (
-                <React.Fragment>
+                <React.Fragment key={service.id}>
 
                   <CollectionItem
-                    key={service.id}
                     title={service.name}
                     primaryContent={service.description}
                     secondaryContent={`$${service.rate}`}

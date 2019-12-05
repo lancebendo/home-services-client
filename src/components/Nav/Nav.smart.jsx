@@ -7,6 +7,7 @@ import NavButton from './NavButton.dumb';
 import NavLink from './NavLink.dumb';
 import ReservationFormModal from '../Reservation';
 
+import api from '../../api';
 import constants from '../ReactConstants';
 import { strUtils } from '../../utilities';
 
@@ -22,6 +23,8 @@ class Nav extends React.Component {
     this.isSelected = this.isSelected.bind(this);
     this.onNavChange = this.onNavChange.bind(this);
     this.onLogout = this.onLogout.bind(this);
+
+    this.createReservation = this.createReservation.bind(this);
   }
 
 
@@ -34,6 +37,10 @@ class Nav extends React.Component {
     return currentPath === path;
   }
 
+  createReservation = (reservation) => {
+    api.post('reservation', reservation)
+      .then(() => window.location.reload());
+  }
 
   onNavChange = (e, sender) => this.setState({ currentPath: sender.path });
 
@@ -78,6 +85,7 @@ class Nav extends React.Component {
 
         <ReservationFormModal
           data={constants.newReservation()}
+          createHandler={this.createReservation}
         />
 
         <SideNav collapsible>

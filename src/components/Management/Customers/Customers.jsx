@@ -71,10 +71,9 @@ class Customers extends React.Component {
 
               {
               customers.map(customer => (
-                <React.Fragment>
+                <React.Fragment key={customer.id}>
 
                   <CollectionItem
-                    key={customer.id}
                     title={`${customer.firstname} ${customer.lastname}`}
                     primaryContent={`Birthday : ${moment(customer.birthday).format('MMMM DD, YYYY')}`}
                     primaryIcon="schedule"

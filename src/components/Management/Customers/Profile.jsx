@@ -79,7 +79,6 @@ load = () => {
 
   // addressUpdate
   updateAddress = (address) => {
-    console.log('haha');
     const { customer } = this.state;
 
     api.put(`customer/${customer.id}/address/${address.id}`, address)

@@ -76,8 +76,8 @@ class Customers extends React.Component {
                   <CollectionItem
                     title={`${customer.firstname} ${customer.lastname}`}
                     primaryContent={`Birthday : ${moment(customer.birthday).format('MMMM DD, YYYY')}`}
-                    primaryIcon="schedule"
-                    secondaryIcon="schedule"
+                    primaryIcon="person"
+                    secondaryIcon="navigate_next"
                     primaryIconBackground={constants.proceedFontColor}
                     onClick={() => {
                       // eslint-disable-next-line react/prop-types

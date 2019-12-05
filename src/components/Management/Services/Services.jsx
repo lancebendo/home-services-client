@@ -94,8 +94,8 @@ class Services extends React.Component {
                     title={service.name}
                     primaryContent={service.description}
                     secondaryContent={`$${service.rate}`}
-                    primaryIcon="schedule"
-                    secondaryIcon="schedule"
+                    primaryIcon="extension"
+                    secondaryIcon="navigate_next"
                     primaryIconBackground={constants.proceedFontColor}
                     isModalTrigger
                     dataTarget={`SERVICE_FORM_${service.id}`}

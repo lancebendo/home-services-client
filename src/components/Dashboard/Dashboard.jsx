@@ -48,6 +48,8 @@ class Dashboard extends Component {
       return (
         <main>
           <h4>Upcoming Reservations</h4>
+          <div className="divider" />
+          <br />
           <Collection>
 
             {
@@ -64,7 +66,7 @@ class Dashboard extends Component {
                       primaryContent={`${customer.firstname} ${customer.lastname}`}
                       secondaryContent={`${address.addressLine1} ${address.addressLine2}, ${address.city}, ${address.state}`}
                       primaryIcon="schedule"
-                      secondaryIcon="schedule"
+                      secondaryIcon="navigate_next"
                       primaryIconBackground={constants.proceedFontColor}
                       isModalTrigger
                       dataTarget={`RESERVATION_FORM_${reservation.id}`}
